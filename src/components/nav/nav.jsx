@@ -79,11 +79,13 @@ function Nav() {
     const isActive = (path) => location.pathname === path;
 
     const closeNav = () => {
-        document.getElementById("overlayNav").style.width = "0cm"
+        document.getElementById("overlayBox").style.width = "0cm"
+        document.getElementById("overlayNav").style.display = "none"
     }
 
     const openNav = () => {
-        document.getElementById("overlayNav").style.width = "7cm"
+        document.getElementById("overlayBox").style.width = "7cm"
+        document.getElementById("overlayNav").style.display = "flex"
     }
 
     const closeCart = () => {
@@ -157,7 +159,7 @@ function Nav() {
 
         <>
             <div ref={overlayRef} id="overlayNav" className="overlay-nav">
-                <div className="overlay-box">
+                <div id='overlayBox' className="overlay-box">
                     <div className="close-div">
                         {/* <img className="close-img" src={cross} onClick={closeNav} /> */}
                     </div>

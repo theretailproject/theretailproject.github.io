@@ -159,15 +159,16 @@ $headFont : Quattrocento;
 
 .overlay-nav {
   position: fixed;
-  width: 0cm;
+  display: none;
   left: 0;
   bottom: 0;
   top: 0;
-  background-color: #2f5340;
+  right: 0;
+  
   z-index: 10000;
-  transition: .2s all;
+  // transition: .2s all;
   overflow-y: auto;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px) brightness(30%);
 
   ::-webkit-scrollbar {
     width: 0;
@@ -180,6 +181,10 @@ $headFont : Quattrocento;
 
 .overlay-box {
   padding: .5cm .5cm;
+  background-color: #2f5340;
+  width: 0cm;
+  transition: .2s width;
+  // backdrop-filter: blur(10px);
 }
 
 .dropdown-content {
