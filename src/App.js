@@ -98,9 +98,7 @@ function App() {
           isActive("/signup") || isActive("/signin") ? null : <Nav />
         }
 
-        <p>
-          Adding test text
-        </p>
+        
 
         <Routes>
           <Route path='/' element={<Home />} />
