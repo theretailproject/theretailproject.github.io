@@ -84,12 +84,16 @@ function Nav() {
     }
 
     const openNav = () => {
-        document.getElementById("overlayBox").style.width = "7cm"
+        setTimeout(() => {
+            document.getElementById("overlayBox").style.width = "7cm"
+            
+        }, 1)
         document.getElementById("overlayNav").style.display = "flex"
     }
 
     const closeCart = () => {
         document.getElementById("cartNew").style.width = "0cm"
+        
     }
 
     const openCart = () => {
@@ -158,8 +162,8 @@ function Nav() {
     return (
 
         <>
-            <div ref={overlayRef} id="overlayNav" className="overlay-nav">
-                <div id='overlayBox' className="overlay-box">
+            <div  id="overlayNav" className="overlay-nav">
+                <div ref={overlayRef} id='overlayBox' className="overlay-box">
                     <div className="close-div">
                         {/* <img className="close-img" src={cross} onClick={closeNav} /> */}
                     </div>
