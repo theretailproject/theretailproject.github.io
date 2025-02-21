@@ -49,41 +49,30 @@ const CheckoutP = () => {
     const [printing, setPrinting] = useState(false)
 
 
-    const handlePayment = async (e, bprice, name, cdesc) => {
+    const handlePayment = async (e, bprice) => {
         e.preventDefault();
-
-        console.log(name)
-
-
 
         const script = document.createElement('script');
         script.src = 'https://checkout.razorpay.com/v1/checkout.js';
         script.async = true;
-        document.body.appendChild(script);
 
         script.onload = () => {
             const options = {
-                key: 'rzp_live_oGKXj8EVJEdpCQ', // Replace with your Razorpay Key ID
-                amount: Number(bprice) * 100, // amount in paisa
+                key: 'rzp_test_OyYjB1Y3qxyCgn', // Replace with actual Razorpay Key ID
+                amount: Number(bprice) * 100, // Amount in paisa
                 currency: 'INR',
-                name: 'Chemictionary',
-                description: String(name),
+                name: 'The ReTail Project',
+                description: "Pet Products",
                 prefill: {
-                    email: auth.currentUser.email,
-                    contact: auth.currentUser.phoneNumber
-                },
-                notes: {
-
-                    course_name: name,
-                    course_description: cdesc
+                    email: userData.email,
+                    contact: userData.phone
                 },
                 handler: async function (response) {
-                    alert("Payment done!!")
+                    console.log("Payment successful, processing order...");
 
-
-
-
-
+                    // Pass the payment ID to proceedToPay
+                    await proceedToPay(response.razorpay_payment_id);
+                    alert("Payment done!!");
                 },
                 modal: {
                     ondismiss: function () {
@@ -95,61 +84,55 @@ const CheckoutP = () => {
             const rzp = new window.Razorpay(options);
             rzp.open();
         };
+
+        document.body.appendChild(script);
     };
 
-    const navigate = useNavigate()
 
-    const proceedToPay = async () => {
+    const proceedToPay = async (paymentId) => {
         if (cartData) {
-            console.log("Starting proceedToPay");
+            console.log("Starting proceedToPay with Payment ID:", paymentId);
 
-            cartData && cartData.map(async (cd) => {
+            for (const cd of cartData) {
                 const orderId = firestore.collection("users").doc(auth.currentUser?.uid).collection("orders").doc().id;
                 console.log("Generated orderId:", orderId);
 
-
-                return (
+                try {
                     await firestore.collection("users").doc(auth.currentUser?.uid).collection("orders").doc(orderId).set({
-                        "orderId": orderId,
-                        "paymentId": "XYZ",
-                        "itemId": cd.itemId,
-                        "name": cd.name,
-                        "price": cd.price,
-                        "quantity": cd.quantity,
-                        "thumbnail": cd.thumbnail,
-                        "link": cd.link,
-                        "status": "Processing",
-                        "orderedAt": firebase.firestore.Timestamp.now(),
-                        "type": "Processing",
-                        "status": "Preparing to dispatch"
-                    })
-                        .then(() => {
-                            console.log("Order added for item:", cd.itemId)
-                            if (userData.checkoutAmt > 0) {
-                                firestore.collection("users").doc(auth.currentUser?.uid).update({
-                                    checkoutAmt: 0
-                                }, { merge: true });
-                            }
-                            firestore.collection("users").doc(auth.currentUser?.uid).collection("cart").doc(cd.docId).delete();
-                            console.log("Cart item deleted for item:", cd.itemId)
+                        orderId: orderId,
+                        paymentId: paymentId,  // Store actual payment ID from Razorpay
+                        itemId: cd.itemId,
+                        name: cd.name,
+                        price: cd.price,
+                        quantity: cd.quantity,
+                        thumbnail: cd.thumbnail,
+                        link: cd.link,
+                        status: "Processing",
+                        orderedAt: firebase.firestore.Timestamp.now(),
+                        type: "Processing"
+                    });
 
-                            
+                    console.log("Order added for item:", cd.itemId);
 
-                        })
-                )
+                    if (userData.checkoutAmt > 0) {
+                        await firestore.collection("users").doc(auth.currentUser?.uid).update({
+                            checkoutAmt: 0
+                        }, { merge: true });
+                    }
 
+                    await firestore.collection("users").doc(auth.currentUser?.uid).collection("cart").doc(cd.docId).delete();
+                    console.log("Cart item deleted for item:", cd.itemId);
 
+                } catch (error) {
+                    console.error("Error processing order:", error);
+                }
+            }
 
-            })
-
-
-
-
-
-
-
+            console.log("All orders processed.");
         }
     };
+
+
 
 
 
@@ -264,8 +247,8 @@ const CheckoutP = () => {
                                         <p className="payiname">Total</p>
                                         <p className="payival">₹ {userData.checkoutAmt + 80 + calculatedTip}</p>
                                     </div>
-                                    <button className="pay-button" 
-                                     onClick={proceedToPay}>
+                                    <button className="pay-button"
+                                        onClick={(e) => { handlePayment(e, (userData.checkoutAmt + 80 + calculatedTip)) }}>
                                         Proceed to Pay
                                     </button>
                                 </div>
