@@ -7,6 +7,7 @@ import ccart from "./shopping-bag.png";
 import user from "./user.png";
 import simg from "./sig.png"
 import close from "./close.png";
+import home from "./home.png";
 import "./nav.scss";
 import dots from "./dots.png"
 import profile from "./person.png"
@@ -171,7 +172,7 @@ function Nav() {
 
                         <Link to="/">
                             <div onClick={closeNav} className={isActive("/") ? "account-dets-menu-item activeM" : "account-dets-menu-item"} >
-                                <img className="acc-dets-img" src={aboutimg} />
+                                <img className="acc-dets-img" src={home} />
                                 <p className="acc-dets-text">
                                     Home
                                 </p>

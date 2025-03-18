@@ -124,7 +124,7 @@ function Home() {
                             <img src={m.img} alt="" className="slider-main-imgcus" />
                             <p className="main-slider-captioncus">
                                 {
-                                   "Hello" m.title
+                                    m.title
                                 }
                             </p>
                         </div>
