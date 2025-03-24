@@ -25,7 +25,7 @@ const Login = () => {
             defaultCountry: "IN",
         }
         );
-    }, []);
+    }, []); 
 
     const handleSendOtp = (e) => {
         e.preventDefault();
