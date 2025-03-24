@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=:wght@400;700&display=swap');
+
+$headFont : Quattrocento;
+
+$primarycolor: #486455;
+$secondarycolor : #e4af47;
+
+* {
+    text-decoration: none;
+    padding: none;
+    margin: 0;
+}
+
+
+.ContactBox {
+    padding: 2cm 5vw;
+}
+
+.chh {
+    text-align: left;
+}
+
+.con-tag {
+    text-align: left;
+}
+
+.con-content {
+    text-align: left;
+}
+
+.st {
+    text-align: left;
+}
+
+.con-left {
+    // border: 1px solid black;
+
+}
+
+.con-low {
+    gap: .5cm;
+}
+
+@media only screen and (max-width :1300px) {
+
+    .con-left {
+        width: 15cm;
+    }
+}
+
+@media only screen and (max-width :1200px) {
+
+    .con-left {
+        width: 13cm;
+    }
+
+    .chh {
+        font-size: 40px;
+    }
+}
+
+
+@media only screen and (max-width :1100px) {
+
+    .con-left {
+        width: 12cm;
+
+
+    }
+
+    .chh {
+        font-size: 36px;
+    }
+
+    .con-content {
+        font-size: 14px;
+    }
+
+    .st {
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width :1000px) {
+
+    .con-left {
+        width: 11cm;
+
+
+    }
+
+    .chh {
+        font-size: 36px;
+    }
+
+    .con-content {
+        font-size: 14px;
+    }
+
+    .st {
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width : 900px) {
+    .con-low {
+        flex-direction: column;
+        gap: 1.5cm;
+    }
+
+    .chh {
+        font-size: 32px;
+    }
+
+    .con-left {
+        width: 100%;
+
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    .con-form {
+        input {
+            font-size: 14px;
+        }
+
+        textarea {
+            font-size: 14px;
+        }
+    }
+}

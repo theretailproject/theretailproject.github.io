@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=:wght@400;700&display=swap');
+
+$headFont : Quattrocento;
+
+$primarycolor: #486455;
+$secondarycolor : #e4af47;
+
+* {
+    text-decoration: none;
+    padding: none;
+    margin: 0;
+}
+
+
+.faq-box {
+    padding: 1cm 5vw;
+}
+
+
+.faq-head-n {
+    font-size: 45px;
+    color: $primarycolor;
+    font-family: $headFont;
+    // font-weight: 600;
+}
+
+.faq-ans {
+    text-align: left;
+}
+
+.faq {
+    width: calc(100% - 1cm);
+    box-sizing: padding-box;
+    box-shadow: none;
+}
+
+.faqs {
+    display: flex;
+    flex-direction: column;
+    gap: .3cm;
+}
+
+@media only screen and (max-width : 800px) {
+    .faq-head-n {
+        font-size: 40px;
+    }
+
+    .faq-ques {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .faq-ans {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    .faq-head-n {
+        font-size: 32px;
+    }
+
+
+
+    .faq-box {
+        padding: .5cm .5cm;
+    }
+
+    .faq-ques {
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .faq {
+        padding: .2cm .3cm;
+        border-radius: 5px;
+        width: calc(100% - .7cm);
+    }
+
+    .showimg {
+        width: .3cm;
+    }
+}
