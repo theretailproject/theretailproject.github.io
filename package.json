@@ -1,5 +1,6 @@
 {
   "name": "trp_new",
+  "homepage": "https://theretailproject.in",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
