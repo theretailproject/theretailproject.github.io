@@ -93,7 +93,7 @@ function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasStarted) {
             startCounter(counterRef1, 100, 25);
-            startCounter(counterRef2, 150, 5);
+            startCounter(counterRef2, 150, 20);
             setHasStarted(true);
           }
         });
@@ -630,22 +630,24 @@ function Home() {
                     </>
                   </div>
                 </div>
-             
-              
-                    <div className="testimonials-row1-col2">
-                      <div className="borderImg">
-                        <img
-                          src={Client1}
-                          className="testimonials-smallLogo"
-                          alt="review"
-                        />
-                      </div>
-                      <div className="reviewBox">
-                        <p className="clientReviewText">Lorem Ipsum nrinb dvnutn nfvur  nugnrub fnjut jnbunbu miig mirgi rngrgni rjigorj motiot grneirnn enriogjrie ioegij reiorjge ioejrij iojrgijr iorjgoiej riogjeior iorjeijir iroejgioej gmioejriogj goimrgoi gmergio rmeokgoi oirjg otiut eiotj ermgiot nmgiro tijib njrtiu rkoijgi gerijt</p>
-                      </div>
-                    </div>
-             
-              
+                <div className="testimonials-row1-col2">
+                  <div className="borderImg">
+                    <img
+                      src={Client1}
+                      className="testimonials-smallLogo"
+                      alt="review"
+                    />
+                  </div>
+                  <div className="reviewBox">
+                    <p className="clientReviewText">
+                      Lorem Ipsum nrinb dvnutn nfvur nugnrub fnjut jnbunbu miig
+                      mirgi rngrgni rjigorj motiot grneirnn enriogjrie ioegij
+                      reiorjge ioejrij iojrgijr iorjgoiej riogjeior iorjeijir
+                      iroejgioej gmioejriogj goimrgoi gmergio rmeokgoi oirjg
+                      otiut eiotj ermgiot nmgiro tijib njrtiu rkoijgi gerijt
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className="testimonials-row3">
                 <p className="testimonials-row3-head ">

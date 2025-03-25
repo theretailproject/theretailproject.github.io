@@ -32,6 +32,8 @@ import PrivacyT from './components/privacy/privacy.js';
 import Terms from './components/terms/terms.js';
 import Refund from './components/refund/refund.js';
 import Preserve from './components/shop/preserve.jsx';
+import Wishlist from "./components/wishlist/wishlist.jsx";
+
 // import Invoice from './components/invoice/invoice.jsx';
 
 
@@ -117,6 +119,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<LogInNew />} />
           <Route path='/faq' element={<FAQQ />} />
+          <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/checkout' element={<CheckoutP />} />
           <Route path='/orders' element={<Orders />} />
           <Route path="/shop/:category/:pid" element={<ProductPage />} />
