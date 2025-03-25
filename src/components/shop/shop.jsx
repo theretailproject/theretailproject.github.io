@@ -8,7 +8,7 @@ import { Sleep } from "./sleep";
 import { Play } from "./play";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Preserve from "./preserve";
-
+import { AllProducts } from "./allproducts";
 function Shop() {
 
 

@@ -8,21 +8,20 @@ import cartH from "./cartHollow.png";
 import cartF from "./cartFilled.png";
 import noProduct from "./noProducts.png";
 
-export const Sleep = () => {
+export const AllProducts = () => {
   const { addToCart, doingWork } = useUserContext();
-  const sleepProducts = products.filter((p) => p.category === "sleep");
-
   return (
     <div className="nproducts">
-      {sleepProducts.length === 0 ? (
+      {products.length === 0 ? (
         <div className="noProductDiv">
           <img src={noProduct} className="noProductImg" alt="No Product" />
           {/* No Products Found! */}
         </div>
       ) : (
         <div className="ProductCardRow">
-          {sleepProducts.map((p) => (
+          {products.map((p) => (
             <div className="ProductCard" key={p.id}>
+           
               <div className="imgCont">
                 <div className="overlayProdCard">
                   <div className="smallImgCartCont">
@@ -48,7 +47,7 @@ export const Sleep = () => {
                   <img src={p.thumbnail} className="productImg" alt="Product" />
                 </Link>
               </div>
-
+              <p className="productCategory">{p.category.toUpperCase()}</p>
               <p className="productName">{p.name}</p>
               <p className="productPrice">₹ {p.price}</p>
             </div>

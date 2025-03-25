@@ -59,7 +59,7 @@
   },
   {
     "id": 3,
-    "multiple": true,
+    "multiple": false,
     "name": "Strawberry Chrochet Toy",
     "brand-name": "The ReTail Proect",
     "weight": 100,
