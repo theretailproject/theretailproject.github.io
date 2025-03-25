@@ -89,6 +89,11 @@ const CheckoutP = () => {
     };
 
 
+
+
+
+    
+
     const proceedToPay = async (paymentId) => {
         if (cartData) {
             console.log("Starting proceedToPay with Payment ID:", paymentId);
