@@ -1,0 +1,160 @@
+ /*
+   {
+    "id": 12,
+    "multiple": false,
+    "name": "Rainbow Chrochet Toy",
+    "brand-name": "The ReTail Proect",
+    "weight": 100,
+    "price": 250,
+    "dimensions": ["L", "B", "H"],
+    "images": [
+      "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+      "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+      "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+      "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+      "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+    ],
+    "thumbnail": "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+    "product-card-img": "https://i.postimg.cc/sxj3K8SS/IMG-9153-removebg-preview.png",
+    "category": "play",
+    "shareLink": "https://theretailproject.in/shop/play/6"
+  },
+  {
+    "id": 19,
+    "multipleColors": true,
+    "multipleSizes": true,
+    "name": "Tug Rope Toy",
+    "brand-name": "The ReTail Proect",
+    "weight": 100,
+    "price": 250,
+    "dimensions": ["L", "B", "H"],
+    "sizes": [
+      {
+        "name": "S",
+        "colors": [
+          {
+            "name": "color1",
+            "images": [
+              "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+              "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+              "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+              "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+              "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+            ]
+          },
+          {
+            "name": "color2",
+            "images": [
+              "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+              "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+              "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+              "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+              "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "M",
+        "colors": [
+          {
+            "name": "color1",
+            "images": [
+              "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+              "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+              "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+              "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+              "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+            ]
+          },
+          {
+            "name": "color2",
+            "images": [
+              "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+              "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+              "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+              "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+              "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+            ]
+          }
+        ]
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+    "product-card-img": "https://i.postimg.cc/sxj3K8SS/IMG-9153-removebg-preview.png",
+    "category": "play",
+    "shareLink": "https://theretailproject.in/shop/play/6"
+  },
+  {
+    "id": 20,
+    "multipleColors": false,
+    "multipleSizes": true,
+    "name": "Tug Rope Toy",
+    "brand-name": "The ReTail Proect",
+    "weight": 100,
+    "price": 250,
+    "dimensions": ["L", "B", "H"],
+    "sizes": [
+      {
+        "name": "S",
+        "images": [
+          "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+          "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+          "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+          "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+          "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+        ]
+      },
+      {
+        "name": "M",
+        "images": [
+          "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+          "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+          "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+          "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+          "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+        ]
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+    "product-card-img": "https://i.postimg.cc/sxj3K8SS/IMG-9153-removebg-preview.png",
+    "category": "play",
+    "shareLink": "https://theretailproject.in/shop/play/6"
+  },
+  {
+    "id": 21,
+    "multipleColors": true,
+    "multipleSizes": false,
+    "name": "Tug Rope Toy",
+    "brand-name": "The ReTail Proect",
+    "weight": 100,
+    "price": 250,
+    "dimensions": ["L", "B", "H"],
+    "colors": [
+      {
+        "name": "color1",
+        "images": [
+          "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+          "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+          "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+          "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+          "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+        ]
+      },
+      {
+        "name": "color1",
+        "images": [
+          "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+          "https://i.postimg.cc/5yqfSgTT/IMG-9155.jpg",
+          "https://i.postimg.cc/T2r2x210/IMG-9156.jpg",
+          "https://i.postimg.cc/WbTN1RJv/IMG-9157.jpg",
+          "https://i.postimg.cc/Wb82D9MJ/IMG-9158.jpg"
+        ]
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/J0W1Xv6j/IMG-9153.jpg",
+    "product-card-img": "https://i.postimg.cc/sxj3K8SS/IMG-9153-removebg-preview.png",
+    "category": "play",
+    "shareLink": "https://theretailproject.in/shop/play/6"
+  }
+    */
