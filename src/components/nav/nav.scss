@@ -1,11 +1,8 @@
 $primarycolor: #486455;
-$secondarycolor : #e4af47;
-@import url('https://fonts.googleapis.com/css2?family=Poppins|Quattrocento&display=swap');
+$secondarycolor: #e4af47;
+@import url("https://fonts.googleapis.com/css2?family=Poppins|Quattrocento&display=swap");
 
-$headFont : Quattrocento;
-
-
-
+$headFont: Quattrocento;
 
 * {
   text-decoration: none;
@@ -13,27 +10,29 @@ $headFont : Quattrocento;
   margin: 0;
 }
 
-
-
 // Navigation Starts Here
-
 
 .co-name-text {
   color: white;
   font-size: 30px;
 }
 
-
-
 .re-text {
   color: $secondarycolor;
 }
 
-
 .menuk {
-  width: .7cm;
-  height: .7cm;
+  width: 0.6cm;
+  height: 0.6cm;
   cursor: pointer;
+  padding: 0.2cm;
+  border-radius: 25%;
+  border: 2px solid $primarycolor;
+  &:hover {
+    // background-color: #e4b04734;
+    border-radius: 25%;
+    border: 2px solid #e4b047e5;
+  }
 }
 
 .onav-head {
@@ -42,36 +41,51 @@ $headFont : Quattrocento;
 }
 
 .close {
-  width: .4cm;
+  width: 0.4cm;
   cursor: pointer;
 }
-
 
 .onav-menu {
   display: flex;
   flex-direction: column;
   margin-top: 1cm;
-  gap: .2cm;
+  gap: 0.2cm;
 }
-
-
-
-
 
 .Nav {
-  padding: .5cm 5vw;
+  padding: 0.5cm 5vw;
   background-color: $primarycolor;
-}
-
-.logo-image {
-  width: 1.5cm;
-
 }
 
 .logo-image-paw {
   width: 1.5cm;
   cursor: pointer;
+  animation: fillHeart 3s infinite;
+  &:hover {
+    transform: scale(0.6);
+    animation: none;
+  }
 
+  title {
+    background-color: #486455;
+  }
+}
+
+@keyframes fillHeart {
+  0% {
+    opacity: 0.9;
+    transform: scale(1.8) ease;
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(2) ease;
+  }
+
+  100% {
+    opacity: 0.9;
+    transform: scale(1.8) ease;
+  }
 }
 
 .nav-box {
@@ -79,13 +93,12 @@ $headFont : Quattrocento;
   justify-content: space-between;
   align-items: center;
   gap: 1cm;
-
 }
 
 .menu {
   display: flex;
   align-items: center;
-  gap: .5cm;
+  gap: 0.5cm;
 }
 
 .menu-item {
@@ -95,14 +108,12 @@ $headFont : Quattrocento;
   text-align: left;
 }
 
-
 .menu-item-img {
-  width: .6cm;
+  width: 0.6cm;
 }
 
-
 .login {
-  padding: .15cm .8cm;
+  padding: 0.15cm 0.8cm;
   font-size: 16px;
   background-color: #e4af47;
   border: none;
@@ -115,23 +126,17 @@ $headFont : Quattrocento;
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 }
-
-
 
 .pcount {
   font-size: 10px;
   color: $secondarycolor;
   position: fixed;
   z-index: 100;
-
 }
 
-
 .dropbtn {
-  background-color: #3498DB;
+  background-color: #3498db;
   color: white;
 
   font-size: 16px;
@@ -141,7 +146,7 @@ $headFont : Quattrocento;
 
 .dropbtn:hover,
 .dropbtn:focus {
-  background-color: #2980B9;
+  background-color: #2980b9;
 }
 
 .dropdown {
@@ -164,7 +169,7 @@ $headFont : Quattrocento;
   bottom: 0;
   top: 0;
   right: 0;
-  
+
   z-index: 10000;
   // transition: .2s all;
   overflow-y: auto;
@@ -174,16 +179,13 @@ $headFont : Quattrocento;
     width: 0;
     height: 0;
   }
-
-
-
 }
 
 .overlay-box {
-  padding: .5cm .5cm;
+  padding: 0.5cm 0.5cm;
   background-color: #2f5340;
   width: 0cm;
-  transition: .2s width;
+  transition: 0.2s width;
   overflow: auto;
   // backdrop-filter: blur(10px);
 }
@@ -193,12 +195,11 @@ $headFont : Quattrocento;
   position: absolute;
   background-color: #f7f7f7;
   width: max-content;
-  padding: .3cm;
+  padding: 0.3cm;
   overflow: auto;
   border: 1px solid #dbdbdb;
   z-index: 1000;
   // margin-left: -.7cm;
-
 }
 
 .acc-dets-text {
@@ -211,17 +212,17 @@ $headFont : Quattrocento;
 .account-dets-menu {
   display: flex;
   flex-direction: column;
-  gap: .1cm;
+  gap: 0.1cm;
 }
 
 .account-dets-menu-item {
   display: flex;
   align-items: center;
-  gap: .2cm;
-  padding: .3cm;
+  gap: 0.2cm;
+  padding: 0.3cm;
   cursor: pointer;
   // border: 1px solid white;
-  border-bottom: 1PX SOLID #e4b04746;
+  border-bottom: 1px SOLID #e4b04746;
   // border-radius: 5px;
   background-color: transparent;
 
@@ -235,26 +236,26 @@ $headFont : Quattrocento;
 }
 
 .acc-dets-img {
-  width: .6cm;
-  height: .6cm;
+  width: 0.6cm;
+  height: 0.6cm;
 }
 
 .login-buttons-overlay {
   display: flex;
   flex-direction: column;
-  gap: .3cm;
-  margin-top: .3cm;
+  gap: 0.3cm;
+  margin-top: 0.3cm;
   display: none;
 
   .login-button {
-    padding: .3cm;
+    padding: 0.3cm;
   }
 }
 
 .nav-menu-bar {
   display: flex;
   align-items: center;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .nav-linkk {
@@ -262,20 +263,16 @@ $headFont : Quattrocento;
   // align-items: center;
 }
 
-
 // Navigation Ends Here
 
-
-
 // Shop page starts here
-
 
 .page-head-box {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: .1cm;
+  gap: 0.1cm;
   // border: 1px solid black;
   width: 100%;
 }
@@ -283,36 +280,31 @@ $headFont : Quattrocento;
 .page-head {
   color: white;
   font-size: 36px;
-
 }
 
 .page-path {
   color: rgb(190, 190, 190);
 }
 
-
 // Shop page ends here
 
-
 // Cart page starts here
-
 
 .cart-lower {
   padding: 1cm 10vw;
   display: flex;
-  gap: .5cm;
+  gap: 0.5cm;
   background-color: rgb(240, 240, 240);
   height: 100%;
-
 }
 
 .cart-products {
   width: 23cm;
   display: flex;
   flex-direction: column;
-  row-gap: .5cm;
+  row-gap: 0.5cm;
   background-color: white;
-  padding: .3cm;
+  padding: 0.3cm;
   border-radius: 10px;
   // border: 1px solid black;
 }
@@ -331,8 +323,8 @@ $headFont : Quattrocento;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: .3cm;
-  padding: .3cm;
+  gap: 0.3cm;
+  padding: 0.3cm;
 }
 
 .cart-product-zero {
@@ -359,19 +351,18 @@ $headFont : Quattrocento;
 .options-box {
   display: flex;
   align-items: center;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .option {
   font-size: 13px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover {
     text-decoration: underline;
   }
 }
-
 
 .cart-product-left {
   width: 4cm;
@@ -389,7 +380,7 @@ $headFont : Quattrocento;
 .cart-product-right {
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
   justify-content: space-between;
   // border: 1px solid black;
   height: 100%;
@@ -398,7 +389,7 @@ $headFont : Quattrocento;
 .cart-product-right-one {
   display: flex;
   flex-direction: column;
-  gap: .2cm;
+  gap: 0.2cm;
 }
 
 .cart-product-img {
@@ -424,37 +415,33 @@ $headFont : Quattrocento;
 .quantity-box {
   // margin-top: .2cm;
   display: flex;
-  gap: .3cm;
+  gap: 0.3cm;
   align-items: center;
 }
 
 .qminus {
-  width: .5cm;
-  padding: .15cm;
+  width: 0.5cm;
+  padding: 0.15cm;
   // border: 1px solid rgb(202, 202, 202);
   background-color: #d3ffe7;
   cursor: pointer;
-
 }
-
 
 .qnum-box {
   // border: 1px solid black;
-  padding: .1cm .3cm;
-  width: .5cm;
+  padding: 0.1cm 0.3cm;
+  width: 0.5cm;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
 .qnum {
   font-size: 18px;
-
 }
 
 .qdis {
-  opacity: .5;
+  opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -462,8 +449,8 @@ $headFont : Quattrocento;
 .cart-checkout {
   display: flex;
   flex-direction: column;
-  padding: .5cm;
-  gap: .5cm;
+  padding: 0.5cm;
+  gap: 0.5cm;
 }
 
 .cart-checkut-text {
@@ -472,7 +459,7 @@ $headFont : Quattrocento;
 }
 
 .ptc {
-  padding: .3cm .5cm;
+  padding: 0.3cm 0.5cm;
   font-size: 16px;
   color: white;
   border: none;
@@ -485,12 +472,11 @@ $headFont : Quattrocento;
   text-align: left;
 }
 
-
 .total-box {
   display: flex;
   justify-content: space-between;
-  gap: .2cm;
-  margin-top: .2cm;
+  gap: 0.2cm;
+  margin-top: 0.2cm;
   align-items: center;
 }
 
@@ -505,11 +491,9 @@ $headFont : Quattrocento;
 
 // Cart page ends here
 
-
-
 .features {
   display: flex;
-  gap: .5cm;
+  gap: 0.5cm;
 }
 
 .feature {
@@ -518,56 +502,49 @@ $headFont : Quattrocento;
 
 .marquee {
   background-color: rgb(248, 248, 248);
-  padding: .3cm;
+  padding: 0.3cm;
 }
 
 .OcollectionsM {
-  margin-top: .5cm;
+  margin-top: 0.5cm;
   column-count: 2;
   justify-content: center;
-  column-gap: .15cm;
-
+  column-gap: 0.15cm;
 
   // border: 1px solid black;
   // background-color: rgb(255, 191, 255);
 
-
   /* Add padding for better visualization */
-
 }
 
 .collection {
   // border: 1px solid black;
-  padding: .3cm;
-
+  padding: 0.3cm;
 }
-
 
 .ctext {
   color: white;
   background-color: $primarycolor;
   font-size: 15px;
   width: fit-content;
-  padding: .1cm .4cm;
+  padding: 0.1cm 0.4cm;
   border-radius: 1000px;
 }
 
 .fproducts {
   display: flex;
-  gap: .5cm;
+  gap: 0.5cm;
   justify-content: center;
-  margin-top: .5cm;
+  margin-top: 0.5cm;
   overflow-x: auto;
   /* Allows horizontal scrolling */
   max-width: 90vw;
-  padding: .2cm;
+  padding: 0.2cm;
   /* Adjusts the width to be responsive */
   // border: 1px solid red;
   flex-wrap: nowrap;
   /* Prevents the products from wrapping to a new line */
-
 }
-
 
 .fptext {
   text-align: center;
@@ -577,14 +554,15 @@ $headFont : Quattrocento;
   width: 100%;
   flex-shrink: 0;
   height: auto;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .price-div {
   display: flex;
-  gap: .3cm;
+  gap: 0.3cm;
   align-items: center;
 }
 
@@ -599,7 +577,7 @@ $headFont : Quattrocento;
 }
 
 .cut-price {
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: grey;
   text-decoration: line-through;
 }
@@ -607,32 +585,30 @@ $headFont : Quattrocento;
 .fprodlower {
   display: flex;
   flex-direction: column;
-  gap: .1cm;
+  gap: 0.1cm;
   // align-items: center;
 }
 
-
 .fprodcart {
   background-color: $primarycolor;
-  padding: .15cm .6cm;
-  margin-top: .2cm;
+  padding: 0.15cm 0.6cm;
+  margin-top: 0.2cm;
   border: none;
   cursor: pointer;
   color: rgb(255, 255, 255);
   border-radius: 10px;
-
 }
 
 .gramMaim {
   display: flex;
   justify-content: center;
-  margin-top: .5cm;
+  margin-top: 0.5cm;
 }
 
 .gramBox {
   column-count: 3;
-  row-gap: .5cm;
-  column-gap: .2cm;
+  row-gap: 0.5cm;
+  column-gap: 0.2cm;
   // background-color: purple;
   width: fit-content;
 }
@@ -644,7 +620,7 @@ $headFont : Quattrocento;
 .gramImg {
   width: 100%;
   filter: brightness(70%);
-  transition: .15s;
+  transition: 0.15s;
   cursor: pointer;
 
   &:hover {
@@ -656,7 +632,7 @@ $headFont : Quattrocento;
   width: 2cm;
   height: 2cm;
   background-color: #d3ffe7;
-  padding: .7cm;
+  padding: 0.7cm;
   border-radius: 50%;
 }
 
@@ -670,7 +646,7 @@ $headFont : Quattrocento;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.5cm;
-  margin-top: .5cm;
+  margin-top: 0.5cm;
 }
 
 .featureM {
@@ -680,15 +656,15 @@ $headFont : Quattrocento;
 
   flex-direction: column;
   align-items: center;
-  gap: .15cm;
+  gap: 0.15cm;
   // padding: 1cm;
   // border-radius: 100000px;
   // background-color: $primarycolor;
   // background-color: #d3ffe7;
-  transition: .3s;
+  transition: 0.3s;
 
-  &:hover {}
-
+  &:hover {
+  }
 }
 
 .ftext {
@@ -701,11 +677,11 @@ $headFont : Quattrocento;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .login-button {
-  padding: .15cm .3cm;
+  padding: 0.15cm 0.3cm;
   background-color: $secondarycolor;
   border-radius: 5px;
   text-align: center;
@@ -722,8 +698,8 @@ $headFont : Quattrocento;
   border: 1px solid rgb(235, 235, 235);
   border-radius: 10px;
   width: 8cm;
-  gap: .3cm;
-  padding: .5cm 1cm;
+  gap: 0.3cm;
+  padding: 0.5cm 1cm;
 }
 
 .subInp {
@@ -734,13 +710,13 @@ $headFont : Quattrocento;
   cursor: pointer;
   color: white;
   background-color: red;
-  padding: .2cm .5cm;
+  padding: 0.2cm 0.5cm;
   width: fit-content;
   border-radius: 10px;
 }
 
 .regInp {
-  padding: .2cm .4cm;
+  padding: 0.2cm 0.4cm;
   font-size: 16px;
   border-radius: 10px;
   border: 1px solid rgb(192, 192, 192);
@@ -751,16 +727,15 @@ $headFont : Quattrocento;
 }
 
 .notification {
-
   position: fixed;
   z-index: 1;
   top: 0;
   margin-top: -1cm;
   left: 45%;
-  padding: .3cm 1cm;
+  padding: 0.3cm 1cm;
   border-radius: 10px;
   background-color: blueviolet;
-  transition: .3s;
+  transition: 0.3s;
 
   p {
     color: white;
@@ -774,35 +749,35 @@ $headFont : Quattrocento;
 .mainL {
   background-color: $secondarycolor;
   color: $primarycolor;
-  padding: .2cm .8cm;
+  padding: 0.2cm 0.8cm;
 }
 
 .shipText {
   font-size: 11px;
   // text-align: right;
-  margin-bottom: .1cm;
+  margin-bottom: 0.1cm;
 }
 
 .profile-box {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: .5cm;
+  gap: 0.5cm;
   margin-top: 1cm;
 }
 
 .user-box {
   background-color: rgb(240, 240, 240);
-  padding: .3cm;
+  padding: 0.3cm;
   width: 10cm;
   border-radius: 10px;
 }
 
 .user-dets {
-  margin-top: .3cm;
+  margin-top: 0.3cm;
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .user-det-head {
@@ -830,16 +805,15 @@ h3 {
   border: 1px solid rgb(197, 197, 197);
   width: 12cm;
   background-color: rgb(240, 240, 240);
-  padding: .5cm;
+  padding: 0.5cm;
   border-radius: 10px;
   overflow-y: auto;
-
 }
 
 .edit-form {
   display: flex;
   flex-direction: column;
-  gap: .5cm;
+  gap: 0.5cm;
 }
 
 .inp-div {
@@ -853,7 +827,7 @@ h3 {
 }
 
 .edit-inp {
-  padding: .15cm 0cm;
+  padding: 0.15cm 0cm;
   border: none;
   font-size: 16px;
   background-color: transparent;
@@ -893,7 +867,7 @@ h3 {
 }
 
 .subInpEP {
-  padding: .3cm;
+  padding: 0.3cm;
   font-size: 16px;
   border: none;
   color: white;
@@ -916,7 +890,7 @@ h3 {
 .cart-product-right-two {
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .pinData {
@@ -936,7 +910,7 @@ h3 {
 .cart-buttons {
   display: flex;
   align-items: center;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .Checkout {
@@ -952,7 +926,7 @@ h3 {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-top: .3cm;
+  margin-top: 0.3cm;
 }
 
 .cheadtext {
@@ -961,23 +935,22 @@ h3 {
 
 .checkout-dets {
   margin-top: 1cm;
-
 }
 
 .checkoutdet {
   background-color: rgb(241, 241, 241);
-  padding: .3cm;
+  padding: 0.3cm;
   border-radius: 10px;
 }
 
 .checkout-left {
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .cdetboxs {
-  margin-top: .3cm;
+  margin-top: 0.3cm;
 }
 
 .arrdatetext {
@@ -987,14 +960,14 @@ h3 {
 .osbox {
   display: flex;
   flex-direction: column;
-  gap: .1cm;
-  margin-top: .3cm;
+  gap: 0.1cm;
+  margin-top: 0.3cm;
 }
 
 .osdiv {
   width: 8cm;
   display: flex;
-  gap: .2cm;
+  gap: 0.2cm;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgb(209, 209, 209);
@@ -1017,10 +990,10 @@ h3 {
 
 .order {
   display: flex;
-  gap: .3cm;
+  gap: 0.3cm;
   align-items: flex-start;
   background-color: whitesmoke;
-  padding: .3cm;
+  padding: 0.3cm;
   border-radius: 10px;
 }
 
@@ -1045,7 +1018,7 @@ h3 {
   margin-top: 1cm;
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .order-arriving {
@@ -1053,7 +1026,7 @@ h3 {
   margin-top: 1cm;
   width: fit-content;
   border: 1px solid rgb(199, 199, 199);
-  padding: .1cm .3cm;
+  padding: 0.1cm 0.3cm;
   color: black;
   border-radius: 10px;
   background-color: rgb(199, 199, 199);
@@ -1068,12 +1041,12 @@ h3 {
   background-color: white;
   width: fit-content;
   height: fit-content;
-  padding: 0cm .1cm;
+  padding: 0cm 0.1cm;
   font-size: 11px;
   // aspect-ratio: 1;
   border-radius: 10000px;
-  margin-top: -.9cm;
-  margin-left: .4cm;
+  margin-top: -0.9cm;
+  margin-left: 0.4cm;
 }
 
 .con-left {
@@ -1092,7 +1065,7 @@ h3 {
 }
 
 .con-content {
-  margin-top: .5cm;
+  margin-top: 0.5cm;
 }
 
 .con-right {
@@ -1101,10 +1074,10 @@ h3 {
 }
 
 .socials {
-  margin-top: .5cm;
+  margin-top: 0.5cm;
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .con-low {
@@ -1116,11 +1089,11 @@ h3 {
 .con-form {
   display: flex;
   flex-direction: column;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .conInp {
-  padding: .3cm;
+  padding: 0.3cm;
   border-radius: 10px;
   background-color: $primarycolor;
   border: 2px solid $primarycolor;
@@ -1129,18 +1102,16 @@ h3 {
 
   &::placeholder {
     color: rgb(211, 211, 211);
-
   }
 
   &:focus {
     border: 2px solid $secondarycolor;
     outline: none;
   }
-
 }
 
 .conMess {
-  padding: .3cm;
+  padding: 0.3cm;
   background-color: $primarycolor;
   color: $secondarycolor;
   border-radius: 10px;
@@ -1150,7 +1121,6 @@ h3 {
 
   &::placeholder {
     color: rgb(211, 211, 211);
-
   }
 
   &:focus {
@@ -1164,7 +1134,7 @@ h3 {
   background-color: $primarycolor;
   color: $secondarycolor;
   border-radius: 10px;
-  padding: .3cm;
+  padding: 0.3cm;
   font-size: 16px;
 }
 
@@ -1174,7 +1144,6 @@ h3 {
   flex-direction: column;
   gap: 3cm;
 }
-
 
 .fh {
   width: fit-content;
@@ -1201,8 +1170,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .5cm;
-
+  gap: 0.5cm;
 }
 
 .simg {
@@ -1213,7 +1181,7 @@ h3 {
 
 .view-more {
   background-color: $primarycolor;
-  padding: .3cm 1.2cm;
+  padding: 0.3cm 1.2cm;
   border-radius: 1000px;
   border: 1px solid $primarycolor;
   color: $secondarycolor;
@@ -1233,7 +1201,7 @@ h3 {
 .wwdbox {
   display: flex;
   justify-content: center;
-  gap: .5cm;
+  gap: 0.5cm;
   flex-wrap: wrap;
 }
 
@@ -1246,24 +1214,22 @@ h3 {
   width: 6cm;
   display: flex;
   flex-direction: column;
-  gap: .2cm;
+  gap: 0.2cm;
   align-items: center;
   // border: 1px solid black;
-  padding: .3cm;
-
+  padding: 0.3cm;
 }
 
 .wwdhead {
   font-size: 20px;
   font-weight: 600;
   text-align: center;
-  margin-top: .1cm;
+  margin-top: 0.1cm;
 }
 
 .wwdtext {
   text-align: center;
   font-size: 14px;
-
 }
 
 .faq-box {
@@ -1278,7 +1244,7 @@ h3 {
 
 .faq-ans {
   // display: none;
-  transition: .3s all ease;
+  transition: 0.3s all ease;
   // color: white;
   color: $secondarycolor;
 }
@@ -1291,19 +1257,18 @@ h3 {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: .5cm;
+  gap: 0.5cm;
 }
 
 .faq {
   background-color: $primarycolor;
   width: 100%;
-  padding: .5cm .5cm;
+  padding: 0.5cm 0.5cm;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  gap: .3cm;
-
+  gap: 0.3cm;
 }
 
 .faq-ques {
@@ -1320,11 +1285,10 @@ h3 {
 }
 
 .showimg {
-  width: .5cm;
+  width: 0.5cm;
   height: auto;
   cursor: pointer;
 }
-
 
 .slider-box {
   display: flex;
@@ -1346,8 +1310,6 @@ h3 {
   /* Smooth transition */
 }
 
-
-
 .fslide-head {
   font-size: 60px;
   color: white;
@@ -1359,7 +1321,7 @@ h3 {
 }
 
 .grab {
-  padding: .15cm .5cm;
+  padding: 0.15cm 0.5cm;
   font-size: 16px;
   background-color: #f09;
   color: white;
@@ -1395,10 +1357,8 @@ h3 {
 //   opacity: 0.5;
 // }
 
-
 .NavNew {
   background-color: $primarycolor;
-
 
   .new-nav-upper {
     display: flex;
@@ -1412,33 +1372,31 @@ h3 {
     justify-content: center;
   }
 
-
   .new-nav-box {
-    padding: .3cm 5vw 0.3cm 5vw;
+    padding: 0.4cm 5vw 0.4cm 5vw;
   }
 
   .new-nav-logo-box {
     display: flex;
     align-items: center;
-    gap: .2cm;
+    gap: 0.2cm;
   }
 
   .new-nav-logo {
     display: flex;
     align-items: center;
-    gap: .2cm;
+    gap: 0.2cm;
   }
 
   .simgg {
-    width: .55cm;
+    width: 0.55cm;
     transform: rotate(10deg);
   }
-
 
   .new-nav-menu {
     display: flex;
     flex-direction: row;
-    gap: .3cm;
+    gap: 0.3cm;
     align-items: center;
     flex-wrap: wrap;
     margin-top: 1cm;
@@ -1446,15 +1404,12 @@ h3 {
 
   .new-nav-menu-item {
     color: white;
-
   }
 
   #dostNav {
     cursor: pointer;
     display: none;
   }
-
-
 }
 
 .ProductPage {
@@ -1470,7 +1425,7 @@ h3 {
   .product-page-left {
     display: flex;
     flex-direction: column;
-    gap: .4cm;
+    gap: 0.4cm;
     width: 100%;
     // border: 1px solid black;
     // flex-shrink: 0;
@@ -1481,7 +1436,7 @@ h3 {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: .3cm;
+    gap: 0.3cm;
     // border: 1px solid black;
   }
 
@@ -1493,26 +1448,25 @@ h3 {
   .product-price {
     font-size: 20px;
     color: $primarycolor;
-
   }
 
   .product-info {
-    line-height: .6cm;
+    line-height: 0.6cm;
   }
 
   .product-page-add-to-cart-box {
     display: flex;
     align-items: center;
-    gap: .3cm;
+    gap: 0.3cm;
     // border: 1px solid black;
     width: fit-content;
   }
 
   .quant-img {
-    width: .4cm;
+    width: 0.4cm;
     height: auto;
     background-color: rgb(238, 238, 238);
-    padding: 0.02cm .1cm;
+    padding: 0.02cm 0.1cm;
     border-radius: 0px 5px 0px 0px;
   }
 
@@ -1525,7 +1479,7 @@ h3 {
   }
 
   .quantity-number {
-    padding: .1cm .5cm;
+    padding: 0.1cm 0.5cm;
     border-right: 1px solid rgb(177, 177, 177);
   }
 
@@ -1539,7 +1493,6 @@ h3 {
 
     cursor: pointer;
     border-radius: 0px 5px 0px 0px;
-
   }
 
   .addImg {
@@ -1550,7 +1503,7 @@ h3 {
     background-color: $primarycolor;
     border: 3px solid $primarycolor;
     color: $primarycolor;
-    padding: .13cm 1cm;
+    padding: 0.13cm 1cm;
     font-size: 16px;
     border-radius: 5px;
     color: $secondarycolor;
@@ -1567,8 +1520,7 @@ h3 {
     font-size: 14px;
     display: flex;
     align-items: center;
-    gap: .2cm;
-
+    gap: 0.2cm;
   }
 
   .catHead {
@@ -1578,7 +1530,7 @@ h3 {
   .small-images {
     display: flex;
     align-items: center;
-    gap: .15cm;
+    gap: 0.15cm;
     overflow-x: auto;
     width: 100%;
   }
@@ -1612,22 +1564,20 @@ h3 {
     left: 0;
     display: flex;
     justify-content: center;
-    gap: .5cm;
+    gap: 0.5cm;
 
     right: 0;
 
     .lai {
-      width: .8cm;
+      width: 0.8cm;
       cursor: pointer;
     }
-
   }
-
 }
 
 .bottom-nav {
   // width: 100%;
-  padding: .25cm 5vw .2cm 5vw;
+  padding: 0.25cm 5vw 0.2cm 5vw;
   background-color: $primarycolor;
   position: sticky;
   z-index: 10;
@@ -1637,8 +1587,7 @@ h3 {
   display: none;
   justify-content: space-between;
   align-items: center;
-  gap: .5cm;
-
+  gap: 0.5cm;
 
   .bottom-nav-item {
     display: flex;
@@ -1647,31 +1596,26 @@ h3 {
     cursor: pointer;
   }
 
-
-
   .bottom-nav-img {
-    width: .5cm;
+    width: 0.5cm;
     height: auto;
   }
 
   .bottom-nav-text {
     color: $secondarycolor;
     font-size: 12px;
-
   }
-
-
 }
 
 .product {
   width: 5cm;
 
   border: none;
-  padding: .3cm;
+  padding: 0.3cm;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .3cm;
+  gap: 0.3cm;
   cursor: pointer;
   flex-shrink: 0;
   // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -1680,14 +1624,11 @@ h3 {
   background-color: #ceffe5;
 
   // border: 1px solid black;
-  transition: .3s all ease;
-
-
+  transition: 0.3s all ease;
 
   &:hover {
     // background-color: #ceffe5;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-
   }
 }
 
@@ -1713,14 +1654,13 @@ h3 {
   /* Allows text wrapping */
   color: $primarycolor;
   text-align: left;
-
 }
 
 .price-div {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: .3cm;
+  gap: 0.3cm;
 }
 
 .prod-lower {
@@ -1728,7 +1668,7 @@ h3 {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  gap: .2cm;
+  gap: 0.2cm;
   // border: 1px solid red;
   width: 100%;
 }
@@ -1741,7 +1681,7 @@ h3 {
 .cut-price {
   text-decoration: line-through;
   color: grey;
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 
 .shop-cats {
@@ -1763,22 +1703,21 @@ h3 {
   // border: 1px solid black;
   // background-color: #ceffe5;
   background-color: $primarycolor;
-  padding: .3cm;
+  padding: 0.3cm;
   border-radius: 10000px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .3cm;
+  gap: 0.3cm;
   cursor: pointer;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
   // box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   &:hover {
     // background-color: $primarycolor;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-
   }
 }
 
@@ -1800,7 +1739,6 @@ h3 {
 
 .cat-page-lower {
   padding: 1cm 10vw;
-
 }
 
 .cat-head {
@@ -1810,7 +1748,7 @@ h3 {
 
 .nav-menu-i {
   display: flex;
-  gap: .3cm;
+  gap: 0.3cm;
   align-items: center;
 }
 
@@ -1822,24 +1760,23 @@ h3 {
   display: flex;
 }
 
-@media only screen and (max-width : 1200px) {
+@media only screen and (max-width: 1200px) {
   .new-nav-box {
-    padding: .3cm 5vw;
+    padding: 0.3cm 5vw;
   }
 
   .co-name-text {
     font-size: 22px;
   }
-
 }
 
-@media only screen and (min-width : 700px) {
+@media only screen and (min-width: 700px) {
   #phoneLogo {
     display: none;
   }
 }
 
-@media only screen and (max-width : 700px) {
+@media only screen and (max-width: 700px) {
   .co-name-text {
     font-size: 20px;
   }
@@ -1849,8 +1786,8 @@ h3 {
   }
 
   .menuk {
-    width: .65cm;
-    height: .65cm;
+    width: 0.65cm;
+    height: 0.65cm;
   }
 
   // #phoneLogo {
@@ -1862,21 +1799,21 @@ h3 {
   }
 }
 
-@media only screen and (max-width : 600px) {
+@media only screen and (max-width: 600px) {
   .co-name-text {
     font-size: 18px;
     text-align: left;
   }
 }
 
-@media only screen and (max-width : 500px) {
+@media only screen and (max-width: 500px) {
   .co-name-text {
     font-size: 16px;
     text-align: left;
   }
 }
 
-@media only screen and (max-width : 400px) {
+@media only screen and (max-width: 400px) {
   .co-name-text {
     font-size: 15px;
     text-align: left;

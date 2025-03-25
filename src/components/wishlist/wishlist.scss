@@ -1,0 +1,108 @@
+$primarycolor: #486455;
+$secondarycolor: #e4af47;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.WishlistComponent {
+  width: 100%;
+}
+
+.WishlistDiv {
+  margin-top: 0.8cm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8cm;
+}
+
+.WishlistRow1 {
+  color: $primarycolor;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.WishlistTable {
+  padding: 0.2cm;
+  border: thin solid $primarycolor;
+  box-shadow: 0px 2px 0.8px 0.6px grey;
+  border-radius: 8px;
+  width: 80vw;
+}
+
+.tableHead {
+  border-bottom: thin solid $primarycolor;
+}
+.ListHead,
+.ListData {
+  padding: 0.4cm;
+  align-items: center;
+}
+
+.ListData {
+  border-top: thin solid $primarycolor;
+  justify-content: center;
+  align-items: center;
+}
+
+.alignCenter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tableData {
+  opacity: 0;
+  animation: appearSlow 1s ease-in-out forwards;
+}
+
+.tableData:hover .ListData{
+  border-bottom: 1px solid #476e4df2;
+}
+
+@keyframes appearSlow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ListImg {
+  width: 2.5cm;
+}
+
+.AddToCartBtn {
+  padding: 0.2cm 0.6cm;
+  background-color: $primarycolor;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #3b5145;
+  }
+}
+
+.deleteBtn {
+  width: 0.6cm;
+  padding: 0.2cm;
+  background-color: rgb(210, 0, 0);
+  border: none;
+  border-radius: 50%;
+  box-shadow: rgba(92, 92, 92, 0.08) 0px 2px 4px,
+    rgba(75, 75, 75, 0.13) 0px 2px 4px;
+  font-weight: 400;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(134, 0, 0);
+  }
+}
