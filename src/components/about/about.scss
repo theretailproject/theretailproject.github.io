@@ -7,8 +7,13 @@ $headFontSize: 3rem;
 
 $primarycolor: #486455;
 $secondarycolor: #e4af47;
+$secondarycolor: #e4af47;
 
 * {
+  text-decoration: none;
+  padding: none;
+  margin: 0;
+  color: #486455;
   text-decoration: none;
   padding: none;
   margin: 0;
@@ -20,9 +25,17 @@ $secondarycolor: #e4af47;
   background-color: #ffffffd0;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  padding: 1cm 0vw;
+  background-color: #ffffffd0;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .about-lower {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2cm;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,6 +92,7 @@ $secondarycolor: #e4af47;
 
 .about-one-left {
   width: 100%;
+  width: 100%;
 }
 
 .about-one-right {
@@ -88,9 +102,22 @@ $secondarycolor: #e4af47;
   flex-shrink: 0;
   gap: 0.3cm;
   flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  width: 15cm;
+  flex-shrink: 0;
+  gap: 0.3cm;
+  flex-wrap: wrap;
 }
 
 .about-one-img {
+  width: 6cm;
+  border-radius: 10px;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
+  }
   width: 6cm;
   border-radius: 10px;
 
@@ -120,6 +147,10 @@ $secondarycolor: #e4af47;
   font-size: 18px;
   font-family: Poppins;
   color: $primarycolor;
+  text-align: left;
+  font-size: 18px;
+  font-family: Poppins;
+  color: $primarycolor;
 }
 
 .small-head {
@@ -127,9 +158,27 @@ $secondarycolor: #e4af47;
   // font-size: 14px;
   color: $primarycolor;
   text-align: left;
+  font-family: Poppins;
+  // font-size: 14px;
+  color: $primarycolor;
+  text-align: left;
 }
 
 .about-two {
+  padding: 5vh 5vw;
+  background-color: $primarycolor;
+  // border: 1px solid black;
+  margin-top: 3cm;
+}
+
+.about-two-child {
+  background-color: white;
+  display: flex;
+  padding: 5vh 5vw;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1cm;
   padding: 5vh 5vw;
   background-color: $primarycolor;
   // border: 1px solid black;
@@ -156,7 +205,20 @@ $secondarycolor: #e4af47;
   justify-content: center;
   padding: 0.2cm;
   flex-shrink: 0;
+  width: 7cm;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  background-color: $primarycolor;
+  border-radius: 10000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2cm;
+  flex-shrink: 0;
 
+  &:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
+  }
   &:hover {
     transform: scale(1.05);
     transition: 0.2s ease-in-out;
@@ -168,14 +230,28 @@ $secondarycolor: #e4af47;
   color: $primarycolor;
   font-weight: 600;
   font-family: $headFont;
+  font-size: 2rem;
+  color: $primarycolor;
+  font-weight: 600;
+  font-family: $headFont;
 }
 
 .founder-img {
   width: 100%;
   border-radius: 10000px;
+  width: 100%;
+  border-radius: 10000px;
 }
 
 .about-two-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1cm;
+  justify-content: space-between;
+  // border: 1px solid black;
+  // height: 100%;
+  align-items: flex-start;
+  // width: 16cm;
   display: flex;
   flex-direction: column;
   gap: 1cm;
@@ -191,9 +267,16 @@ $secondarycolor: #e4af47;
   font-size: 20px;
   font-family: Poppins;
   color: $primarycolor;
+  text-align: left;
+  font-size: 20px;
+  font-family: Poppins;
+  color: $primarycolor;
 }
 
 .foname {
+  text-align: left;
+  font-weight: 600;
+  color: $primarycolor;
   text-align: left;
   font-weight: 600;
   color: $primarycolor;
@@ -203,13 +286,23 @@ $secondarycolor: #e4af47;
   text-align: left;
   color: rgb(87, 87, 87);
   font-size: 14px;
+  text-align: left;
+  color: rgb(87, 87, 87);
+  font-size: 14px;
 }
 
 .qoute {
   width: 1.5cm;
+  width: 1.5cm;
 }
 
 .about-three {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5cm;
+  padding: 0cm 5;
+  align-items: center;
+  margin-top: 2cm;
   display: flex;
   flex-direction: column;
   gap: 1.5cm;
@@ -222,14 +315,21 @@ $secondarycolor: #e4af47;
   font-size: 3rem;
   font-family: $headFont;
   font-weight: 600;
+  font-size: 3rem;
+  font-family: $headFont;
+  font-weight: 600;
 }
 
 .about-misc {
   margin-top: 2cm;
   padding: 0cm 10vw;
+  margin-top: 2cm;
+  padding: 0cm 10vw;
 }
 
 .about-story-text {
+  margin-top: 1cm;
+  font-size: 18px;
   margin-top: 1cm;
   font-size: 18px;
 }
