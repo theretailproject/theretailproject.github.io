@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 const CheckoutP = () => {
     const { userData, doingWork, setDoingWork, cartData, setCartData } = useUserContext();
 
+    const [orderId, setOrderId] = useState("")
+
     const updatedata = (e) => {
         const { name, value } = e.target;
         firestore.collection("users").doc(auth.currentUser?.uid).update(
@@ -92,50 +94,72 @@ const CheckoutP = () => {
 
 
 
-    
+
 
     const proceedToPay = async (paymentId) => {
-        if (cartData) {
-            console.log("Starting proceedToPay with Payment ID:", paymentId);
+        if (!cartData || cartData.length === 0) {
+            console.log("Cart is empty. Nothing to process.");
+            return;
+        }
 
-            for (const cd of cartData) {
-                const orderId = firestore.collection("users").doc(auth.currentUser?.uid).collection("orders").doc().id;
-                console.log("Generated orderId:", orderId);
+        console.log("Starting proceedToPay with Payment ID:", paymentId);
 
-                try {
-                    await firestore.collection("users").doc(auth.currentUser?.uid).collection("orders").doc(orderId).set({
-                        orderId: orderId,
-                        paymentId: paymentId,  // Store actual payment ID from Razorpay
-                        itemId: cd.itemId,
-                        name: cd.name,
-                        price: cd.price,
-                        quantity: cd.quantity,
-                        thumbnail: cd.thumbnail,
-                        link: cd.link,
-                        status: "Processing",
-                        orderedAt: firebase.firestore.Timestamp.now(),
-                        type: "Processing"
-                    });
+        const userId = auth.currentUser?.uid;
+        if (!userId) {
+            console.error("User not authenticated");
+            return;
+        }
 
-                    console.log("Order added for item:", cd.itemId);
+        const userRef = firestore.collection("users").doc(userId);
+        const ordersRef = userRef.collection("orders");
 
-                    if (userData.checkoutAmt > 0) {
-                        await firestore.collection("users").doc(auth.currentUser?.uid).update({
-                            checkoutAmt: 0
-                        }, { merge: true });
-                    }
+        // Generate a single orderId for the entire transaction
+        const orderId = ordersRef.doc().id;
 
-                    await firestore.collection("users").doc(auth.currentUser?.uid).collection("cart").doc(cd.docId).delete();
-                    console.log("Cart item deleted for item:", cd.itemId);
+        try {
+            const batch = firestore.batch();
 
-                } catch (error) {
-                    console.error("Error processing order:", error);
-                }
+            cartData.forEach((cd, index) => {
+                const invoiceId = index === 0 ? orderId : ordersRef.doc().id; // First item gets same invoiceId as orderId
+
+                
+
+                 batch.set(ordersRef.doc(invoiceId), {
+                    orderId: orderId,
+                    paymentId: paymentId,
+                    invoiceId: invoiceId,
+                    itemId: cd.itemId,
+                    name: cd.name,
+                    price: cd.price,
+                    quantity: cd.quantity,
+                    thumbnail: cd.thumbnail,
+                    link: cd.link,
+                    status: "Processing",
+                    orderedAt: firebase.firestore.Timestamp.now(),
+                    type: "Processing",
+                });
+
+                console.log(`Added item ${cd.itemId} with orderId: ${orderId} and invoiceId: ${invoiceId}`);
+
+                // Delete the cart item in batch
+                const cartItemRef = userRef.collection("cart").doc(cd.docId);
+                batch.delete(cartItemRef);
+            });
+
+            // Reset checkout amount if greater than 0
+            if (userData.checkoutAmt > 0) {
+                batch.update(userRef, { checkoutAmt: 0 });
             }
 
-            console.log("All orders processed.");
+            // Commit batch write
+            await batch.commit();
+            console.log("All orders processed successfully.");
+
+        } catch (error) {
+            console.error("Error processing order:", error);
         }
     };
+
 
 
 
