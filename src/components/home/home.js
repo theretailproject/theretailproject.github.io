@@ -246,7 +246,7 @@ function Home() {
               <div className="slider-maincus-flex-col1">
                 <p className="main-slider-captioncus1">{m.title1}</p>
                 <p className="main-slider-captioncus2">{m.title2}</p>
-                <Link to="/Shop">
+                <Link to="/shop">
                   <button className="main-slider-buttoncus">Explore Now</button>
                 </Link>
               </div>
