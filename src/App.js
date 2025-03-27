@@ -33,6 +33,7 @@ import Terms from './components/terms/terms.js';
 import Refund from './components/refund/refund.js';
 import Preserve from './components/shop/preserve.jsx';
 import Wishlist from "./components/wishlist/wishlist.jsx";
+import { AllProducts } from './components/shop/allproducts.jsx';
 
 // import Invoice from './components/invoice/invoice.jsx';
 
@@ -109,7 +110,7 @@ function App() {
           <Route path='/how-to-recycle' element={<Recycle />} />
           <Route path='/about-us' element={<About />} />
           <Route path='/shop' element={<Shop />} >
-            <Route index path='/shop/' element={<Wear />} />
+            <Route index path='/shop/' element={<AllProducts />} />
             <Route index path='/shop/wear' element={<Wear />} />
             <Route index path='/shop/walk' element={<Walk />} />
             <Route index path='/shop/play' element={<Play />} />
