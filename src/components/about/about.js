@@ -1,10 +1,51 @@
 import "./about.scss";
-
+import aboutZero from "./aboutZero.jpeg";
 function About() {
   return (
     <div className="About">
       <div className="about-lower">
         <p className="about-head-main">About Us</p>
+        <div className="about-zero">
+          <div className="about-zero-child">
+            <div className="about-zero-left">
+              <img src={aboutZero} className="about-zero-left-img" />
+            </div>
+            <p className="about-zero-text">
+              <span style={{ textAlign: "center" }} className="firstLine">
+                {" "}
+                Some ideas  </span> don’t start with a grand plan , they start with a
+                simple habit.
+             
+              <br />
+              <br></br>Growing up, I watched my mom transform my grandmother’s
+              discarded clothes into something fresh and functional. Without
+              even thinking about it, I picked up the same habit. I loved taking
+              my mom’s old clothes and giving them a second life. For me, it
+              wasn’t about ‘being sustainable’; it was just the way we did
+              things. <br />
+              <br />
+              That mindset stayed with me. So, when I started designing for my
+              pets, it felt completely natural to use what I already had. No
+              waste, no unnecessary purchases, just creativity with purpose.{" "}
+              <br />
+              <br />
+              And from that simple act,{" "}
+              <b>
+                <i>The ReTail Project</i>
+              </b>{" "}
+              took shape. It wasn’t born out of a business plan. It came from a
+              desire to create responsibly, to make something meaningful, and to
+              honor the lessons I grew up with. Now, every piece I design
+              carries that same intention. <br />
+              <br />
+              <i>
+                The ReTail Project is more than a brand; it’s a continuation of
+                a mindset, one that values the stories behind what we create and
+                the impact we leave behind.
+              </i>
+            </p>
+          </div>
+        </div>
         <div className="about-one">
           <div className="about-one-left">
             {/* <p className="small-head">

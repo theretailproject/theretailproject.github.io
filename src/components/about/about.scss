@@ -29,7 +29,47 @@ $secondarycolor: #e4af47;
   gap: 2cm;
 }
 
+.about-zero {
+  margin-top: -0.8cm;
+  width: 80vw;
+  padding: 10px 20vw;
+  align-items: flex-start;
+  background-color: rgba(255, 255, 255, 0.641);
+
+
+}
+
+.about-zero-child {
+  display: flex;
+  gap: 1cm;
+}
+.about-zero-left {
+  
+}
+.about-zero-left-img {
+  width: 8cm;
+  border: 10px solid $primarycolor;
+  border-radius: 10%;
+  &:hover{
+    transform: scale(1.02);
+    transition: 0.5s ease;
+  }
+}
+
+.firstLine{
+  font-size: 19px;
+  font-weight: bolder;
+
+}
+
+.about-zero-text {
+  font-size: 18px;
+  color: $primarycolor;
+  text-align: center;
+}
+
 .about-one {
+  margin-top: 1.5cm;
   display: flex;
   padding: 0cm 10vw;
   justify-content: space-between;
