@@ -60,14 +60,9 @@ $secondarycolor: #e4af47;
   background-color: $primarycolor;
   padding: 0.15cm 0.6cm;
   border-radius: 10px;
-  color: $secondarycolor;
+  color: white;
   font-size: 14px;
   cursor: pointer;
-
-  &:hover {
-    background-color: $secondarycolor;
-    color: $primarycolor;
-  }
 }
 
 .cart-total-text {
@@ -116,21 +111,13 @@ $secondarycolor: #e4af47;
   gap: 0.3cm;
   width: calc(100% - 0.6cm);
   background-color: $primarycolor;
-  padding: 0.4cm;
+  padding: 0.3cm;
   border-radius: 10px;
-  border:none;
 
   p {
     color: $secondarycolor;
-    font-size: 18px;
+    font-size: 16px;
   }
-
-  &:hover{
-    background-color: $secondarycolor;
-    p{
-        color:$primarycolor;
-    }
-}
 }
 
 .cart-checkout-new {
@@ -155,22 +142,19 @@ $secondarycolor: #e4af47;
 
 .cart-prod-new-img {
   width: 100%;
-  height: fit-content;
 }
 
 .cart-prod-new {
   display: flex;
-  border-radius: 5px;
   align-items: stretch;
   // gap: .2cm;
   // background-color: $primarycolor;
+  border: 2px solid transparent;
   padding: 0.12cm;
-  border: 3px solid white;
-  cursor: pointer;
-
   &:hover {
-    border: 3px solid $primarycolor;
+    border: 2px solid $primarycolor;
   }
+  // border-radius: 10px;
 }
 
 .cart-prod-new-right {
@@ -218,7 +202,7 @@ $secondarycolor: #e4af47;
   cursor: pointer;
   border: 1px solid $secondarycolor;
 
-  &:hover {
+  &:hover{
     background-color: $secondarycolor;
     color: $primarycolor;
   }
@@ -233,19 +217,13 @@ $secondarycolor: #e4af47;
 }
 
 .cart-del-new {
-  color: red;
+  color: $secondarycolor;
   font-size: 14px;
   cursor: pointer;
-  border-radius: 5px;
   transition: 0.3s;
-  border: thin solid transparent;
-  background-color: #ffffffd9;
+
   &:hover {
-    // text-decoration: underline;
-    border-radius: 5px;
-    border: thin solid red;
-    background-color: red;
-    color:white;
+    text-decoration: underline;
   }
 }
 
@@ -259,14 +237,13 @@ $secondarycolor: #e4af47;
   }
 
   .cart-prod-new-left {
-    padding: 0;
+    padding: 0.2cm 0;
   }
 
   .checout-text {
     text-align: left;
     font-size: 16px;
   }
- 
 
   .cart-total-text {
     font-size: 16px;
@@ -276,6 +253,7 @@ $secondarycolor: #e4af47;
 @media only screen and (max-width: 400px) {
   .cart-prod-new {
     flex-direction: column;
+    font-size: 14px;
   }
 
   .cart-prod-new-right {
