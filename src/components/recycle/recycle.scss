@@ -83,7 +83,7 @@ $secondarycolor: #e4af47;
 }
 
 .rec-new-box {
-  width: 60vw;
+  width: 80vw;
   display: flex;
   flex-direction: row;
   height: fit-content;
@@ -220,7 +220,7 @@ $secondarycolor: #e4af47;
 
 @media only screen and (max-width: 1000px) {
   .rec-new-box {
-    width: 8.5cm;
+    width: 80vw;
   }
 
   .rec-img {
@@ -230,7 +230,7 @@ $secondarycolor: #e4af47;
 
 @media only screen and (max-width: 900px) {
   .rec-new-box {
-    width: 8cm;
+    width: 80vw;
   }
 
   .rec-img {
@@ -248,7 +248,7 @@ $secondarycolor: #e4af47;
 
 @media only screen and (max-width: 800px) {
   .rec-new-box {
-    width: 7cm;
+    width: 90vw;
   }
 
   .rec-img {
@@ -270,7 +270,7 @@ $secondarycolor: #e4af47;
   }
 
   .rec-new-box {
-    width: 100%;
+    // width: 100%;
     gap: 0.5cm;
   }
 
@@ -280,12 +280,30 @@ $secondarycolor: #e4af47;
 
   .recycle-head {
     font-size: 32px;
+    padding: 0.3cm;
+  }
+  .tRowNum{
+    font-size: 16px;
+  }
+  .tRowHead {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+  }
+  .tRowTxt {
+    font-size: 14px;
+    margin-left: none;
+    text-align: left;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .prc {
     width: 100%;
+  }
+
+  .rec-new-box {
+    flex-direction: column;
   }
 
   .rec-det {
@@ -302,6 +320,27 @@ $secondarycolor: #e4af47;
 
   .recycle-lower {
     padding: 0cm 5vw;
+  }
+
+  .table-details{
+    padding: 0.4cm;
+  }
+
+  .tRowData{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tRowHead {
+    font-weight: bold;
+    font-size: 16px;
+    // text-decoration: underline;
+    text-align: center;
+    padding-bottom: 0.2cm;
+  }
+  .tRowTxt {
+    margin-left: none;
+    text-align: center;
   }
 }
 
