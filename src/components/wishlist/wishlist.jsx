@@ -5,6 +5,7 @@ import del from "./delete (1).png";
 import { auth, firestore, firebase } from "../../firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
+import cartImg from "./cartImg.png";
 function Wishlist() {
   const { addToCart, doingWork, delFromWishlist } = useUserContext();
   const wishlistRef = firestore
@@ -31,10 +32,13 @@ function Wishlist() {
           <tbody>
             {products && products.length === 0 ? (
               <tr>
-                <td colSpan="6" className="tableData ListData">No Products in Wishlist!</td>
+                <td colSpan="6" className="tableData ListData">
+                  No Products in Wishlist!
+                </td>
               </tr>
             ) : (
-              products && products.map((product) => (
+              products &&
+              products.map((product) => (
                 <tr key={product.itemId} className="tableData">
                   <td className="ListData">
                     <Link to={`shop/${product.category}/${product.itemId}`}>
@@ -61,6 +65,13 @@ function Wishlist() {
                       >
                         Add To Cart
                       </button>
+
+                      <img
+                        src={cartImg}
+                        className="AddToCartBtnImg"
+                        onClick={() => addToCart(product)}
+                      />
+
                       <img
                         src={del}
                         className="deleteBtn"
@@ -74,6 +85,46 @@ function Wishlist() {
             )}
           </tbody>
         </table>
+
+        <div className="WishlistCards">
+          {products && products.length === 0 ? (
+            <p className="ListDataSmall bold">No Products in Wishlist</p>
+          ) : (
+            products &&
+            products.map((product) => (
+              <div className="WishlistCard">
+                <img src={product.thumbnail} className="WishlistImg" />
+                <div className="WishlistInfo">
+                  <p className="ListDataSmall bold">{product.name}</p>
+                  <p className="ListDataSmall">Specs: Holds color and size value</p>
+                  <p className="ListDataSmall">Price: ₹ {product.price}</p>
+                  <p className="ListDataSmall">Qty: {product.quantity}</p>
+                  <div className="ListDataSmall">
+                    <span className="alignCenter">
+                      <button
+                        className="AddToCartBtn"
+                        onClick={() => addToCart(product)}
+                      >
+                        Add To Cart
+                      </button>
+                      <img
+                        src={cartImg}
+                        className="AddToCartBtnImg"
+                        onClick={() => addToCart(product)}
+                      />
+                      <img
+                        src={del}
+                        className="deleteBtn"
+                        alt="Delete"
+                        onClick={() => delFromWishlist(product)}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
