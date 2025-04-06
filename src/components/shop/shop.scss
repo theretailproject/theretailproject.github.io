@@ -77,7 +77,14 @@ button:disabled {
   border-radius: 10px;
   max-width: 9cm;
   cursor: pointer;
+  background-color: whitesmoke;
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  padding: 0.2cm 0.4cm;
   transition: transform 0.3s ease-in-out;
+  border-top: 2px solid $primarycolor;
+  border-bottom: 2px solid $primarycolor;
+  // border-left: 2px solid $primarycolor;
+  // border-right: 2px solid $primarycolor;
 }
 
 .imgCont {
@@ -150,11 +157,11 @@ button:disabled {
   /* text-align: center; */
 }
 
-.smallImgCartCont {
+.smallImgCartContHollow {
   position: relative;
 }
 
-.smallImgCartCont::after {
+.smallImgCartContHollow::after {
   position: absolute;
   content: "Add to Cart";
   color: rgb(223, 185, 80);
@@ -171,7 +178,7 @@ button:disabled {
   border-radius: 01px 5px 5px 0;
 }
 
-.smallImgCartCont::before {
+.smallImgCartContHollow::before {
   position: absolute;
   content: "";
   top: 0.095cm;
@@ -186,16 +193,57 @@ button:disabled {
   transition: ease-in-out 0.45s;
 }
 
-.smallImgCartCont:hover::after,
-.smallImgCartCont:hover::before {
+.smallImgCartContHollow:hover::after,
+.smallImgCartContHollow:hover::before {
   opacity: 1;
 }
 
-.smallImgHeartCont {
+.smallImgCartContFilled {
   position: relative;
 }
 
-.smallImgHeartCont::after {
+.smallImgCartContFilled::after {
+  position: absolute;
+  content: "Remove from Cart";
+  color: rgb(223, 185, 80);
+  background-color: #40533e;
+  top: 0.12cm;
+  left: 1.53cm;
+  width: 2.5cm;
+  height: auto;
+  padding: 0.15cm;
+  font-size: 12px;
+  font-weight: bolder;
+  opacity: 0;
+  transition: ease-in-out 0.45s;
+  border-radius: 01px 5px 5px 0;
+}
+
+.smallImgCartContFilled::before {
+  position: absolute;
+  content: "";
+  top: 0.095cm;
+  left: 1.28cm;
+  width: 0cm;
+  height: 0cm;
+  font-size: 13px;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-right: 10px solid #425240;
+  opacity: 0;
+  transition: ease-in-out 0.45s;
+}
+
+.smallImgCartContFilled:hover::after,
+.smallImgCartContFilled:hover::before {
+  opacity: 1;
+}
+
+.smallImgHeartContHollow {
+  position: relative;
+}
+
+.smallImgHeartContHollow::after {
   position: absolute;
   content: "Add to Wishlist";
   color: rgb(223, 185, 80);
@@ -212,7 +260,7 @@ button:disabled {
   border-radius: 01px 5px 5px 0;
 }
 
-.smallImgHeartCont::before {
+.smallImgHeartContHollow::before {
   position: absolute;
   content: "";
   top: 0.055cm;
@@ -227,8 +275,49 @@ button:disabled {
   transition: ease-in-out 0.45s;
 }
 
-.smallImgHeartCont:hover::after,
-.smallImgHeartCont:hover::before {
+.smallImgHeartContHollow:hover::after,
+.smallImgHeartContHollow:hover::before {
+  opacity: 1;
+}
+
+.smallImgHeartContFilled {
+  position: relative;
+}
+
+.smallImgHeartContFilled::after {
+  position: absolute;
+  content: "Remove from Wishlist";
+  color: rgb(223, 185, 80);
+  background-color: #40533e;
+  top: 0.055cm;
+  left: 1.53cm;
+  width: 2.8cm;
+  height: auto;
+  padding: 0.18cm;
+  font-size: 11px;
+  font-weight: bolder;
+  opacity: 0;
+  transition: ease-in-out 0.45s;
+  border-radius: 01px 5px 5px 0;
+}
+
+.smallImgHeartContFilled::before {
+  position: absolute;
+  content: "";
+  top: 0.055cm;
+  left: 1.28cm;
+  width: 0cm;
+  height: 0cm;
+  font-size: 13px;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-right: 10px solid #40533e;
+  opacity: 0;
+  transition: ease-in-out 0.45s;
+}
+
+.smallImgHeartContFilled:hover::after,
+.smallImgHeartContFilled:hover::before {
   opacity: 1;
 }
 
