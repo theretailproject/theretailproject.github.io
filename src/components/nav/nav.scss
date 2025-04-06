@@ -1788,6 +1788,10 @@ h3 {
   }
 }
 
+.acc-dets-text{
+  font-size: 0.8rem;
+}
+
 @media only screen and (max-width: 700px) {
   .co-name-text {
     font-size: 20px;
@@ -1856,6 +1860,10 @@ h3 {
     text-align: left;
   }
 
+  .acc-dets-text{
+    font-size: 0.7rem;
+  }
+
   .menuk {
     width: 0.45cm;
     height: 0.45cm;
@@ -1888,5 +1896,9 @@ h3 {
     img {
       padding: 0;
     }
+  }
+
+  .acc-dets-text{
+    font-size: 0.7rem;
   }
 }
