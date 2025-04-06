@@ -1,5 +1,5 @@
 import "./about.scss";
-import aboutZero from "./aboutZero.jpeg";
+// import aboutZero from "./aboutZero.jpeg";
 function About() {
   return (
     <div className="About">
@@ -8,7 +8,7 @@ function About() {
         <div className="about-zero">
           <div className="about-zero-child">
             <div className="about-zero-left">
-              <img src={aboutZero} className="about-zero-left-img" />
+              {/* <img src={aboutZero} className="about-zero-left-img" /> */}
             </div>
             <p className="about-zero-text">
               <span style={{ textAlign: "center" }} className="firstLine">
