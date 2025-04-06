@@ -136,6 +136,7 @@ $secondarycolor : #e4af47;
   width:0.7cm;
 }
 .product-page-buttons {
+  width: fit-content;
   margin-top: 1cm;
   display: flex;
   flex-direction: column;
@@ -150,11 +151,11 @@ $secondarycolor : #e4af47;
 }
 
 .product-page-buttons-row2{
-width: 11.5cm;
+width: 100%;
 }
 
 .blueBG{
-  background-color: rgb(62, 122, 195);
+  background-color: rgb(255, 255, 255);
 }
 
 .pp-button {
@@ -168,7 +169,7 @@ width: 11.5cm;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   column-gap: 0.2cm ;
   gap: 8px;
   transition: font-weight 0.02s ease-in-out;
@@ -261,13 +262,18 @@ width: 11.5cm;
   }
 }
 
-@media only screen and (max-width : 1100px) {
+@media only screen and (max-width : 1130px) {
   .product-left {
     width: 9cm;
   }
+
+  .pp-button {
+    padding: .3cm 0.7cm;
+    font-size: 15px;
+  }
 }
 
-@media only screen and (max-width : 1000px) {
+@media only screen and (max-width : 1030px) {
   .product-page-box {
     flex-direction: column;
   }
@@ -315,5 +321,17 @@ width: 11.5cm;
 
   .price {
     margin-top: 0.1cm;
+  }
+
+  .product-page-buttons{
+    width:auto
+  }
+  .product-page-buttons-row1{
+    flex-direction: column;
+  }
+
+  .pp-button{
+    width: 100%;
+    font-size: 14px;
   }
 }
