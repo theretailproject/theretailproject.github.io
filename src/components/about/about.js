@@ -1,21 +1,130 @@
 import "./about.scss";
 import aboutZero from "./aboutZero.jpeg";
+import { useRef, useEffect } from "react";
+
 function About() {
+  const about1right = useRef(null);
+  const about1left = useRef(null);
+  const about2right = useRef(null);
+  const about2left = useRef(null);
+  const about3 = useRef(null);
+  const chooseUp = useRef(null);
+  const featuresUp = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target;
+
+          if (entry.isIntersecting) {
+            if (
+              target.classList.contains("about-zero-left") ||
+              target.classList.contains("about-one-left")
+            ) {
+              target.classList.add("active-left");
+            }
+            if (
+              target.classList.contains("about-zero-text") ||
+              target.classList.contains("about-one-right")
+            ) {
+              target.classList.add("active-right");
+            }
+          } else {
+            target.classList.remove("active-left", "active-right");
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const elements = [
+      about1left.current,
+      about1right.current,
+      about2left.current,
+      about2right.current,
+    ];
+
+    elements.forEach((el) => el && observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => el && observer.unobserve(el));
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+
+          if (entry.isIntersecting) {
+            el.classList.add("active-collection");
+          } else {
+            el.classList.remove("active-collection"); // Optional: remove if you want re-animation
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    const about3Boxes = about3.current?.querySelectorAll(".about-two-children");
+    const chooseBoxes =
+      chooseUp.current?.querySelectorAll(".about-three-point");
+    const featureBoxes =
+      featuresUp.current?.querySelectorAll(".about-five-point");
+    if (about3Boxes) {
+      Array.from(about3Boxes).forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.2}s`; // staggered entry
+        observer.observe(el);
+      });
+    }
+    if (chooseBoxes) {
+      Array.from(chooseBoxes).forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.2}s`; // staggered entry
+        observer.observe(el);
+      });
+    }
+    if (featureBoxes) {
+      Array.from(featureBoxes).forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.2}s`; // staggered entry
+        observer.observe(el);
+      });
+    }
+    return () => {
+      if (about3Boxes) {
+        Array.from(about3Boxes).forEach((el) => {
+          if (el.classList.contains("about-two-children")) observer.unobserve(el);
+        });
+      }
+      if (chooseBoxes) {
+        Array.from(chooseBoxes).forEach((el) => {
+          if (el.classList.contains("about-three-point"))
+            observer.unobserve(el);
+        });
+      }
+      if (featureBoxes) {
+        Array.from(featureBoxes).forEach((el) => {
+          if (el.classList.contains("about-five-point")) observer.unobserve(el);
+        });
+      }
+    };
+  }, []);
+
   return (
     <div className="About">
       <div className="about-lower">
         <p className="about-head-main">About Us</p>
         <div className="about-zero">
           <div className="about-zero-child">
-            <div className="about-zero-left">
+            <div className="about-zero-left" ref={about1left}>
               <img src={aboutZero} className="about-zero-left-img" />
             </div>
-            <p className="about-zero-text">
+            <p className="about-zero-text" ref={about1right}>
               <span style={{ textAlign: "center" }} className="firstLine">
                 {" "}
-                Some ideas  </span> don’t start with a grand plan , they start with a
-                simple habit.
-             
+                Some ideas{" "}
+              </span>{" "}
+              don’t start with a grand plan , they start with a simple habit.
               <br />
               <br></br>Growing up, I watched my mom transform my grandmother’s
               discarded clothes into something fresh and functional. Without
@@ -46,8 +155,9 @@ function About() {
             </p>
           </div>
         </div>
+
         <div className="about-one">
-          <div className="about-one-left">
+          <div className="about-one-left" ref={about2left}>
             {/* <p className="small-head">
                             About Us
                         </p> */}
@@ -76,7 +186,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="about-one-right">
+          <div className="about-one-right" ref={about2right}>
             <img className="about-one-img" src={require("./01.jpg")} />
             <img className="about-one-img" src={require("./02.jpg")} />
             <img className="about-one-img" src={require("./03.jpg")} />
@@ -85,11 +195,11 @@ function About() {
         </div>
 
         <div className="about-two">
-          <div className="about-two-child">
-            <div className="about-two-left">
+          <div className="about-two-child" ref={about3}>
+            <div className="about-two-children about-two-left">
               <img className="founder-img" src={require("./founder.jpg")} />
             </div>
-            <div className="about-two-right">
+            <div className="about-two-children about-two-right">
               <img className="qoute" src={require("./quote.png")} />
 
               <div className="founder-desc">
@@ -112,7 +222,7 @@ function About() {
         <div className="about-misc">
           <p className="about-misc-head">Our Story</p>
           <p className="about-story-text">
-            The ReTail Project: A Tale of Love, Recycling, and Compassion
+            <b>The ReTail Project: A Tale of Love, Recycling, and Compassion</b>
             <br />
             <br />
             <span style={{ textAlign: "left" }}>
@@ -163,7 +273,7 @@ function About() {
         <div className="about-three">
           <p className="about-three-head">Why Choose Us ?</p>
 
-          <div className="about-three-points">
+          <div className="about-three-points" ref={chooseUp}>
             <div className="about-three-point">
               <img className="about-point-img" src={require("./quality.png")} />
               <div className="about-point-right">
@@ -242,7 +352,7 @@ function About() {
         </div>
 
         <div className="about-five">
-          <div className="about-five-box">
+          <div className="about-five-box" ref={featuresUp}>
             <div className="about-five-point">
               <img className="about-five-img" src={require("./truck.png")} />
 
