@@ -98,7 +98,7 @@ $headFont: Quattrocento;
 .menu {
   display: flex;
   align-items: center;
-  gap: 0.2cm;
+  gap: 0.5cm;
 }
 
 .menu-item {
@@ -1768,6 +1768,18 @@ h3 {
   .co-name-text {
     font-size: 22px;
   }
+
+  .menuk {
+    width: 0.6cm;
+    height: 0.6cm;
+    padding: 0.2cm;
+    // border: none;
+    &:hover {
+      // border: none;
+
+      // border-radius: 0;
+    }
+  }
 }
 
 @media only screen and (min-width: 700px) {
@@ -1776,26 +1788,43 @@ h3 {
   }
 }
 
+.acc-dets-text{
+  font-size: 0.8rem;
+}
+
 @media only screen and (max-width: 700px) {
   .co-name-text {
     font-size: 20px;
   }
-
   .logo-image-paw {
     width: 1.3cm;
   }
-
-  .menuk {
-    width: 0.65cm;
-    height: 0.65cm;
-  }
-
-  // #phoneLogo {
-  //   display: flex;
-  // }
-
   #deskLogo {
     display: none;
+  }
+
+  .logo-image-paw {
+    width: 1.2cm;
+  }
+
+  .menuk {
+    width: 0.5cm;
+    height: 0.5cm;
+    padding: 0.2cm;
+    border: none;
+    &:hover {
+      border: none;
+
+      border-radius: 0;
+    }
+  }
+
+  .nav-menu-bar {
+    gap: 0.2cm;
+
+    img {
+      padding: 0;
+    }
   }
 }
 
@@ -1804,6 +1833,25 @@ h3 {
     font-size: 18px;
     text-align: left;
   }
+  .menuk {
+    width: 0.5cm;
+    height: 0.5cm;
+    padding: 0.2cm;
+    border: none;
+    &:hover {
+      border: none;
+
+      border-radius: 0;
+    }
+  }
+
+  .nav-menu-bar {
+    gap: 0.2cm;
+
+    img {
+      padding: 0;
+    }
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -1811,11 +1859,46 @@ h3 {
     font-size: 16px;
     text-align: left;
   }
+
+  .acc-dets-text{
+    font-size: 0.7rem;
+  }
+
+  .menuk {
+    width: 0.45cm;
+    height: 0.45cm;
+    padding: 0.15cm;
+    border: none;
+    &:hover {
+      border: none;
+
+      border-radius: 0;
+    }
+  }
+  .nav-menu-bar {
+    gap: 0.19cm;
+
+    img {
+      padding: 0;
+    }
+  }
 }
 
 @media only screen and (max-width: 400px) {
   .co-name-text {
     font-size: 15px;
     text-align: left;
+  }
+
+  .nav-menu-bar {
+    gap: 0.17cm;
+
+    img {
+      padding: 0;
+    }
+  }
+
+  .acc-dets-text{
+    font-size: 0.7rem;
   }
 }

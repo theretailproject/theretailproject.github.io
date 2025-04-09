@@ -1,53 +1,3 @@
-// import "./shop.scss"
-// import products from "./products.json"
-// import { Link } from "react-router-dom"
-// import { useUserContext } from "../../UserContext";
-
-// export const Play = () => {
-
-//     const { addToCart, doingWork } = useUserContext();
-
-//     return (
-//         <div className="nproducts">
-//             {
-//                 products.map((p) => (
-//                     p.category == "play"
-//                         ?
-//                         <div className="fproduct">
-//                             <Link to={`/shop/${p.category}/${p.id}`}>
-//                                 <div className="fprod-upper">
-//                                     <img className="prodimg" src={p.thumbnail} />
-//                                     <div className="prod-desc">
-//                                         <p className="prod-cat">
-//                                             Play
-//                                         </p>
-//                                         <p className="prod-name">
-//                                             {p.name}
-//                                         </p>
-//                                         <p className="prod-price">
-//                                             ₹ {p.price}
-//                                         </p>
-//                                     </div>
-//                                 </div>
-//                             </Link>
-//                             <div className="fprod-lower">
-//                                 <button className="add-cart" onClick={() => { addToCart(p) }} disabled={doingWork ? true : false}  >
-//                                     ADD TO CART
-//                                 </button>
-//                                 <div className="heart-box">
-//                                     <img className="heart" src={require("./like.png")} alt="" />
-//                                 </div>
-//                             </div>
-//                         </div>
-//                         : null
-//                 ))
-//             }
-
-//         </div >
-//     )
-// }
-
-
 import "./shop.scss";
 import products from "./products.json";
 import { Link } from "react-router-dom";
@@ -57,10 +7,24 @@ import liked from "./liked.png";
 import cartH from "./cartHollow.png";
 import cartF from "./cartFilled.png";
 import noProduct from "./noProducts.png";
-
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { auth, firestore, firebase } from "../../firebase";
 export const Play = () => {
-  const { addToCart, doingWork } = useUserContext();
+  const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
+    useUserContext();
   const playProducts = products.filter((p) => p.category === "play");
+
+  const wishlistRef = firestore
+    .collection("users")
+    .doc(auth.currentUser?.uid)
+    .collection("wishlist");
+  const [wishlist] = useCollectionData(wishlistRef);
+
+  const cartRef = firestore
+    .collection("users")
+    .doc(auth.currentUser?.uid)
+    .collection("cart");
+  const [cart] = useCollectionData(cartRef);
 
   return (
     <div className="nproducts">
@@ -72,29 +36,69 @@ export const Play = () => {
       ) : (
         <div className="ProductCardRow">
           {playProducts.map((p) => (
-            <div className="ProductCard" key={p.id}>
+            <div className="ProductCard" key={p.itemId}>
               <div className="imgCont">
                 <div className="overlayProdCard">
-                  <div className="smallImgCartCont">
+                  
+                  {cart &&
+                  cart.some((product) => product.itemId === p.itemId) ? (
+                    <div className="smallImgCartContFilled">
+                    <img
+                      src={cartF}
+                      alt="Cart Icon"
+                      onMouseOver={(e) => (e.currentTarget.src = cartH)}
+                      onMouseOut={(e) => (e.currentTarget.src = cartF)}
+                      className="smallBtn"
+                      onClick={()=>{
+                          delFromCart(p)
+                          }}
+                    />
+                  </div>
+                    
+                  ) : (
+                    <div className="smallImgCartContHollow">
                     <img
                       src={cartH}
                       alt="Cart Icon"
                       onMouseOver={(e) => (e.currentTarget.src = cartF)}
                       onMouseOut={(e) => (e.currentTarget.src = cartH)}
                       className="smallBtn"
+                      onClick={()=>{
+                          addToCart(p)
+                          }}
                     />
                   </div>
-                  <div className="smallImgHeartCont">
-                    <img
-                      src={like}
-                      alt="Like Icon"
-                      onMouseOver={(e) => (e.currentTarget.src = liked)}
-                      onMouseOut={(e) => (e.currentTarget.src = like)}
-                      className="smallBtn"
-                    />
-                  </div>
+                  )}
+                  {wishlist &&
+                  wishlist.some((product) => product.itemId === p.itemId) ? (
+                    <div className="smallImgHeartContFilled">
+                      <img
+                        src={liked}
+                        alt="Like Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = like)}
+                        onMouseOut={(e) => (e.currentTarget.src = liked)}
+                        className="smallBtn"
+                        onClick={()=>{
+                          delFromWishlist(p)
+                          }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="smallImgHeartContHollow">
+                      <img
+                        src={like}
+                        alt="Like Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = liked)}
+                        onMouseOut={(e) => (e.currentTarget.src = like)}
+                        className="smallBtn"
+                        onClick={() => {
+                          addToWishlist(p);
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
-                <Link to={`/shop/${p.category}/${p.id}`}>
+                <Link to={`/shop/${p.category}/${p.itemId}`}>
                   <img src={p.thumbnail} className="productImg" alt="Product" />
                 </Link>
               </div>

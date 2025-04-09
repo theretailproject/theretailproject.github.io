@@ -9,7 +9,7 @@ import simg from "./sig.png";
 import close from "./close.png";
 import "./nav.scss";
 import dots from "./dots.png";
-import home from "./home.png"
+import home from "./home.png";
 import profile from "./person.png";
 import enroll from "./page.png";
 import invoices from "./dollar-sign.png";
@@ -26,6 +26,7 @@ import "./cart.scss";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useUserContext } from "../../UserContext";
 import { Navigation } from "@coreui/coreui";
+import { use } from "react";
 
 function Nav() {
   const location = useLocation();
@@ -56,13 +57,13 @@ function Nav() {
   //         setnitems(cart.length);
   //     }
   // }, [cart]);
-
+  const [amount, setAmount] = useState(0);
   const cartRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
     .collection("cart");
   const [cart] = useCollectionData(cartRef);
-
+  console.log(cart);
   const overlayRef = useRef(null);
 
   useEffect(() => {
@@ -188,6 +189,31 @@ function Nav() {
     closeCart();
     navigate("/checkout");
   };
+
+  const setCheckoutAmount =async(amount) => {
+    await setDoingWork(true);
+        firestore.collection("users").doc(auth.currentUser?.uid).update(
+          {
+            checkoutAmt: amount,
+          },
+          { merge: true }
+        );
+    await setDoingWork(false)
+    // .then(()=>
+      openCheckout()
+    // )
+
+  }
+  
+
+  useEffect(() => {
+    if (cart && cart.length > 0) {
+      const total = cart.reduce((sum, c) => sum + c.price * c.quantity, 0);
+      setAmount(total);
+    } else {
+      setAmount(0);
+    }
+  }, [cart]);
 
   return (
     <>
@@ -397,64 +423,68 @@ function Nav() {
                 cart.length == 0 ? (
                   <p>No product in cart</p>
                 ) : (
-                  <div className="cart-prod-new">
-                    <div className="cart-prod-new-left">
-                      <img className="cart-prod-new-img" src={c.thumbnail} />
-                    </div>
-                    <div className="cart-prod-new-right">
-                      <p className="cart-prod-new-name">{c.name}</p>
-                      <p className="cart-prod-new-price">₹ {c.price}</p>
-
-                      <div className="cart-new-quantity-box">
-                        <button
+                  <Link to={`shop/${c.category}/${c.itemId}`}>
+                    <div className="cart-prod-new">
+                      <div className="cart-prod-new-left">
+                        <img className="cart-prod-new-img" src={c.thumbnail} />
+                        <p
                           onClick={() => {
-                            minusQty(c);
+                            deleteProd(c);
                           }}
-                          className="cart-minus-new"
-                          disabled={doingWork ? true : false}
+                          className="cart-del-new"
                         >
-                          -
-                        </button>
-                        <p className="cart-quantity-new">{c.quantity}</p>
-                        <button
-                          onClick={() => {
-                            plusQty(c);
-                          }}
-                          className="cart-plus-new"
-                          disabled={doingWork ? true : false}
-                        >
-                          +
-                        </button>
+                          Delete
+                        </p>
                       </div>
+                      <div className="cart-prod-new-right">
+                        <p className="cart-prod-new-name">{c.name}</p>
+                        <p className="cart-prod-new-price">₹ {c.price}</p>
 
-                      <p
-                        onClick={() => {
-                          deleteProd(c);
-                        }}
-                        className="cart-del-new"
-                      >
-                        Delete
-                      </p>
+                        <div className="cart-new-quantity-box">
+                          <button
+                            onClick={() => {
+                              minusQty(c);
+                            }}
+                            className="cart-minus-new"
+                            disabled={doingWork ? true : false}
+                          >
+                            -
+                          </button>
+                          <p className="cart-quantity-new">{c.quantity}</p>
+                          <button
+                            onClick={() => {
+                              plusQty(c);
+                            }}
+                            className="cart-plus-new"
+                            disabled={doingWork ? true : false}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 )
               )}
           </div>
           {
             <div className="cart-checkout-new">
-              <div
-                onClick={
-                  !doingWork && userData.checkoutAmt && userData.checkoutAmt > 0
-                    ? openCheckout
-                    : null
-                }
+              <button
+                // onClick={
+                //   !doingWork && userData.checkoutAmt && userData.checkoutAmt > 0
+                //     ? openCheckout
+                //     : null
+                // }
+                onClick={()=>{setCheckoutAmount(amount)}}
+                disabled={amount>0?false:true}
                 className="checkout-final"
+                
               >
                 <p className="checout-text">Proceed to Checkout</p>
                 <p>|</p>
 
-                <p className="checout-price">₹ {userData.checkoutAmt}</p>
-              </div>
+                <p className="checout-price">₹ {amount}</p>
+              </button>
             </div>
           }
         </div>
@@ -480,8 +510,8 @@ function Nav() {
                 />
               </div>
 
-              <Link className="new-nav-logo-box" to="/" >
-                <p title="Home" className="co-name-text" id="phoneLogo" >
+              <Link className="new-nav-logo-box" to="/">
+                <p title="Home" className="co-name-text" id="phoneLogo">
                   The <span className="re-text">Re</span>Tail Project
                 </p>
               </Link>
@@ -497,7 +527,11 @@ function Nav() {
                 {auth.currentUser ? (
                   <div className="nav-menu-bar">
                     <Link className="nav-linkk" to="/wishlist">
-                      <img title="Your Wishlist" className="menuk hideoii" src={wishlist} />
+                      <img
+                        title="Your Wishlist"
+                        className="menuk hideoii"
+                        src={wishlist}
+                      />
                     </Link>
                     <img
                       onClick={openCart}
@@ -507,7 +541,11 @@ function Nav() {
                     />
 
                     <Link className="nav-linkk" to="/profile">
-                      <img title="Your Profile" className="menuk hideoii" src={profile} />
+                      <img
+                        title="Your Profile"
+                        className="menuk hideoii"
+                        src={profile}
+                      />
                     </Link>
                     {/* <Link className='nav-linkk' to="/pet-profile">
                                                 <img className="menuk hideoii" src={pawimg} />

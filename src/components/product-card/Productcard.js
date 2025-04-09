@@ -1,19 +1,18 @@
-import "./shop.scss";
-import products from "./products.json";
+import "./Productcard.scss";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../UserContext";
 import like from "./like.png";
 import liked from "./liked.png";
 import cartH from "./cartHollow.png";
 import cartF from "./cartFilled.png";
-import noProduct from "./noProducts.png";
-
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore } from "../../firebase";
-export const Wear = () => {
+import bestseller from "./bestseller.json";
+
+const Productcard = () => {
   const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
     useUserContext();
-  const wearProducts = products.filter((p) => p.category === "wear");
+  console.log(bestseller);
 
   const wishlistRef = firestore
     .collection("users")
@@ -28,20 +27,16 @@ export const Wear = () => {
   const [cart] = useCollectionData(cartRef);
 
   return (
-    <div className="nproducts">
-      {wearProducts.length === 0 ? (
-        <div className="noProductDiv">
-          <img src={noProduct} className="noProductImg" alt="No Product" />
-          {/* No Products Found! */}
-        </div>
-      ) : (
-        <div className="ProductCardRow">
-          {wearProducts.map((p) => (
-            <div className="ProductCard" key={p.itemId}>
+    <>
+      {bestseller &&
+        bestseller.map((prod) => (
+          <>
+            {console.log(prod)}
+            <div className="ProductCard" key={prod.itemId}>
               <div className="imgCont">
                 <div className="overlayProdCard">
                   {cart &&
-                  cart.some((product) => product.itemId === p.itemId) ? (
+                  cart.some((product) => product.itemId === prod.itemId) ? (
                     <div className="smallImgCartContFilled">
                       <img
                         src={cartF}
@@ -50,7 +45,7 @@ export const Wear = () => {
                         onMouseOut={(e) => (e.currentTarget.src = cartF)}
                         className="smallBtn"
                         onClick={() => {
-                          delFromCart(p);
+                          delFromCart(prod);
                         }}
                       />
                     </div>
@@ -63,13 +58,13 @@ export const Wear = () => {
                         onMouseOut={(e) => (e.currentTarget.src = cartH)}
                         className="smallBtn"
                         onClick={() => {
-                          addToCart(p);
+                          addToCart(prod);
                         }}
                       />
                     </div>
                   )}
                   {wishlist &&
-                  wishlist.some((product) => product.itemId === p.itemId) ? (
+                  wishlist.some((product) => product.itemId === prod.itemId) ? (
                     <div className="smallImgHeartContFilled">
                       <img
                         src={liked}
@@ -78,7 +73,7 @@ export const Wear = () => {
                         onMouseOut={(e) => (e.currentTarget.src = liked)}
                         className="smallBtn"
                         onClick={() => {
-                          delFromWishlist(p);
+                          delFromWishlist(prod);
                         }}
                       />
                     </div>
@@ -91,23 +86,29 @@ export const Wear = () => {
                         onMouseOut={(e) => (e.currentTarget.src = like)}
                         className="smallBtn"
                         onClick={() => {
-                          addToWishlist(p);
+                          addToWishlist(prod);
                         }}
                       />
                     </div>
                   )}
                 </div>
-                <Link to={`/shop/${p.category}/${p.itemId}`}>
-                  <img src={p.thumbnail} className="productImg" alt="Product" />
+
+                <Link to={`/shop/${prod.category}/${prod.itemId}`}>
+                  <img
+                    src={prod.thumbnail}
+                    className="productImg"
+                    alt="Product"
+                  />
                 </Link>
               </div>
 
-              <p className="productName">{p.name}</p>
-              <p className="productPrice">₹ {p.price}</p>
+              <p className="productName">{prod.name}</p>
+              <p className="productPrice">₹ {prod.price}</p>
             </div>
-          ))}
-        </div>
-      )}
-    </div>
+          </>
+        ))}
+    </>
   );
 };
+
+export default Productcard;

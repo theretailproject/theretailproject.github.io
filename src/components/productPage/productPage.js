@@ -1,6 +1,3 @@
-// 
-
-
 import { useParams } from "react-router-dom";
 import "./productPage.scss";
 import products from "../shop/products.json";
@@ -12,17 +9,33 @@ import cartH from "./cartHollow.png";
 import cartF from "./cartFilled.png";
 import bagHollow from "./bagHollow.png";
 import bagFilled from "./bagFilled.png";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { auth, firestore, firebase } from "../../firebase";
 
 function ProductPage() {
-  const { addToCart, doingWork } = useUserContext();
+  const { addToCart, doingWork, addToWishlist, delFromWishlist,delFromCart } =
+    useUserContext();
 
   const { pid } = useParams();
 
   const [currentImg, setCurrentImg] = useState(() => {
-    const product = products.find((product) => product.id == pid);
+    const product = products.find((product) => product.itemId == pid);
     return product ? product.thumbnail : null;
   });
 
+  console.log(products);
+  const wishlistRef = firestore
+    .collection("users")
+    .doc(auth.currentUser?.uid)
+    .collection("wishlist");
+  const [wishlist] = useCollectionData(wishlistRef);
+
+  const cartRef = firestore
+    .collection("users")
+    .doc(auth.currentUser?.uid)
+    .collection("cart");
+  const [cart] = useCollectionData(cartRef);
+  console.log(cart);
   const onMouseOverChange = (x) => {
     setCurrentImg(x);
   };
@@ -47,7 +60,7 @@ function ProductPage() {
   return (
     <div className="MainDiv">
       {products.map((p) =>
-        p.id == pid ? (
+        p.itemId == pid ? (
           !p.multiple ? (
             <div className="product-page-box">
               <div className="product-left">
@@ -93,26 +106,65 @@ function ProductPage() {
 
                 <div className="product-page-buttons">
                   <span className="product-page-buttons-row1">
-                    <button
-                      onClick={() => {
-                        addToCart(p);
-                      }}
-                      className="pp-button"
-                      disabled={doingWork ? true : false}
-                    >
-                      <img src={like} className="btnSmallImg heart-icon" />
-                      Add to Wishlist
-                    </button>
-                    <button
-                      onClick={() => {
-                        addToCart(p);
-                      }}
-                      className="pp-button"
-                      disabled={doingWork ? true : false}
-                    >
-                      <img src={cartH} className="btnSmallImg cart-icon" />
-                      Add to Cart
-                    </button>
+                    {
+                      wishlist &&
+                    wishlist.some((product) => product.itemId === p.itemId) ? (
+                      <button
+                        onClick={() => {
+                          delFromWishlist(p);
+                        }}
+                        className="pp-button"
+                        disabled={doingWork ? true : false}
+                      >
+                        <img
+                          src={liked}
+                          className="btnSmallImg heart-icon-filled"
+                        />
+                        Remove from Wishlist
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          addToWishlist(p);
+                        }}
+                        className="pp-button"
+                        disabled={doingWork ? true : false}
+                      >
+                        <img src={like} className="btnSmallImg heart-icon" />
+                        Add to Wishlist
+                      </button>
+                    )}
+
+                    {
+                      cart &&
+                    cart.some((product) => product.itemId === p.itemId) 
+                    ? (
+                      <button
+                        onClick={() => {
+                          delFromCart(p);
+                        }}
+                        className="pp-button"
+                        disabled={doingWork ? true : false}
+                      >
+                        <img
+                          src={cartF}
+                          className="btnSmallImg cart-icon-filled"
+                        />
+                        Remove from Cart
+                      </button>
+                    ) 
+                    : (
+                      <button
+                        onClick={() => {
+                          addToCart(p);
+                        }}
+                        className="pp-button"
+                        disabled={doingWork ? true : false}
+                      >
+                        <img src={cartH} className="btnSmallImg cart-icon" />
+                        Add to Cart
+                      </button>
+                    )}
                   </span>
                   <div className="">
                     <button className="pp-button product-page-buttons-row2 blueBG">

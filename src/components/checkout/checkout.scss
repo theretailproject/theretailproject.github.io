@@ -120,12 +120,18 @@ $secondarycolor : #e4af47;
 .pay-button {
     padding: .3cm;
     font-size: 16px;
+    font-weight: bold;
     border-radius: 5px;
-    background-color: $primarycolor;
-    color: $secondarycolor;
+    background-color: $secondarycolor;
+    color: $primarycolor;
     border: 2px solid $primarycolor;
     margin-top: 1cm;
     cursor: pointer;
+    &:hover{
+        background-color: $primarycolor;
+        color: $secondarycolor;
+        // border: 2px solid $secondarycolor;
+    }
 }
 
 .add-tip {

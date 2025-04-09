@@ -1,81 +1,156 @@
 $primarycolor: #486455;
-$secondarycolor : #e4af47;
+$secondarycolor: #e4af47;
 
 .ProfileNew {
-    padding: 1cm 0vw;
+  padding: 1cm 0vw;
 }
 
 .profile-new-box {
-    // border: 1px solid rgb(221, 221, 221);
-    padding: 0cm 5vw;
-    border-radius: 5px;
+  // border: 1px solid rgb(221, 221, 221);
+  padding: 0cm 5vw;
 
+  border-radius: 5px;
 }
 
+.profileRow1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2cm;
+  background-color: whitesmoke;
+}
 
+.signOutBtn {
+  padding: 0.1cm 0.4cm;
+  // width: 100%;
+  background-color: transparent;
+  border: 3px solid $primarycolor;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s all ease;
+  color: $primarycolor;
 
-
-
+  &:hover {
+    background-color: $primarycolor;
+    color: white;
+  }
+}
 
 .profile-box-det {
-    display: flex;
-    align-items: center;
-    gap: .2cm;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(230, 230, 230);
-    padding: .3cm 0cm;
+  display: flex;
+  align-items: center;
+  gap: 0.2cm;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding: 0.3cm 0cm;
+  background-color: whitesmoke;
 }
 
 .write {
-    width: .4cm;
-    opacity: .8;
-    cursor: pointer;
+  width: 0.4cm;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .profile-det-head {
-    display: flex;
+  display: flex;
 
-    gap: .5cm;
-
+  gap: 0.5cm;
 }
 
 .profile-head {
-    font-size: 1.3rem;
-    margin-bottom: .3cm;
-    padding-bottom: .1cm;
-    border-bottom: 1px solid rgb(230, 230, 230);
-    text-align: left;
+  font-size: 1.3rem;
+  margin-bottom: 0.3cm;
+  padding-bottom: 0.1cm;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  text-align: left;
 }
 
 .profile-det-label {
-    width: 4cm;
-    font-size: 1rem;
-    font-weight: 500;
-    color: black;
-    border-right: 1px solid rgb(230, 230, 230);
-    // border: 1px solid red;
-    text-align: left;
+  width: 4cm;
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  border-right: 1px solid rgb(230, 230, 230);
+  // border: 1px solid red;
+  text-align: left;
 }
 
 .profile-det-text {
-    font-size: 1rem;
-    word-break: break-all;
-    color: black;
+  font-size: 1rem;
+  word-break: break-all;
+  color: black;
 }
 
+@media only screen and (max-width: 800px) {
+  .profile-det-head {
+    flex-direction: column;
+    gap: 0.2cm;
+  }
 
-@media only screen and (max-width:800px) {
-    .profile-det-head {
-        flex-direction: column;
-        gap: .2cm;
+  .profile-det-label {
+    width: auto;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--theme-ui-colors-text-basic-color-2);
+    // border: 1px solid red;
+  }
 
+  .signOutBtn {
+    padding: 0.1cm 0.2cm;
+    // width: 100%;
+    background-color: transparent;
+    border: 2px solid $primarycolor;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: 0.3s all ease;
+    color: $primarycolor;
+
+    &:hover {
+      background-color: $primarycolor;
+      color: white;
     }
+  }
+}
 
-    .profile-det-label {
-        width: auto;
-        font-size: .8rem;
-        font-weight: 400;
-        color: var(--theme-ui-colors-text-basic-color-2);
-        // border: 1px solid red;
+@media only screen and (max-width: 400px) {
+  .profile-det-head {
+    flex-direction: column;
+    gap: 0.1cm;
+  }
+
+  .profile-det-label {
+    width: auto;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--theme-ui-colors-text-basic-color-2);
+    // border: 1px solid red;
+  }
+
+  .profile-det-text {
+    font-size: 0.7rem;
+    text-align: left;
+  }
+
+  .signOutBtn {
+    padding: 0.05cm 0.3cm;
+    // width: 100%;
+    background-color: transparent;
+    border: 1px solid $primarycolor;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: 0.3s all ease;
+    color: $primarycolor;
+
+    &:hover {
+      background-color: $primarycolor;
+      color: white;
     }
+  }
 }

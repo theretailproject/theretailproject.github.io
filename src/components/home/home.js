@@ -23,6 +23,8 @@ import Client1 from "./Client1.jpeg";
 import Client2 from "./Client2.jpeg";
 import Client3 from "./Client3.jpeg";
 import { useRef } from "react";
+
+import Productcard from "../product-card/Productcard";
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -71,44 +73,16 @@ function PrevArrowHome(props) {
   );
 }
 
-// function counter() {
-//   let i = 0;
-//   let interval = setInterval(() => {
-//       document.getElementById('counter1').innerHTML = i;
-//       if (i >= 100) {
-//           clearInterval(interval);
-//       }
-//       i++;
-//   }, 50); // Adjust speed by modifying the interval time
-//
-
 function Home() {
   const counterRef1 = useRef(null);
   const counterRef2 = useRef(null);
+  const home1left = useRef(null);
+  const home1right = useRef(null);
+  const home2left = useRef(null);
+  const home2right = useRef(null);
+  const collectionUp = useRef(null);
+  const partnersUp = useRef(null);
   const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasStarted) {
-            startCounter(counterRef1, 100, 25);
-            startCounter(counterRef2, 150, 20);
-            setHasStarted(true);
-          }
-        });
-      },
-      { threshold: 0.5 } // Trigger when at least 50% of the element is visible
-    );
-
-    if (counterRef1.current) observer.observe(counterRef1.current);
-    if (counterRef2.current) observer.observe(counterRef2.current);
-
-    return () => {
-      if (counterRef1.current) observer.unobserve(counterRef1.current);
-      if (counterRef2.current) observer.unobserve(counterRef2.current);
-    };
-  }, [hasStarted]);
 
   function startCounter(ref, targetValue, speed) {
     let current = 0;
@@ -125,6 +99,71 @@ function Home() {
 
     updateCounter(); // Start the counter
   }
+  //   if (home1left.current) {
+  //     home1left.current.classList.add("active-left");
+  //     // myDivRef.current.classList.remove("old-class-name");
+  //   }
+
+  //   if (home1right.current) {
+  //     home1right.current.classList.add("active-right");
+  //     // myDivRef.current.classList.remove("old-class-name");
+  //   }
+  //   if (home2left.current) {
+  //     home2left.current.classList.add("active-left");
+  //     // myDivRef.current.classList.remove("old-class-name");
+  //   }
+  //   if (home2right.current) {
+  //     home2right.current.classList.add("active-right");
+  //     // myDivRef.current.classList.remove("old-class-name");
+  //   }
+  // };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target;
+
+          if (entry.isIntersecting) {
+            if (target.classList.contains("home-main-div-left")) {
+              target.classList.add("active-left");
+            }
+            if (target.classList.contains("home-main-div-right")) {
+              target.classList.add("active-right");
+            }
+
+            if (
+              !hasStarted &&
+              (target === counterRef1.current || target === counterRef2.current)
+            ) {
+              startCounter(counterRef1, 100, 25);
+              startCounter(counterRef2, 150, 5);
+              setHasStarted(true);
+            }
+          } else {
+            target.classList.remove("active-left", "active-right");
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const elements = [
+      counterRef1.current,
+      counterRef2.current,
+      home1left.current,
+      home1right.current,
+      home2left.current,
+      home2right.current,
+    ];
+
+    elements.forEach((el) => el && observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => el && observer.unobserve(el));
+    };
+  }, [hasStarted]);
+
   useEffect(() => {
     setTimeout(() => {
       const loader = document.querySelector(".loader-container");
@@ -140,8 +179,59 @@ function Home() {
       if (hero) {
         hero.style.opacity = "1"; // Fixed the "none" issue
       }
-    }, 2500);
+    }, 500);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+
+          if (entry.isIntersecting) {
+            el.classList.add("active-collection");
+          } else {
+            el.classList.remove("active-collection"); // Optional: remove if you want re-animation
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    const colBoxes = collectionUp.current?.querySelectorAll(".collection");
+    const partnerBoxes = partnersUp.current?.querySelectorAll(
+      ".testimonials-ClientLogo"
+    );
+
+    if (colBoxes) {
+      Array.from(colBoxes).forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.2}s`; // staggered entry
+        observer.observe(el);
+      });
+    }
+    if (partnerBoxes) {
+      Array.from(partnerBoxes).forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.2}s`; // staggered entry
+        observer.observe(el);
+      });
+    }
+
+    return () => {
+      if (colBoxes) {
+        Array.from(colBoxes).forEach((el) => {
+          if (el.classList.contains("testimonials-ClientLogo"))
+            observer.unobserve(el);
+        });
+      }
+      if (partnerBoxes) {
+        Array.from(partnerBoxes).forEach((el) => {
+          if (el.classList.contains("testimonials-ClientLogo"))
+            observer.unobserve(el);
+        });
+      }
+    };
+  }, []);
+
   const slides = [
     { img: "slide-one-before.jpg", img2: "slide-one-after.jpg" },
     { img: "slide-two-before.jpg", img2: "slide-two-after.jpg" },
@@ -225,6 +315,7 @@ function Home() {
         "4- Lorem ipsumjb binrbienr rivnrjineir ejfnswe nruinriune einwuieniuwen enijneriugneui enfjeni nur roignu riugnriu rniru",
     },
   ];
+
   return (
     <div className="Home">
       <div className="loader-container">
@@ -250,7 +341,11 @@ function Home() {
                   <button className="main-slider-buttoncus">Explore Now</button>
                 </Link>
               </div>
-              <img src={m.img} alt="" className="slider-main-imgcus" />
+              <img
+                src={m.img}
+                alt=""
+                className="slider-main-imgcus display-none"
+              />
             </div>
           </div>
         ))}
@@ -260,10 +355,10 @@ function Home() {
         <div className="hero-lower">
           <div className="home-main">
             <div className="home-main-div">
-              <div className="home-main-div-left">
+              <div ref={home1left} className="home-main-div-left ">
                 <img className="main-div-back hbone" src={backOne} />
               </div>
-              <div className="home-main-div-right">
+              <div ref={home1right} className="home-main-div-right">
                 <p className="home-main-head">Who We Are ?</p>
                 <p className="main-text">
                   The ReTail Project is a conscious pet brand that customizes
@@ -282,7 +377,7 @@ function Home() {
             {/* <marquee>hello</marquee> */}
             <div className="htwoow">
               <div className="home-main-div htwoowContent">
-                <div className="home-main-div-right">
+                <div ref={home2left} className="home-main-div-right ">
                   <p className="home-main-head whiteContent">What We Do ?</p>
                   <p className="main-text whiteContent">
                     The ReTail Project is all about giving pet parents the
@@ -300,7 +395,7 @@ function Home() {
 
                   <button className="read-more yellowBorder ">Read more</button>
                 </div>
-                <div className="home-main-div-left hmltt">
+                <div ref={home2right} className="home-main-div-left hmltt">
                   <img
                     className="main-div-back hbone htwoImage"
                     src={backTwo}
@@ -355,7 +450,7 @@ function Home() {
 
           <div className="collection-box">
             <p className="home-main-head">Our Collections</p>
-            <div className="collections">
+            <div className="collections" ref={collectionUp}>
               <Link to="/shop/wear">
                 <div className="collection wear">
                   <p className="coltext">WEAR</p>
@@ -419,6 +514,87 @@ function Home() {
           <div className="featured-products-box">
             <div className="home-main-head">Our Bestsellers</div>
             <div className="featured-products">
+              {/* <div className="ProductCard">
+                <div className="imgCont">
+                  <div className="overlayProdCard">
+                    <div className="smallImgCartCont">
+                      <img
+                        src={cartH}
+                        alt="Cart Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
+                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
+                        className="smallBtn"
+                      />
+                    </div>
+                    <div className="smallImgHeartCont">
+                      <img
+                        src={like}
+                        alt="Like Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = liked)}
+                        onMouseOut={(e) => (e.currentTarget.src = like)}
+                        className="smallBtn"
+                      />
+                    </div>
+                  </div>
+                  <Link to={`/shop`}>
+                    <img
+                      src={require("./btwo.jpg")}
+                      className="productImg"
+                      alt="Product"
+                    />
+                  </Link>
+                </div>
+                <p className="productCategory">WEAR</p>
+                <div className="productCardRowCus">
+                  {" "}
+                  <p className="productName">Festive Frock</p>
+                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
+                </div>
+                <Link to="/shop/wear">
+                  <button className=" view-button">View</button>
+                </Link>
+              </div>
+              <div className="ProductCard">
+                <div className="imgCont">
+                  <div className="overlayProdCard">
+                    <div className="smallImgCartCont">
+                      <img
+                        src={cartH}
+                        alt="Cart Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
+                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
+                        className="smallBtn"
+                      />
+                    </div>
+                    <div className="smallImgHeartCont">
+                      <img
+                        src={like}
+                        alt="Like Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = liked)}
+                        onMouseOut={(e) => (e.currentTarget.src = like)}
+                        className="smallBtn"
+                      />
+                    </div>
+                  </div>
+                  <Link to={`/shop`}>
+                    <img
+                      src={require("./btwo.jpg")}
+                      className="productImg"
+                      alt="Product"
+                    />
+                  </Link>
+                </div>
+                <p className="productCategory">WEAR</p>
+                <div className="productCardRowCus">
+                  {" "}
+                  <p className="productName">Festive Frock</p>
+                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
+                </div>
+
+                <Link to="/shop/wear">
+                  <button className=" view-button">View</button>
+                </Link>
+              </div>
               <div className="ProductCard">
                 <div className="imgCont">
                   <div className="overlayProdCard">
@@ -459,90 +635,6 @@ function Home() {
                   <button className=" view-button">View</button>
                 </Link>
               </div>
-
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-
               <div className="ProductCard">
                 <div className="imgCont">
                   <div className="overlayProdCard">
@@ -582,7 +674,8 @@ function Home() {
                 <Link to="/shop/wear">
                   <button className=" view-button">View</button>
                 </Link>
-              </div>
+              </div> */}
+              <Productcard />
             </div>
           </div>
 
@@ -630,30 +723,28 @@ function Home() {
                     </>
                   </div>
                 </div>
-                <div className="testimonials-row1-col2">
-                  <div className="borderImg">
-                    <img
-                      src={Client1}
-                      className="testimonials-smallLogo"
-                      alt="review"
-                    />
-                  </div>
-                  <div className="reviewBox">
-                    <p className="clientReviewText">
-                      Lorem Ipsum nrinb dvnutn nfvur nugnrub fnjut jnbunbu miig
-                      mirgi rngrgni rjigorj motiot grneirnn enriogjrie ioegij
-                      reiorjge ioejrij iojrgijr iorjgoiej riogjeior iorjeijir
-                      iroejgioej gmioejriogj goimrgoi gmergio rmeokgoi oirjg
-                      otiut eiotj ermgiot nmgiro tijib njrtiu rkoijgi gerijt
-                    </p>
-                  </div>
-                </div>
+                <Slider {...settingsF} className="testimonials-row1-col2">
+                  {reviewSlider &&
+                    reviewSlider.map((review, index) => (
+                      <div className="reviewSliderDiv" key={index}>
+                        <img
+                          src={Client1}
+                          className="testimonials-smallLogo"
+                          alt="review"
+                        />
+                        <div className="reviewBox">
+                          {" "}
+                          <p className="clientReviewText">{review.review}</p>
+                        </div>
+                      </div>
+                    ))}
+                </Slider>
               </div>
               <div className="testimonials-row3">
                 <p className="testimonials-row3-head ">
                   Our Upcycling Partners
                 </p>
-                <div className="testimonials-row3-row2">
+                <div className="testimonials-row3-row2" ref={partnersUp}>
                   <img src={Client1} className="testimonials-ClientLogo" />
                   <img src={Client2} className="testimonials-ClientLogo" />
                   <img src={Client3} className="testimonials-ClientLogo" />

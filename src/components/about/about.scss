@@ -7,13 +7,8 @@ $headFontSize: 3rem;
 
 $primarycolor: #486455;
 $secondarycolor: #e4af47;
-$secondarycolor: #e4af47;
 
 * {
-  text-decoration: none;
-  padding: none;
-  margin: 0;
-  color: #486455;
   text-decoration: none;
   padding: none;
   margin: 0;
@@ -22,10 +17,7 @@ $secondarycolor: #e4af47;
 
 .About {
   padding: 1cm 0vw;
-  background-color: #ffffffd0;
-  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-  padding: 1cm 0vw;
+  width: 100%;
   background-color: #ffffffd0;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
@@ -36,46 +28,42 @@ $secondarycolor: #e4af47;
   flex-direction: column;
   align-items: center;
   gap: 2cm;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2cm;
 }
 
 .about-zero {
   margin-top: -0.8cm;
-  width: 80vw;
-  padding: 10px 20vw;
+  width: 100%;
   align-items: flex-start;
   background-color: rgba(255, 255, 255, 0.641);
-
-
 }
 
 .about-zero-child {
-  display: flex;
-  gap: 1cm;
+  padding: 1vh 5vw;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2vw;
 }
 .about-zero-left {
-  
 }
 .about-zero-left-img {
-  width: 8cm;
+  width: 20vw;
   border: 10px solid $primarycolor;
   border-radius: 10%;
-  &:hover{
+  &:hover {
     transform: scale(1.02);
     transition: 0.5s ease;
   }
 }
 
-.firstLine{
+.firstLine {
   font-size: 19px;
   font-weight: bolder;
-
 }
 
 .about-zero-text {
+  width: 70vw;
   font-size: 18px;
   color: $primarycolor;
   text-align: center;
@@ -92,7 +80,6 @@ $secondarycolor: #e4af47;
 
 .about-one-left {
   width: 100%;
-  width: 100%;
 }
 
 .about-one-right {
@@ -102,22 +89,9 @@ $secondarycolor: #e4af47;
   flex-shrink: 0;
   gap: 0.3cm;
   flex-wrap: wrap;
-  display: flex;
-  justify-content: center;
-  width: 15cm;
-  flex-shrink: 0;
-  gap: 0.3cm;
-  flex-wrap: wrap;
 }
 
 .about-one-img {
-  width: 6cm;
-  border-radius: 10px;
-
-  &:hover {
-    transform: scale(1.05);
-    transition: 0.2s ease-in-out;
-  }
   width: 6cm;
   border-radius: 10px;
 
@@ -147,10 +121,6 @@ $secondarycolor: #e4af47;
   font-size: 18px;
   font-family: Poppins;
   color: $primarycolor;
-  text-align: left;
-  font-size: 18px;
-  font-family: Poppins;
-  color: $primarycolor;
 }
 
 .small-head {
@@ -158,14 +128,10 @@ $secondarycolor: #e4af47;
   // font-size: 14px;
   color: $primarycolor;
   text-align: left;
-  font-family: Poppins;
-  // font-size: 14px;
-  color: $primarycolor;
-  text-align: left;
 }
 
 .about-two {
-  padding: 5vh 5vw;
+  padding: 0.8cm 1cm;
   background-color: $primarycolor;
   // border: 1px solid black;
   margin-top: 3cm;
@@ -177,21 +143,8 @@ $secondarycolor: #e4af47;
   padding: 5vh 5vw;
   border-radius: 25px;
   justify-content: center;
-  align-items: flex-start;
-  gap: 1cm;
-  padding: 5vh 5vw;
-  background-color: $primarycolor;
-  // border: 1px solid black;
-  margin-top: 3cm;
-}
-
-.about-two-child {
-  background-color: white;
-  display: flex;
-  padding: 5vh 5vw;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  // flex-wrap: wrap;
   gap: 1cm;
 }
 
@@ -205,20 +158,7 @@ $secondarycolor: #e4af47;
   justify-content: center;
   padding: 0.2cm;
   flex-shrink: 0;
-  width: 7cm;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  background-color: $primarycolor;
-  border-radius: 10000px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.2cm;
-  flex-shrink: 0;
 
-  &:hover {
-    transform: scale(1.05);
-    transition: 0.2s ease-in-out;
-  }
   &:hover {
     transform: scale(1.05);
     transition: 0.2s ease-in-out;
@@ -230,28 +170,14 @@ $secondarycolor: #e4af47;
   color: $primarycolor;
   font-weight: 600;
   font-family: $headFont;
-  font-size: 2rem;
-  color: $primarycolor;
-  font-weight: 600;
-  font-family: $headFont;
 }
 
 .founder-img {
   width: 100%;
   border-radius: 10000px;
-  width: 100%;
-  border-radius: 10000px;
 }
 
 .about-two-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1cm;
-  justify-content: space-between;
-  // border: 1px solid black;
-  // height: 100%;
-  align-items: flex-start;
-  // width: 16cm;
   display: flex;
   flex-direction: column;
   gap: 1cm;
@@ -267,16 +193,9 @@ $secondarycolor: #e4af47;
   font-size: 20px;
   font-family: Poppins;
   color: $primarycolor;
-  text-align: left;
-  font-size: 20px;
-  font-family: Poppins;
-  color: $primarycolor;
 }
 
 .foname {
-  text-align: left;
-  font-weight: 600;
-  color: $primarycolor;
   text-align: left;
   font-weight: 600;
   color: $primarycolor;
@@ -286,23 +205,13 @@ $secondarycolor: #e4af47;
   text-align: left;
   color: rgb(87, 87, 87);
   font-size: 14px;
-  text-align: left;
-  color: rgb(87, 87, 87);
-  font-size: 14px;
 }
 
 .qoute {
   width: 1.5cm;
-  width: 1.5cm;
 }
 
 .about-three {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5cm;
-  padding: 0cm 5;
-  align-items: center;
-  margin-top: 2cm;
   display: flex;
   flex-direction: column;
   gap: 1.5cm;
@@ -315,21 +224,14 @@ $secondarycolor: #e4af47;
   font-size: 3rem;
   font-family: $headFont;
   font-weight: 600;
-  font-size: 3rem;
-  font-family: $headFont;
-  font-weight: 600;
 }
 
 .about-misc {
   margin-top: 2cm;
   padding: 0cm 10vw;
-  margin-top: 2cm;
-  padding: 0cm 10vw;
 }
 
 .about-story-text {
-  margin-top: 1cm;
-  font-size: 18px;
   margin-top: 1cm;
   font-size: 18px;
 }
@@ -506,6 +408,9 @@ $secondarycolor: #e4af47;
 }
 
 @media only screen and (max-width: 1400px) {
+  .about-zero-text {
+    font-size: 18px;
+  }
   .about-one-img {
     width: 5cm;
   }
@@ -560,6 +465,13 @@ $secondarycolor: #e4af47;
 }
 
 @media only screen and (max-width: 1100px) {
+  .firstLine {
+    font-size: 18px;
+    font-weight: bolder;
+  }
+  .about-zero-text {
+    font-size: 17px;
+  }
   .about-one-img {
     width: 4.5cm;
   }
@@ -569,9 +481,14 @@ $secondarycolor: #e4af47;
   }
 
   .about-two {
-    padding: 0cm 5vw;
+    padding: 0.6cm 5vw;
   }
-
+  .about-two-left {
+    width: 5.5cm;
+  }
+  .founder-text {
+    font-size: 18px;
+  }
   .about-misc {
     padding: 0cm 5vw;
   }
@@ -579,7 +496,10 @@ $secondarycolor: #e4af47;
   .about-three {
     padding: 0cm 5vw;
   }
-
+  .about-three-points{
+    row-gap:1.5cm;
+    column-gap: 1.2cm;
+  }
   .about-four {
     padding: 2cm 5vw;
     width: calc(100% - (10vw + 2px));
@@ -651,6 +571,27 @@ $secondarycolor: #e4af47;
 }
 
 @media only screen and (max-width: 900px) {
+  .about-zero-child {
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 2vh;
+  }
+
+  .about-zero-left-img {
+    width: 40vw;
+  }
+  .firstLine {
+    font-size: 17px;
+    font-weight: bolder;
+  }
+
+  .about-zero-text {
+    font-size: 16px;
+    width: 90vw;
+    text-align: justify;
+  }
+
   .about-one-img {
     width: 4cm;
   }
@@ -660,7 +601,7 @@ $secondarycolor: #e4af47;
   }
 
   .about-two {
-    padding: 0cm 5vw;
+    padding: 0.4cm 5vw;
   }
 
   .about-misc {
@@ -668,9 +609,12 @@ $secondarycolor: #e4af47;
   }
 
   .about-three {
-    padding: 0cm 5vw;
+    padding: 0cm 4vw;
   }
-
+  .about-three-points{
+    row-gap:1.2cm;
+    column-gap: 1cm;
+  }
   .about-four {
     padding: 2cm 5vw;
     width: calc(100% - (10vw + 2px));
@@ -743,6 +687,10 @@ $secondarycolor: #e4af47;
 }
 
 @media only screen and (max-width: 800px) {
+  .firstLine {
+    font-size: 16px;
+    font-weight: bolder;
+  }
   .about-one-img {
     width: 6cm;
   }
@@ -753,7 +701,7 @@ $secondarycolor: #e4af47;
   }
 
   .about-two {
-    padding: 0cm 5vw;
+    padding: 0.3cm 4vw;
     flex-direction: column;
   }
 
@@ -763,6 +711,10 @@ $secondarycolor: #e4af47;
 
   .about-three {
     padding: 0cm 5vw;
+  }
+  .about-three-points{
+    row-gap:1cm;
+    column-gap: 0.9cm;
   }
 
   .about-four {
@@ -784,7 +736,7 @@ $secondarycolor: #e4af47;
   }
 
   .about-two-left {
-    width: 7cm;
+    width: 4.8cm;
   }
 
   .qoute {
@@ -844,7 +796,10 @@ $secondarycolor: #e4af47;
   .about-point-text {
     font-size: 14px;
   }
-
+  .about-four-content{
+    flex-direction: column;
+    justify-content: center;
+  }
   .about-four-head {
     font-size: 30px;
     line-height: 1cm;
@@ -860,8 +815,12 @@ $secondarycolor: #e4af47;
     font-size: 35px;
   }
 
+  .about-two-child {
+    display: flex;
+    flex-direction: column;
+  }
   .about-two-left {
-    width: 7cm;
+    width: 4.5cm;
   }
 
   .qoute {
@@ -886,6 +845,9 @@ $secondarycolor: #e4af47;
 
   .about-three-head {
     font-size: 35px;
+  }
+  .about-three-points{
+    row-gap:0.8cm;
   }
 
   .about-point-head {
@@ -924,7 +886,7 @@ $secondarycolor: #e4af47;
   }
 
   .about-two-left {
-    width: 6cm;
+    width: 4.3cm;
   }
 
   .founder-text {
@@ -977,10 +939,22 @@ $secondarycolor: #e4af47;
 }
 
 @media only screen and (max-width: 450px) {
+  .firstLine {
+    font-size: 15px;
+    font-weight: bolder;
+  }
+  .about-zero-text {
+    font-size: 14px;
+    width: 90vw;
+    text-align: justify;
+  }
   .about-one-img {
     width: 4cm;
   }
 
+  .about-two-left {
+    width: 4cm;
+  }
   .about-point-head {
     font-size: 16px;
   }
