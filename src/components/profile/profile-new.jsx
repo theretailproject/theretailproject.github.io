@@ -6,7 +6,7 @@ import "./profile.scss";
 import { useContext, useEffect, useState } from "react";
 import { UserContext, useUserContext } from "../../UserContext.js";
 import PetProfile from "../pet-profile/profile-new";
-
+import { useNavigate } from "react-router-dom";
 function ProfileNew() {
   // const usersRef = firestore.collection("users");
   // const [users] = useCollectionData(usersRef);
@@ -37,16 +37,19 @@ function ProfileNew() {
   // }, [users]); // Only run when `users` changes
 
   const { userData, petData } = useUserContext();
-  const signOut = () => {
-    signOut();
-    alert("User Logged Out Succesfully! Come Back Soon!!");
-  };
+  const navigate = useNavigate();
   return (
     <div className="ProfileNew">
       <div className="profile-new-box">
         <div className="profileRow1">
           <p className="profile-head">User Profile</p>
-          <button className="signOutBtn" onClick={signOut}>
+          <button
+            className="signOutBtn"
+            onClick={() => {
+              auth.signOut();
+              navigate("/");
+            }}
+          >
             Sign Out
           </button>
         </div>
