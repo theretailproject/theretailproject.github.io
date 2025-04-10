@@ -1081,6 +1081,14 @@ $secondarycolor: #e4af47;
       transform: translateX(0);
     }
   }
+
+  
+  .about-zero-text {
+    padding: 0.2cm;
+    font-size: 14px;
+    width: 90vw;
+    text-align: justify;
+  }
 }
 
 @media only screen and (max-width: 450px) {
