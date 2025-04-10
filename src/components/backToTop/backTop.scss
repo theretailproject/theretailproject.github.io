@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.backTopDiv {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.backTopBtn {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  cursor: pointer;
+  padding: 0.8cm;
+}
+
+.arrowBtn {
+  padding: 0.3cm;
+  width: 1cm;
+  background-color: #486455;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  border: 1px solid white;
+}
+
+@media only screen and (max-width: 768px) {
+  .arrowBtn {
+    padding: 0.2cm;
+    width: 0.8cm;
+  }
+  .backTopBtn {
+    padding: 0.6cm;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+    .arrowBtn {
+      padding: 0.2cm;
+      width: 0.7cm;
+    }
+    .backTopBtn {
+      padding: 0.5cm;
+    }
+  }

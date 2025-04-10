@@ -682,10 +682,16 @@ $headFont: Quattrocento;
 
 .login-button {
   padding: 0.15cm 0.3cm;
-  background-color: $secondarycolor;
+  border: 2px solid $secondarycolor;
+
   border-radius: 5px;
   text-align: center;
-  color: $primarycolor;
+  color: $secondarycolor;
+
+  &:hover {
+    background-color: $secondarycolor;
+    color: $primarycolor;
+  }
 }
 
 .SignUp {
@@ -1852,6 +1858,13 @@ h3 {
       padding: 0;
     }
   }
+
+  .login-button {
+    padding: 0.1cm 0.2cm;
+    border: 2px solid $secondarycolor;
+    font-size: 14px;
+  }
+  
 }
 
 @media only screen and (max-width: 500px) {
@@ -1900,5 +1913,13 @@ h3 {
 
   .acc-dets-text{
     font-size: 0.7rem;
+  }
+
+  .login-button {
+    min-width: 1.2cm;
+    padding: 0.1cm 0.2cm;
+    border: 2px solid $secondarycolor;
+    font-size: 12px;
+    word-wrap: none;
   }
 }

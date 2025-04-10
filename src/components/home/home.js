@@ -355,7 +355,7 @@ function Home() {
         <div className="hero-lower">
           <div className="home-main">
             <div className="home-main-div">
-              <div ref={home1left} className="home-main-div-left ">
+              <div ref={home1left} className="home-main-div-left">
                 <img className="main-div-back hbone" src={backOne} />
               </div>
               <div ref={home1right} className="home-main-div-right">
@@ -370,8 +370,9 @@ function Home() {
                   sustainability and style together for pet parents who care
                   about the planet.
                 </p>
-
-                <button className="read-more">Read more</button>
+                <Link to="/about-us">
+                  <button className="read-more">Read more</button>
+                </Link>
               </div>
             </div>
             {/* <marquee>hello</marquee> */}
@@ -392,8 +393,11 @@ function Home() {
                     with our community, as each product is personal
                     and sustainable.
                   </p>
-
-                  <button className="read-more yellowBorder ">Read more</button>
+                  <Link to="/how-to-recycle">
+                    <button className="read-more yellowBorder ">
+                      Read more
+                    </button>
+                  </Link>
                 </div>
                 <div ref={home2right} className="home-main-div-left hmltt">
                   <img

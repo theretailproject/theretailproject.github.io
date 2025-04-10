@@ -3,8 +3,92 @@ import one from "./send.png";
 import two from "./style.png";
 import three from "./smile.png";
 import prc from "./prc.jpg";
-
+import { useRef, useEffect } from "react";
 function Recycle() {
+  const recycle1_1left = useRef(null);
+  const recycle1_2right = useRef(null);
+  const recycle1_3left = useRef(null);
+  const recycleTable = useRef(null);
+  const home2left = useRef(null);
+  const home2right = useRef(null);
+  const collectionUp = useRef(null);
+  const partnersUp = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target;
+          console.log(entry);
+          if (entry.isIntersecting) {
+            if (entry.target === recycle1_1left.current || entry.target === recycle1_3left.current) {
+              if (target.classList.contains("rec-new-box")) {
+                target.classList.add("active-left");
+              }
+            }
+            
+            if (entry.target === recycle1_2right.current) {
+              if (target.classList.contains("rec-new-box")) {
+                target.classList.add("active-right");
+              }
+            }
+            
+          } else {
+            target.classList.remove("active-left", "active-right");
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const elements = [
+      recycle1_1left.current,
+      recycle1_2right.current,
+      recycle1_3left.current,
+    ];
+
+    elements.forEach((el) => el && observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => el && observer.unobserve(el));
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+
+          if (entry.isIntersecting) {
+            el.classList.add("active-collection");
+          } else {
+            el.classList.remove("active-collection"); // Optional: remove if you want re-animation
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    const recycleBoxes = recycleTable.current?.querySelectorAll(".tRowData");
+
+    if (recycleBoxes) {
+      Array.from(recycleBoxes).forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.2}s`; // staggered entry
+        observer.observe(el);
+      });
+    }
+
+    return () => {
+      if (recycleBoxes) {
+        Array.from(recycleBoxes).forEach((el) => {
+          if (el.classList.contains("tRowData"))
+            observer.unobserve(el);
+        });
+      }
+    };
+  }, []);
+
   return (
     <div className="RecyclePage">
       <div className="recycle-lower">
@@ -22,7 +106,7 @@ function Recycle() {
             </div>
 
             <div className="rec-imgs">
-              <div className="rec-new-box leftAlign">
+              <div className="rec-new-box" ref={recycle1_1left}>
                 <img className="rec-img" src={one} />
                 <div className="rec-process-text ">
                   <p className="rec-head">Step 1 : SEND</p>
@@ -37,7 +121,7 @@ function Recycle() {
                   </p>
                 </div>
               </div>
-              <div className="rec-new-box rightAlign">
+              <div className="rec-new-box" ref={recycle1_2right}>
                 <img className="rec-img scc" src={two} />
                 <div className="rec-process-text">
                   <p className="rec-head">Step 2 : STYLE</p>
@@ -52,7 +136,7 @@ function Recycle() {
                   </p>
                 </div>
               </div>
-              <div className="rec-new-box ">
+              <div className="rec-new-box" ref={recycle1_3left}>
                 <img className="rec-img" src={three} />
                 <div className="rec-process-text">
                   <p className="rec-head">Step 3 : SMILE</p>
@@ -115,7 +199,7 @@ function Recycle() {
               for their pets. Here's how it works:
             </p>
             <br />
-            <table className="table-details">
+            <table className="table-details" ref={recycleTable}>
               <tr className="tRowData">
                 <td className="tRowNum">1</td>
                 <td className="tRowHead">Submission : </td>
@@ -174,12 +258,16 @@ function Recycle() {
 
             <br />
             <p className="rec-text table-details table-details-color">
-              Connect with us on <a href="https://wa.me/+919664149148" className="boldTxt">WhatsApp</a> to discuss the transformation.
-             <br /> Our team is ready to make adjustments according to your dog's size
-              and any specific preferences you may have.
+              Connect with us on{" "}
+              <a href="https://wa.me/+919664149148" className="boldTxt">
+                WhatsApp
+              </a>{" "}
+              to discuss the transformation.
+              <br /> Our team is ready to make adjustments according to your
+              dog's size and any specific preferences you may have.
               <br />
               <br />
-              <span className="boldTxt">
+              <span className="boldTxt boldAnimation">
                 ' Tailor your pet's fashion sustainably with ReTail Project. '
               </span>
             </p>

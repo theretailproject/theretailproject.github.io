@@ -125,6 +125,7 @@ export const UserProvider = ({ children }) => {
     .doc(auth.currentUser?.uid)
     .collection("cart");
   const [cart] = useCollectionData(cartRef);
+
   const wishlistRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
@@ -166,7 +167,7 @@ export const UserProvider = ({ children }) => {
             },
             { merge: true }
           );
-          alert("product added to cart");
+          // alert("product added to cart");
           await setDoingWork(false);
         });
     }
@@ -180,118 +181,105 @@ export const UserProvider = ({ children }) => {
       .collection("wishlist")
       .doc().id;
 
-    if (wishlist && wishlist.length>0 && wishlist.some((product) => product.itemId == p.itemId)) {
+    if (
+      wishlist &&
+      wishlist.length > 0 &&
+      wishlist.some((product) => product.itemId == p.itemId)
+    ) {
       alert("Item is already in wishlist, increase quantity in wishlist");
     } else {
-    await setDoingWork(true);
-    await firestore
-      .collection("users")
-      .doc(auth.currentUser?.uid)
-      .collection("wishlist")
-      .doc(wishlistProdId)
-      .set({
-        docId: wishlistProdId,
-        name: p.name,
-        thumbnail: p.thumbnail,
-        link: `/shop/${p.category}/${p.itemId}`,
-        price: p.price,
-        quantity: 1,
-        itemId: p.itemId,
-        category: p.category,
-      })
-      .then(async () => {
-        alert("Product added to Wishlist");
-        await setDoingWork(false);
-      });
+      await setDoingWork(true);
+      await firestore
+        .collection("users")
+        .doc(auth.currentUser?.uid)
+        .collection("wishlist")
+        .doc(wishlistProdId)
+        .set({
+          docId: wishlistProdId,
+          name: p.name,
+          thumbnail: p.thumbnail,
+          link: `/shop/${p.category}/${p.itemId}`,
+          price: p.price,
+          quantity: 1,
+          itemId: p.itemId,
+          category: p.category,
+        })
+        .then(async () => {
+          // alert("Product added to Wishlist");
+          await setDoingWork(false);
+        });
     }
   };
 
   const delFromWishlist = async (p) => {
     setDoingWork(true);
-    // console.log("Delete btn clicked.");
-
-    const userId = auth.currentUser?.uid; // Extract user ID
-    const productId = p?.itemId; // Ensure product ID is accessible
-    console.log(p);
-    console.log("User ID:", userId);
-    console.log("Product ID:", productId);
-    console.log("Wishlist:", wishlist);
-
+  
+    const userId = auth.currentUser?.uid;
     if (!userId) {
-      console.error("User ID is undefined. Ensure the user is authenticated.");
+      console.error("User not logged in.");
+      setDoingWork(false);
       return;
     }
-
-    if (!productId) {
-      console.error("Invalid product ID:", productId);
-    }
-
-    if (
-      !wishlist ||
-      !wishlist.some((product) => product.itemId === productId)
-    ) {
-      console.error("Product not found in wishlist.");
-      return;
-    }
-
-    const currentDocId = wishlist?.map((pr) =>
-      pr.itemId === p.itemId ? pr.docId : null
-    );
-    console.log(currentDocId);
+  
     try {
-      const productRef = doc(
-        firestore,
-        "users",
-        userId,
-        "wishlist",
-        currentDocId[0]
-      );
-      console.log("Firestore document path:", productRef.path);
-
-      await deleteDoc(productRef).then(() =>
-        // alert("Product removed from Wishlist")
-        setDoingWork(false)
-      );
+      const product = wishlist?.find((item) => item.itemId === p.itemId);
+      if (!product || !product.docId) {
+        console.error("Product not found in wishlist or missing docId.");
+        setDoingWork(false);
+        return;
+      }
+  
+      const productRef = doc(firestore, "users", userId, "wishlist", product.docId);
+      await deleteDoc(productRef);
+  
+      console.log("Product removed from wishlist:", product.name);
     } catch (error) {
       console.error("Error removing product from wishlist:", error);
       alert("Failed to remove product from wishlist");
     } finally {
-      await setDoingWork(false); // Ensure state update happens after operation
+      setDoingWork(false);
     }
-
-    console.log("Product removed from wishlist");
   };
+  
 
   const delFromCart = async (c) => {
-    await setDoingWork(true);
-    console.log("Cart from product: ",c);
-    console.log("Cart from cart list: ",cart)
-    const currentDocId = cart?.map((pr) =>
-        pr.itemId === c.itemId ? pr.docId : null
-      );
-      console.log(currentDocId);
-      try {
-        const productRef = doc(
-          firestore,
-          "users",
-          auth?.currentUser.uid,
-          "cart",
-          currentDocId[0]
-        );
-        console.log("Firestore document path:", productRef.path);
+    setDoingWork(true);
   
-        await deleteDoc(productRef).then(() =>
-          // alert("Product removed from Wishlist")
-          setDoingWork(false)
-        );
-      } catch (error) {
-        console.error("Error removing product from wishlist:", error);
-        alert("Failed to remove product from wishlist");
-      } finally {
-        await setDoingWork(false); // Ensure state update happens after operation
+    const userId = auth.currentUser?.uid;
+    if (!userId) {
+      console.error("User not logged in.");
+      setDoingWork(false);
+      return;
+    }
+  
+    try {
+      const product = cart?.find((item) => item.itemId === c.itemId);
+      if (!product || !product.docId) {
+        console.error("Product not found in cart or missing docId.");
+        setDoingWork(false);
+        return;
       }
+  
+      const productRef = doc(firestore, "users", userId, "cart", product.docId);
+      await deleteDoc(productRef);
+  
+      // Update checkout amount
+      const updatedAmt = userData.checkoutAmt - Number(c.price || 0);
+      setCheckoutAmt(updatedAmt);
+      await firestore.collection("users").doc(userId).update({
+        checkoutAmt: updatedAmt,
+      });
+  
+      console.log("Product removed from cart:", product.name);
+      
+    } catch (error) {
+      console.error("Error removing product from cart:", error);
+      alert("Failed to remove product from cart");
+    } finally {
+      setDoingWork(false);
+    }
   };
-
+  
   return (
     <UserContext.Provider
       value={{
@@ -307,7 +295,7 @@ export const UserProvider = ({ children }) => {
         setCartData,
         addToWishlist,
         delFromWishlist,
-        delFromCart
+        delFromCart,
       }}
     >
       {children} {/* Ensure data is loaded before rendering children */}

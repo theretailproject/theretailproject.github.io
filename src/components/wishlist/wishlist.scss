@@ -48,6 +48,7 @@ $headFont: Quattrocento;
   max-width: 18vw;
 }
 
+
 .ListData {
   // border-top: thin solid $primarycolor;
   justify-content: center;
@@ -287,8 +288,17 @@ $headFont: Quattrocento;
 
   .WishlistCards {
     display: flex;
+    width:100%;
   }
-
+  .no-products {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: whitesmoke;
+    padding: 0.2cm;
+  }
   .AddToCartBtn {
     display: flex;
   }

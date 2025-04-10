@@ -82,6 +82,37 @@ $secondarycolor: #e4af47;
   flex-shrink: 0;
 }
 
+@keyframes divLeft {
+  from {
+    opacity: 0.5;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes divRight {
+  from {
+    opacity: 0.5;
+    transform: translateX(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.rec-new-box.active-left {
+  opacity: 1;
+  animation: divLeft 1s ease-in;
+}
+
+.rec-new-box.active-right {
+  opacity: 1;
+  animation: divRight 1s ease-in;
+}
 .rec-new-box {
   width: 80vw;
   display: flex;
@@ -100,6 +131,7 @@ $secondarycolor: #e4af47;
   &:hover {
     border: 2.5px solid $primarycolor;
   }
+  opacity: 0;
 }
 
 .leftAlign {
@@ -192,6 +224,20 @@ $secondarycolor: #e4af47;
 }
 .tRowData {
   border-bottom: thin solid $primarycolor;
+  opacity: 0;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tRowData.active-collection {
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .tRowHead {
@@ -205,11 +251,24 @@ $secondarycolor: #e4af47;
 }
 
 .boldTxt {
-  font-weight: bold;
+  // font-weight: bold;
   color: whitesmoke;
-
+  animation: boldAnimate 1s ease infinite;
+  // transition: 0.8s ease;
   &:hover {
     text-decoration: underline;
+  }
+}
+
+@keyframes boldAnimate {
+  0% {
+    font-weight: 500;
+  }
+  50% {
+    font-weight: bolder;
+  }
+  100% {
+    font-weight: bold;
   }
 }
 @media only screen and (max-width: 1500px) {
@@ -225,6 +284,28 @@ $secondarycolor: #e4af47;
 
   .rec-img {
     width: 3cm;
+  }
+
+  @keyframes divLeft {
+    from {
+      opacity: 0.5;
+      transform: translateX(-180px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes divRight {
+    from {
+      opacity: 0.5;
+      transform: translateX(180px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
@@ -282,7 +363,7 @@ $secondarycolor: #e4af47;
     font-size: 32px;
     padding: 0.3cm;
   }
-  .tRowNum{
+  .tRowNum {
     font-size: 16px;
   }
   .tRowHead {
@@ -294,6 +375,27 @@ $secondarycolor: #e4af47;
     font-size: 14px;
     margin-left: none;
     text-align: left;
+  }
+  @keyframes divLeft {
+    from {
+      opacity: 0.5;
+      transform: translateX(-150px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes divRight {
+    from {
+      opacity: 0.5;
+      transform: translateX(150px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
@@ -322,11 +424,11 @@ $secondarycolor: #e4af47;
     padding: 0cm 5vw;
   }
 
-  .table-details{
+  .table-details {
     padding: 0.4cm;
   }
 
-  .tRowData{
+  .tRowData {
     display: flex;
     flex-direction: column;
   }
@@ -347,5 +449,55 @@ $secondarycolor: #e4af47;
 @media only screen and (max-width: 500px) {
   .recycle-head {
     font-size: 28px;
+  }
+
+  @keyframes divLeft {
+    from {
+      opacity: 0.5;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes divRight {
+    from {
+      opacity: 0.5;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .recycle-head {
+    font-size: 28px;
+  }
+
+  @keyframes divLeft {
+    from {
+      opacity: 0.5;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes divRight {
+    from {
+      opacity: 0.5;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }

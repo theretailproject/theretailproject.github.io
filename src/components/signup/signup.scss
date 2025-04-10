@@ -1,145 +1,184 @@
 $primarycolor: #486455;
-$secondarycolor : #e4af47;
-
+$secondarycolor: #e4af47;
 
 .SignUpNew {
-    padding: 1.5cm 5vw;
-    display: flex;
-    // justify-content: center;
-    background-color: whitesmoke;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .5cm;
+  padding: 1.5cm 5vw;
+  display: flex;
+  // justify-content: center;
+  background-color: whitesmoke;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5cm;
 }
 
 .signup-new-box {
-    width: 12cm;
-    // border: 1px solid #ceffe5;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: .5cm;
-    padding: .5cm;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    align-items: center;
-    height: fit-content;
-
+  width: 12cm;
+  // border: 1px solid #ceffe5;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cm;
+  padding: 0.5cm;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  align-items: center;
+  height: fit-content;
 }
 
 .signup-logon {
-    width: 1.2cm;
+  width: 1.2cm;
 }
 
+.SignUpNew-Row1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5cm;
+}
+
+.back-btn {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+  }
+
 .signup-head-upn {
-    display: flex;
-    align-items: center;
-    gap: .2cm;
-    margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.2cm;
+  margin-top: 0;
 }
 
 .signup-head-textn {
-    font-size: 24px;
-    color: $primarycolor;
+  font-size: 24px;
+  color: $primarycolor;
 }
 
 .signup-new-form {
-    display: flex;
-    flex-direction: column;
-    gap: .3cm;
-    width: 100%;
-
+  display: flex;
+  flex-direction: column;
+  gap: 0.3cm;
+  width: 100%;
 }
 
 .signupwithgoogle {
-    background-color: #4285F4;
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    font-size: 1rem;
-    padding: .3cm;
+  background-color: #4285f4;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  padding: 0.3cm;
+
+  &:hover {
+    background-color: #1b72fd;
+  }
 }
 
-
 .singup-input-new {
-    padding: .3cm;
-    border: 1px solid $primarycolor;
-    background-color: transparent;
-    border-radius: 5px;
-    font-size: 1rem;
+  padding: 0.3cm;
+  border: 1px solid $primarycolor;
+  background-color: transparent;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 .singup-new-submit {
-    font-size: 1rem;
+  font-size: 1rem;
+  background-color: transparent;
+  font-weight: bolder;
+  padding: 0.3cm;
+  border: 2px solid $primarycolor;
+  border-radius: 5px;
+  color: $primarycolor;
+  cursor: pointer;
+
+  &:hover {
     background-color: $primarycolor;
-    padding: .3cm;
-    border: none;
-    border-radius: 5px;
     color: $secondarycolor;
-    cursor: pointer;
+  }
 }
 
 .signup-new-head {
-    font-size: 2rem;
-    color: $primarycolor;
-    font-weight: 600;
-    // border: 1px solid black;
+  font-size: 2rem;
+  color: $primarycolor;
+  font-weight: 600;
+  // border: 1px solid black;
 }
 
 .re-text {
-    color: $secondarycolor;
+  color: $secondarycolor;
 }
 
 .alreadyheavanaccount {
-    font-size: .8rem;
-
+  font-size: 0.8rem;
 }
 
 .signup-new-text {
-    font-size: 1rem;
-
+  font-size: 1rem;
 }
 
 .signup-signin-button {
-    color: blue;
-    cursor: pointer;
-    transition: .3s;
+  color: blue;
+  cursor: pointer;
+  transition: 0.3s;
 
-    &:hover {
-        text-decoration: underline;
-    }
-
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
+@media only screen and (max-width: 700px) {
+  .signup-new-box {
+    width: calc(100% - 10vw);
+  }
 
-@media only screen and (max-width : 700px) {
-    .signup-new-box {
-        width: calc(100% - 10vw);
-    }
+  .signup-new-head {
+    font-size: 26px;
+  }
 
-    .signup-new-head {
-        font-size: 26px;
-    }
+  .signup-new-text {
+    font-size: 14px;
+  }
 
-    .signup-new-text {
-        font-size: 14px;
-    }
+  .signup-head-textn {
+    font-size: 20px;
+  }
 
-    .signup-head-textn {
-        font-size: 20px;
-    }
-
-    .signup-logon {
-        width: 1cm;
-    }
+  .signup-logon {
+    width: 1cm;
+  }
 }
 
-@media only screen and (max-width : 500px) {
-    .singup-input-new {
-        font-size: 14px;
-    }
+@media only screen and (max-width: 500px) {
+  .signup-head-textn {
+    font-size: 18px;
+  }
+  .signup-new-head {
+    font-size: 1.2rem;
+  }
+  .singup-new-text {
+    font-size: 0.8rem;
+  }
+
+  .singup-input-new {
+    padding: 0.2cm;
+    font-size: 0.8rem;
+  }
+  .singup-new-submit {
+    font-size: 0.8rem;
+    padding: 0.2cm;
+  }
+
+  .signupwithgoogle {
+    font-size: 0.8rem;
+    padding: 0.2cm;
+  }
 }

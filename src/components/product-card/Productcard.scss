@@ -27,6 +27,16 @@ $secondarycolor: #e4af47;
 //   // border-left: 2px solid $primarycolor;
 //   // border-right: 2px solid $primarycolor;
 // }
+@keyframes appearSlow {
+  from {
+    opacity: 0.5;
+    display: none;
+  }
+  to {
+    opacity: 1;
+    display: flex;
+  }
+}
 
 .ProductCard {
   position: relative;
@@ -45,6 +55,7 @@ $secondarycolor: #e4af47;
   border-top: 2px solid $primarycolor;
   border-bottom: 2px solid $primarycolor;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  animation: appearSlow 0.5s ease-in;
 }
 
 // .imgCont {

@@ -10,7 +10,8 @@ import noProduct from "./noProducts.png";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore, firebase } from "../../firebase";
 export const AllProducts = () => {
-  const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } = useUserContext();
+  const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
+    useUserContext();
   const wishlistRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
@@ -22,8 +23,35 @@ export const AllProducts = () => {
     .doc(auth.currentUser?.uid)
     .collection("cart");
   const [cart] = useCollectionData(cartRef);
- 
- 
+
+  function addToWishlistFunc(p) {
+    auth?.currentUser
+      ? addToWishlist(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function addToCartFunc(p) {
+    auth?.currentUser
+      ? addToCart(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function deleteFromCartFunc(p) {
+    auth?.currentUser
+      ? delFromCart(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function deleteFromWishlistFunc(p) {
+    auth?.currentUser
+      ? delFromWishlist(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function closeOverlay(){
+    document.getElementById("overlaySignInId").style.display = "none";
+  }
+
   return (
     <div className="nproducts">
       {products.length === 0 ? (
@@ -33,39 +61,48 @@ export const AllProducts = () => {
         </div>
       ) : (
         <div className="ProductCardRow">
+        <div className="overlaySignIn" id="overlaySignInId">
+        <div className="overlaySignInChildren">
+          <div className="overlaySignInChild">
+            <p className="overlaySignInChild1">Sign In to Proceed</p>
+            <Link to="/signin">
+              <button className="overlaySignInChildBtn2">Move to SignIn</button>
+            </Link>
+            <button className="overlaySignInChildBtn1" onClick={closeOverlay}>Cancel</button>
+          </div>
+        </div>
+      </div>
           {products.map((p) => (
             <div className="ProductCard" key={p.itemId}>
-           
               <div className="imgCont">
                 <div className="overlayProdCard">
-                {cart &&
+                  {cart &&
                   cart.some((product) => product.itemId === p.itemId) ? (
                     <div className="smallImgCartContFilled">
-                    <img
-                      src={cartF}
-                      alt="Cart Icon"
-                      onMouseOver={(e) => (e.currentTarget.src = cartH)}
-                      onMouseOut={(e) => (e.currentTarget.src = cartF)}
-                      className="smallBtn"
-                      onClick={()=>{
-                          delFromCart(p)
-                          }}
-                    />
-                  </div>
-                    
+                      <img
+                        src={cartF}
+                        alt="Cart Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = cartH)}
+                        onMouseOut={(e) => (e.currentTarget.src = cartF)}
+                        className="smallBtn"
+                        onClick={() => {
+                          deleteFromCartFunc(p);
+                        }}
+                      />
+                    </div>
                   ) : (
                     <div className="smallImgCartContHollow">
-                    <img
-                      src={cartH}
-                      alt="Cart Icon"
-                      onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                      onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                      className="smallBtn"
-                      onClick={()=>{
-                          addToCart(p)
-                          }}
-                    />
-                  </div>
+                      <img
+                        src={cartH}
+                        alt="Cart Icon"
+                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
+                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
+                        className="smallBtn"
+                        onClick={() => {
+                          addToCartFunc(p);
+                        }}
+                      />
+                    </div>
                   )}
                   {wishlist &&
                   wishlist.some((product) => product.itemId === p.itemId) ? (
@@ -76,9 +113,9 @@ export const AllProducts = () => {
                         onMouseOver={(e) => (e.currentTarget.src = like)}
                         onMouseOut={(e) => (e.currentTarget.src = liked)}
                         className="smallBtn"
-                        onClick={()=>{
-                          delFromWishlist(p)
-                          }}
+                        onClick={() => {
+                          deleteFromWishlistFunc(p);
+                        }}
                       />
                     </div>
                   ) : (
@@ -90,19 +127,21 @@ export const AllProducts = () => {
                         onMouseOut={(e) => (e.currentTarget.src = like)}
                         className="smallBtn"
                         onClick={() => {
-                          addToWishlist(p);
+                          addToWishlistFunc(p);
                         }}
                       />
                     </div>
                   )}
                 </div>
                 <Link to={`/shop/${p.category}/${p.itemId}`}>
-                  <img src={p.thumbnail} className="productImg" alt="Product" />
+                  <img src={p.thumbnail} className="productImg" alt="Product" loading="lazy"/>
                 </Link>
-              </div>
-              <p className="productCategory">{p.category.toUpperCase()}</p>
-              <p className="productName">{p.name}</p>
-              <p className="productPrice">₹ {p.price}</p>
+              </div>{" "}
+              <Link to={`/shop/${p.category}/${p.itemId}`}>
+                <p className="productCategory">{p.category.toUpperCase()}</p>
+                <p className="productName">{p.name}</p>
+                <p className="productPrice">₹ {p.price}</p>{" "}
+              </Link>
             </div>
           ))}
         </div>

@@ -190,21 +190,19 @@ function Nav() {
     navigate("/checkout");
   };
 
-  const setCheckoutAmount =async(amount) => {
+  const setCheckoutAmount = async (amount) => {
     await setDoingWork(true);
-        firestore.collection("users").doc(auth.currentUser?.uid).update(
-          {
-            checkoutAmt: amount,
-          },
-          { merge: true }
-        );
-    await setDoingWork(false)
+    firestore.collection("users").doc(auth.currentUser?.uid).update(
+      {
+        checkoutAmt: amount,
+      },
+      { merge: true }
+    );
+    await setDoingWork(false);
     // .then(()=>
-      openCheckout()
+    openCheckout();
     // )
-
-  }
-  
+  };
 
   useEffect(() => {
     if (cart && cart.length > 0) {
@@ -418,55 +416,62 @@ function Nav() {
             </div>
           </div>
           <div className="cart-prods-list">
-            {cart &&
-              cart.map((c) =>
-                cart.length == 0 ? (
-                  <p>No product in cart</p>
-                ) : (
-                  <Link to={`shop/${c.category}/${c.itemId}`}>
-                    <div className="cart-prod-new">
-                      <div className="cart-prod-new-left">
-                        <img className="cart-prod-new-img" src={c.thumbnail} />
-                        <p
-                          onClick={() => {
-                            deleteProd(c);
-                          }}
-                          className="cart-del-new"
-                        >
-                          Delete
-                        </p>
-                      </div>
-                      <div className="cart-prod-new-right">
-                        <p className="cart-prod-new-name">{c.name}</p>
-                        <p className="cart-prod-new-price">₹ {c.price}</p>
+            {!cart || cart.length === 0 ? (
+              <p>No product in cart</p>
+            ) : (
+              cart.map((c) => (
+                <Link to={`shop/${c.category}/${c.itemId}`} key={c.docId}>
+                  <div className="cart-prod-new">
+                    <div className="cart-prod-new-left">
+                      <img
+                        className="cart-prod-new-img"
+                        src={c.thumbnail}
+                        alt={c.name}
+                      />
+                      <p
+                        onClick={(e) => {
+                          e.preventDefault(); // Prevent navigating when clicking delete
+                          deleteProd(c);
+                        }}
+                        className="cart-del-new"
+                      >
+                        Delete
+                      </p>
+                    </div>
+                    <div className="cart-prod-new-right">
+                      <p className="cart-prod-new-name">{c.name}</p>
+                      <p className="cart-prod-new-price">₹ {c.price}</p>
 
-                        <div className="cart-new-quantity-box">
-                          <button
-                            onClick={() => {
-                              minusQty(c);
-                            }}
-                            className="cart-minus-new"
-                            disabled={doingWork ? true : false}
-                          >
-                            -
-                          </button>
-                          <p className="cart-quantity-new">{c.quantity}</p>
-                          <button
-                            onClick={() => {
-                              plusQty(c);
-                            }}
-                            className="cart-plus-new"
-                            disabled={doingWork ? true : false}
-                          >
-                            +
-                          </button>
-                        </div>
+                      <div className="cart-new-quantity-box">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            minusQty(c);
+                          }}
+                          className="cart-minus-new"
+                          disabled={doingWork}
+                        >
+                          -
+                        </button>
+                        <p className="cart-quantity-new">{c.quantity}</p>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            plusQty(c);
+                          }}
+                          className="cart-plus-new"
+                          disabled={doingWork}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
-                  </Link>
-                )
-              )}
+                  </div>
+                </Link>
+              ))
+            )}
           </div>
+
           {
             <div className="cart-checkout-new">
               <button
@@ -475,10 +480,11 @@ function Nav() {
                 //     ? openCheckout
                 //     : null
                 // }
-                onClick={()=>{setCheckoutAmount(amount)}}
-                disabled={amount>0?false:true}
+                onClick={() => {
+                  setCheckoutAmount(amount);
+                }}
+                disabled={amount > 0 ? false : true}
                 className="checkout-final"
-                
               >
                 <p className="checout-text">Proceed to Checkout</p>
                 <p>|</p>

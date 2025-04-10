@@ -11,9 +11,9 @@ import bagHollow from "./bagHollow.png";
 import bagFilled from "./bagFilled.png";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore, firebase } from "../../firebase";
-
+import { Link } from "react-router-dom";
 function ProductPage() {
-  const { addToCart, doingWork, addToWishlist, delFromWishlist,delFromCart } =
+  const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
     useUserContext();
 
   const { pid } = useParams();
@@ -56,9 +56,48 @@ function ProductPage() {
       console.error("Error sharing:", error);
     }
   };
+  function addToWishlistFunc(p) {
+    auth?.currentUser
+      ? addToWishlist(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
 
+  function addToCartFunc(p) {
+    auth?.currentUser
+      ? addToCart(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function deleteFromCartFunc(p) {
+    auth?.currentUser
+      ? delFromCart(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function deleteFromWishlistFunc(p) {
+    auth?.currentUser
+      ? delFromWishlist(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function closeOverlay() {
+    document.getElementById("overlaySignInId").style.display = "none";
+  }
   return (
     <div className="MainDiv">
+      <div className="overlaySignIn" id="overlaySignInId">
+        <div className="overlaySignInChildren">
+          <div className="overlaySignInChild">
+            <p className="overlaySignInChild1">Sign In to Proceed</p>
+            <Link to="/signin">
+              <button className="overlaySignInChildBtn2">Move to SignIn</button>
+            </Link>
+            <button className="overlaySignInChildBtn1" onClick={closeOverlay}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
       {products.map((p) =>
         p.itemId == pid ? (
           !p.multiple ? (
@@ -106,12 +145,11 @@ function ProductPage() {
 
                 <div className="product-page-buttons">
                   <span className="product-page-buttons-row1">
-                    {
-                      wishlist &&
+                    {wishlist &&
                     wishlist.some((product) => product.itemId === p.itemId) ? (
                       <button
                         onClick={() => {
-                          delFromWishlist(p);
+                          deleteFromWishlistFunc(p);
                         }}
                         className="pp-button"
                         disabled={doingWork ? true : false}
@@ -125,7 +163,7 @@ function ProductPage() {
                     ) : (
                       <button
                         onClick={() => {
-                          addToWishlist(p);
+                          addToWishlistFunc(p);
                         }}
                         className="pp-button"
                         disabled={doingWork ? true : false}
@@ -135,13 +173,11 @@ function ProductPage() {
                       </button>
                     )}
 
-                    {
-                      cart &&
-                    cart.some((product) => product.itemId === p.itemId) 
-                    ? (
+                    {cart &&
+                    cart.some((product) => product.itemId === p.itemId) ? (
                       <button
                         onClick={() => {
-                          delFromCart(p);
+                          deleteFromCartFunc(p);
                         }}
                         className="pp-button"
                         disabled={doingWork ? true : false}
@@ -152,11 +188,10 @@ function ProductPage() {
                         />
                         Remove from Cart
                       </button>
-                    ) 
-                    : (
+                    ) : (
                       <button
                         onClick={() => {
-                          addToCart(p);
+                          addToCartFunc(p);
                         }}
                         className="pp-button"
                         disabled={doingWork ? true : false}
