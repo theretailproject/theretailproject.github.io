@@ -225,7 +225,7 @@ $secondarycolor: #e4af47;
 
 @keyframes divLeft {
   from {
-    opacity: 0.5;
+    opacity: 0;
     transform: translateX(-200px);
   }
   to {
@@ -240,19 +240,19 @@ $secondarycolor: #e4af47;
   flex-shrink: 0;
   position: relative;
   opacity: 0.1;
-  transform: translateX(-0px);
+  transform: translateX(0px);
   transition: opacity 4s ease, transform 0.8s ease;
 }
 
 /* Class to trigger animation */
-.active-left{
+.home-main-div-left.active-left{
   opacity: 1;
   animation: divLeft 1s ease-in;
 }
 
 @keyframes divRight {
   from {
-    opacity: 0.5;
+    opacity: 0;
     transform: translateX(300px);
   }
   to {
@@ -270,10 +270,10 @@ $secondarycolor: #e4af47;
   // border: 1px solid black;
   width: auto;
   flex-grow: 0;
-  transform: translateX(5px);
+  transform: translateX(0px);
   transition: opacity 4s ease, transform 0.8s ease;
 }
-.active-right{
+.home-main-div-right.active-right{
   opacity: 1;
   animation: divRight 1s ease-in;
 }
@@ -1486,8 +1486,8 @@ opacity: 0;
 
   @keyframes divLeft {
     from {
-      opacity: 0.5;
-      transform: translateX(-180px);
+      opacity: 0;
+      transform: translateX(-100px);
     }
     to {
       opacity: 1;
@@ -1498,7 +1498,7 @@ opacity: 0;
   @keyframes divRight {
     from {
       opacity: 0.5;
-      transform: translateX(180px);
+      transform: translateX(150px);
     }
     to {
       opacity: 1;
