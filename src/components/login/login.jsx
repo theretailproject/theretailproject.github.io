@@ -81,7 +81,7 @@ const Login = () => {
         <div className='SignUpNew'>
             <Link to="/">
                 <div className="signup-head-upn">
-                    <img className="signup-logon" src={require("./pawb.png")} />
+                    <img className="signup-logon" src={require("./pawb.png")} title="Home Button"/>
                     <p className="signup-head-textn">
                         The <span className="re-text">Re</span>Tail Project
                     </p>
