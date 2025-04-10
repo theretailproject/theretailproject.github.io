@@ -88,7 +88,10 @@ function Wishlist() {
 
         <div className="WishlistCards">
           {products && products.length === 0 ? (
-            <p className="ListDataSmall bold">No Products in Wishlist</p>
+            <div className="no-products">
+
+            <p className="ListDataSmall bold ">No Products in Wishlist</p>
+            </div>
           ) : (
             products &&
             products.map((product) => (
