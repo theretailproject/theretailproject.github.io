@@ -682,10 +682,16 @@ $headFont: Quattrocento;
 
 .login-button {
   padding: 0.15cm 0.3cm;
-  background-color: $secondarycolor;
+  border: 2px solid $secondarycolor;
+
   border-radius: 5px;
   text-align: center;
-  color: $primarycolor;
+  color: $secondarycolor;
+
+  &:hover {
+    background-color: $secondarycolor;
+    color: $primarycolor;
+  }
 }
 
 .SignUp {
