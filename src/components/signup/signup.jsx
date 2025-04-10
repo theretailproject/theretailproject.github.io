@@ -87,14 +87,19 @@ function SignUp() {
 
   return (
     <div className="SignUpNew">
-      <Link to="/">
-        <div className="signup-head-upn">
-          <img className="signup-logon" src={require("./pawb.png")} />
-          <p className="signup-head-textn">
-            The <span className="re-text">Re</span>Tail Project
-          </p>
-        </div>
-      </Link>
+      <div className="SignUpNew-Row1">
+        <button onClick={() => navigate(-1)} className="back-btn">
+          ← Back
+        </button>
+        <Link to="/">
+          <div className="signup-head-upn">
+            <img className="signup-logon" src={require("./pawb.png")} />
+            <p className="signup-head-textn">
+              The <span className="re-text">Re</span>Tail Project
+            </p>
+          </div>
+        </Link>
+      </div>
 
       <div className="signup-new-box">
         <div className="signup-head">

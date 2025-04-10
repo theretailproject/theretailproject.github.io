@@ -31,6 +31,23 @@ $secondarycolor: #e4af47;
   width: 1.2cm;
 }
 
+.SignUpNew-Row1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5cm;
+}
+
+.back-btn {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+  }
+
 .signup-head-upn {
   display: flex;
   align-items: center;
@@ -141,17 +158,17 @@ $secondarycolor: #e4af47;
 }
 
 @media only screen and (max-width: 500px) {
-  .signup-head-textn{
+  .signup-head-textn {
     font-size: 18px;
   }
-  .signup-new-head{
+  .signup-new-head {
     font-size: 1.2rem;
   }
-  .singup-new-text{
+  .singup-new-text {
     font-size: 0.8rem;
   }
 
-  .singup-input-new{
+  .singup-input-new {
     padding: 0.2cm;
     font-size: 0.8rem;
   }
