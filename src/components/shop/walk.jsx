@@ -7,6 +7,7 @@ import liked from "./liked.png";
 import cartH from "./cartHollow.png";
 import cartF from "./cartFilled.png";
 import noProduct from "./noProducts.png";
+import { useState } from "react";
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore } from "../../firebase";
@@ -20,7 +21,8 @@ export const Walk = () => {
     delFromCart,
   } = useUserContext();
   const walkProducts = products.filter((p) => p.category === "walk");
-
+  const [error, setError] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState({});
   const wishlistRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
@@ -56,7 +58,44 @@ export const Walk = () => {
       ? delFromWishlist(p)
       : (document.getElementById("overlaySignInId").style.display = "flex");
   }
+  const updateSelectedOption = (itemId, key, value) => {
+    setSelectedOptions((prev) => ({
+      ...prev,
+      [itemId]: {
+        ...prev[itemId],
+        [key]: value,
+      },
+    }));
+  };
 
+  const handleAction = (product, callback) => {
+    const options = selectedOptions[product.itemId] || {};
+    const { color, size } = options;
+
+    if (product.multiColor && !color) {
+      setError("Please select a color to proceed.");
+      document.getElementById("overlayErrorId").style.display = "flex";
+      return;
+    }
+
+    if (product.multiSize && !size) {
+      setError("Please select a size to proceed.");
+      document.getElementById("overlayErrorId").style.display = "flex";
+      return;
+    }
+
+    const finalProduct = {
+      ...product,
+      ...(product.multiColor && { color }),
+      ...(product.multiSize && { size }),
+    };
+
+    if (auth.currentUser) {
+      callback(finalProduct);
+    } else {
+      document.getElementById("overlaySignInId").style.display = "flex";
+    }
+  };
   return (
     <div className="nproducts">
       {walkProducts.length === 0 ? (
@@ -83,8 +122,8 @@ export const Walk = () => {
             <div className="ProductCard" key={p.itemId}>
               <div className="imgCont">
                 <div className="overlayProdCard">
-                  {cart &&
-                  cart.some((product) => product.itemId === p.itemId) ? (
+                  {/* Cart Button */}
+                  {cart && cart.some((prod) => prod.itemId === p.itemId) ? (
                     <div className="smallImgCartContFilled">
                       <img
                         src={cartF}
@@ -92,9 +131,7 @@ export const Walk = () => {
                         onMouseOver={(e) => (e.currentTarget.src = cartH)}
                         onMouseOut={(e) => (e.currentTarget.src = cartF)}
                         className="smallBtn"
-                        onClick={() => {
-                          deleteFromCartFunc(p);
-                        }}
+                        onClick={() => handleAction(p, delFromCart)}
                       />
                     </div>
                   ) : (
@@ -105,14 +142,14 @@ export const Walk = () => {
                         onMouseOver={(e) => (e.currentTarget.src = cartF)}
                         onMouseOut={(e) => (e.currentTarget.src = cartH)}
                         className="smallBtn"
-                        onClick={() => {
-                          addToCartFunc(p);
-                        }}
+                        onClick={() => handleAction(p, addToCart)}
                       />
                     </div>
                   )}
+
+                  {/* Wishlist Button */}
                   {wishlist &&
-                  wishlist.some((product) => product.itemId === p.itemId) ? (
+                  wishlist.some((prod) => prod.itemId === p.itemId) ? (
                     <div className="smallImgHeartContFilled">
                       <img
                         src={liked}
@@ -120,9 +157,7 @@ export const Walk = () => {
                         onMouseOver={(e) => (e.currentTarget.src = like)}
                         onMouseOut={(e) => (e.currentTarget.src = liked)}
                         className="smallBtn"
-                        onClick={() => {
-                          deleteFromWishlistFunc(p);
-                        }}
+                        onClick={() => handleAction(p, delFromWishlist)}
                       />
                     </div>
                   ) : (
@@ -133,9 +168,7 @@ export const Walk = () => {
                         onMouseOver={(e) => (e.currentTarget.src = liked)}
                         onMouseOut={(e) => (e.currentTarget.src = like)}
                         className="smallBtn"
-                        onClick={() => {
-                          addToWishlistFunc(p);
-                        }}
+                        onClick={() => handleAction(p, addToWishlist)}
                       />
                     </div>
                   )}

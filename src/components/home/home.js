@@ -1,3 +1,6 @@
+// Main Home Page
+
+//Importing Images, Stylesheets and Components
 import "./home.scss";
 import backOne from "./home-back-one.jpg";
 import backTwo from "./home-back-two.jpg";
@@ -23,8 +26,8 @@ import Client1 from "./Client1.jpeg";
 import Client2 from "./Client2.jpeg";
 import Client3 from "./Client3.jpeg";
 import { useRef } from "react";
-
 import Productcard from "../product-card/Productcard";
+
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -74,6 +77,7 @@ function PrevArrowHome(props) {
 }
 
 function Home() {
+  // reference to components
   const counterRef1 = useRef(null);
   const counterRef2 = useRef(null);
   const home1left = useRef(null);
@@ -82,8 +86,10 @@ function Home() {
   const home2right = useRef(null);
   const collectionUp = useRef(null);
   const partnersUp = useRef(null);
+
   const [hasStarted, setHasStarted] = useState(false);
 
+  // counter to show counting animation in review box
   function startCounter(ref, targetValue, speed) {
     let current = 0;
 
@@ -99,25 +105,8 @@ function Home() {
 
     updateCounter(); // Start the counter
   }
-  //   if (home1left.current) {
-  //     home1left.current.classList.add("active-left");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
 
-  //   if (home1right.current) {
-  //     home1right.current.classList.add("active-right");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
-  //   if (home2left.current) {
-  //     home2left.current.classList.add("active-left");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
-  //   if (home2right.current) {
-  //     home2right.current.classList.add("active-right");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
-  // };
-
+  //animation for home division 2 and 3, also the counter
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -164,6 +153,7 @@ function Home() {
     };
   }, [hasStarted]);
 
+  //loader animation
   useEffect(() => {
     setTimeout(() => {
       const loader = document.querySelector(".loader-container");
@@ -177,11 +167,12 @@ function Home() {
       }
 
       if (hero) {
-        hero.style.opacity = "1"; // Fixed the "none" issue
+        hero.style.opacity = "1";
       }
     }, 500);
   }, []);
 
+  //aniamtion to make division-up
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -232,6 +223,7 @@ function Home() {
     };
   }, []);
 
+  //slides array of objects defined
   const slides = [
     { img: "slide-one-before.jpg", img2: "slide-one-after.jpg" },
     { img: "slide-two-before.jpg", img2: "slide-two-after.jpg" },
@@ -240,6 +232,8 @@ function Home() {
     { img: "slide-five-before.jpg", img2: "slide-five-after.jpg" },
     { img: "slide-six-before.jpg", img2: "slide-six-after.jpg" },
   ];
+
+  //settings for slick-slider transformations
   const settingsT = {
     // dots: true,
     infinite: true,
@@ -251,6 +245,7 @@ function Home() {
     autoplaySpeed: 5000,
   };
 
+  //settings for slick-slider home-slider
   const settingsF = {
     dots: true,
     infinite: true,
@@ -262,14 +257,7 @@ function Home() {
     arrows: true,
   };
 
-  var settingsReviews = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
+  //array of objects for main Slider - holds information
   const mainSlider = [
     {
       img: require("./home-one.jpg"),
@@ -318,11 +306,12 @@ function Home() {
 
   return (
     <div className="Home">
+      {/* loader container */}
       <div className="loader-container">
         <img src={loadImg} className="heart" />
         <p className="HomeHead1">Welcome to The ReTail Project!!</p>
       </div>
-
+      {/* slider container - home division 1 */}
       <Slider {...settingsF} className="SliderCusHome">
         {mainSlider.map((m, index) => (
           <div
@@ -351,9 +340,11 @@ function Home() {
         ))}
       </Slider>
 
+      {/* rest of the homepage */}
       <div className="Hero">
         <div className="hero-lower">
           <div className="home-main">
+            {/* home-division-2 */}
             <div className="home-main-div">
               <div ref={home1left} className="home-main-div-left">
                 <img className="main-div-back hbone" src={backOne} />
@@ -375,7 +366,8 @@ function Home() {
                 </Link>
               </div>
             </div>
-            {/* <marquee>hello</marquee> */}
+
+            {/* home-division-3 */}
             <div className="htwoow">
               <div className="home-main-div htwoowContent">
                 <div ref={home2left} className="home-main-div-right ">
@@ -451,7 +443,7 @@ function Home() {
 
 
                     </div> */}
-
+          {/* collection box - home-division-4 */}
           <div className="collection-box">
             <p className="home-main-head">Our Collections</p>
             <div className="collections" ref={collectionUp}>
@@ -483,6 +475,7 @@ function Home() {
             </div>
           </div>
 
+          {/* transformations - home-division-4 */}
           <div className="transformations">
             <p className="home-main-head">Our Transformations</p>
 
@@ -515,174 +508,15 @@ function Home() {
             </Slider>
           </div>
 
+          {/* featured-products-box - home-division-4 */}
           <div className="featured-products-box">
             <div className="home-main-head">Our Bestsellers</div>
             <div className="featured-products">
-              {/* <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus ">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div> */}
               <Productcard />
             </div>
           </div>
 
+          {/* our-testimonials-box - home-division-4 */}
           <div className="our-testimonials-box">
             <div className="our-testimonials-component">
               <div className="testimonials-row1">

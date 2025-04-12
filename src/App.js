@@ -26,7 +26,7 @@ import { Sleep } from "./components/shop/sleep.jsx";
 import { auth, firestore } from "./firebase.js";
 import CheckoutP from "./components/checkout/checkout.jsx";
 import Orders from "./components/orders/orders.jsx";
-import ProductPage from "./components/productPage/productPage.js";
+import ProductPage from "./components/productPage/productPage1.js";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import PrivacyT from "./components/privacy/privacy.js";
 import Terms from "./components/terms/terms.js";
