@@ -251,9 +251,9 @@ $secondarycolor: #e4af47;
 }
 
 .boldTxt {
-  // font-weight: bold;
+  font-weight: bold;
   color: whitesmoke;
-  animation: boldAnimate 1s ease infinite;
+  // animation: boldAnimate 1s ease infinite;
   // transition: 0.8s ease;
   &:hover {
     text-decoration: underline;
