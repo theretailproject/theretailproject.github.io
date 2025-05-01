@@ -239,13 +239,13 @@ $secondarycolor: #e4af47;
   width: 12cm;
   flex-shrink: 0;
   position: relative;
-  opacity: 0.1;
-  transform: translateX(0px);
+  opacity: 0;
+  transform: translateX(-0px);
   transition: opacity 4s ease, transform 0.8s ease;
 }
 
 /* Class to trigger animation */
-.home-main-div-left.active-left{
+.home-main-div-left.active-left {
   opacity: 1;
   animation: divLeft 1s ease-in;
 }
@@ -266,14 +266,14 @@ $secondarycolor: #e4af47;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.3cm;
-  opacity: 0.1;
+  opacity: 0;
   // border: 1px solid black;
   width: auto;
   flex-grow: 0;
-  transform: translateX(0px);
+  transform: translateX(5px);
   transition: opacity 4s ease, transform 0.8s ease;
 }
-.home-main-div-right.active-right{
+.home-main-div-right.active-right {
   opacity: 1;
   animation: divRight 1s ease-in;
 }
@@ -1018,6 +1018,7 @@ $secondarycolor: #e4af47;
   padding: 0.5cm;
   display: flex;
   flex-direction: row;
+  // height: 50vh;
   align-items: center;
   justify-content: space-around;
 }
@@ -1060,22 +1061,27 @@ $secondarycolor: #e4af47;
 }
 
 .testimonials-row1-col2 {
-  width: 60vw;
-  height: auto;
-  overflow: hidden;
+  width: 50vw;
+  padding: 0 0.5cm;
   display: flex !important;
-  align-items: center;
-  position: relative;
-}
-
-.reviewSliderDiv {
-  display: flex !important;
-  flex-direction: row !important;
   justify-content: center;
   align-items: center;
-  gap: 0.4cm;
-  width: 100%;
-  flex-wrap: nowrap !important; /* Prevent wrapping */
+  // position: relative;
+}
+
+// .reviewParentDiv{
+//   width: 100%;
+//   max-height:80vh;
+// }
+.reviewSliderDiv {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0.2cm;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 85%;
+  flex-wrap: nowrap !important;
+  height: 100%;
 }
 
 .testimonials-smallLogo {
@@ -1087,46 +1093,52 @@ $secondarycolor: #e4af47;
   cursor: pointer;
   left: 0;
 }
+.testimonials-smallLogo-user {
+  display: flex;
+  flex-direction: row;
+  width: 1cm;
+  // padding: 0.2cm; /* Reduce padding */
+  border-radius: 50%;
+  cursor: pointer;
+  left: 0;
+  align-self: center;
+  background-color: $secondarycolor;
+}
 
 .reviewBox {
-  position: relative;
-  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: justify;
-  padding: 0.2cm;
-  border-radius: 5px;
-  font-size: 22px;
-  font-weight: 800;
-  color: $primarycolor;
-  background-color: $secondarycolor;
-  border: 2px solid $secondarycolor;
-  box-shadow: rgba(89, 89, 89, 0.3) 0px 19px 38px,
-    rgba(68, 68, 68, 0.22) 0px 15px 12px;
-  max-width: 90%;
   padding: 0.5cm;
   border-radius: 5px;
   font-size: 16px;
+  font-weight: 600;
+  color: $primarycolor;
+  background-color: #f6b430dc;
+  border: 2px solid $secondarycolor;
   box-shadow: rgba(89, 89, 89, 0.3) 0px 10px 20px;
-  &::before {
-    position: absolute;
-    content: " ";
-    top: 1cm;
-    left: -0.25cm;
-    width: 0cm;
-    height: 0cm;
-    font-size: 15px;
-    border-top: 16px solid transparent;
-    border-bottom: 16px solid transparent;
-    border-right: 10px solid $secondarycolor;
-    transition: ease-in-out 0.45s;
-    z-index: 1000;
-  }
+  width: 90%;
+  min-height: 300px;
+  transition: 0.2s ease;
+}
+
+.reviewName {
+  display: flex;
+  flex-direction: row;
+  gap: 0.1cm;
+  align-items: center;
+  align-self: flex-end;
+  margin-right: 100px;
+  color: $secondarycolor;
 }
 
 .clientReviewText {
-  max-width: 10cm;
-
+  max-width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   word-wrap: break-word;
   text-align: justify; /* Align text properly */
   color: #ffffff;
@@ -1134,7 +1146,16 @@ $secondarycolor: #e4af47;
   font-size: 18px;
   color: $primarycolor;
   // background-color: $secondarycolor;
-  right: 0;
+  // border: 2px solid $secondarycolor;
+  // background-color: $secondarycolor;
+  // right: 0;
+  // align-self: center;
+}
+
+.clientName {
+  font-size: 20px;
+  font-weight: 600px;
+  color: $secondarycolor;
 }
 
 .testimonials-ClientLogo {
@@ -1142,7 +1163,7 @@ $secondarycolor: #e4af47;
   height: 4cm;
   // height: auto;
   border-radius: 50%;
-opacity: 0;
+  opacity: 0;
   padding: 0.2cm;
   &:hover {
     transform: scale(1.2);
@@ -1487,7 +1508,7 @@ opacity: 0;
   @keyframes divLeft {
     from {
       opacity: 0;
-      transform: translateX(-100px);
+      transform: translateX(-180px);
     }
     to {
       opacity: 1;
@@ -1497,8 +1518,8 @@ opacity: 0;
 
   @keyframes divRight {
     from {
-      opacity: 0.5;
-      transform: translateX(150px);
+      opacity: 0;
+      transform: translateX(180px);
     }
     to {
       opacity: 1;
@@ -1615,7 +1636,7 @@ opacity: 0;
 
   @keyframes divLeft {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(-160px);
     }
     to {
@@ -1626,7 +1647,7 @@ opacity: 0;
 
   @keyframes divRight {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(160px);
     }
     to {
@@ -1740,7 +1761,7 @@ opacity: 0;
 
   @keyframes divLeft {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(-80px);
     }
     to {
@@ -1751,7 +1772,7 @@ opacity: 0;
 
   @keyframes divRight {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(80px);
     }
     to {
@@ -1866,7 +1887,7 @@ opacity: 0;
 
   @keyframes divLeft {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(-20px);
     }
     to {
@@ -1877,7 +1898,7 @@ opacity: 0;
 
   @keyframes divRight {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(20px);
     }
     to {
@@ -2000,7 +2021,7 @@ opacity: 0;
 
   @keyframes divLeft {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(-15px);
     }
     to {
@@ -2011,7 +2032,7 @@ opacity: 0;
 
   @keyframes divRight {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(15px);
     }
     to {
@@ -2158,7 +2179,7 @@ opacity: 0;
 
   @keyframes divLeft {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(-5px);
     }
     to {
@@ -2169,7 +2190,7 @@ opacity: 0;
 
   @keyframes divRight {
     from {
-      opacity: 0.5;
+      opacity: 0;
       transform: translateX(5px);
     }
     to {
@@ -2196,7 +2217,6 @@ opacity: 0;
   .after {
     font-size: 12px;
   }
-  
 }
 
 @media screen and (max-width: 768px) {
