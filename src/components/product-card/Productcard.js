@@ -8,31 +8,97 @@ import cartF from "./cartFilled.png";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore } from "../../firebase";
 import bestseller from "./bestseller.json";
+import { useEffect,useState } from "react";
 
 const Productcard = () => {
+  const [currentUser, setCurrentUser] = useState(auth.currentUser?.uid || null);
   const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
     useUserContext();
-  console.log(bestseller);
+  // console.log(bestseller);
+const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user?.uid || null);
+    });
+  
+    return () => unsubscribe();
+  }, []);
+  
+  useEffect(() => {
+    if (currentUser) {
+      const cartRef = firestore
+        .collection("users")
+        .doc(currentUser)
+        .collection("cart");
+  
+      const unsubscribe = cartRef.onSnapshot((snapshot) => {
+        const cartItems = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCart(cartItems);
+      });
+  
+      return () => unsubscribe();
+    } else {
+      setCart([]); // Reset cart when no user
+    }
+  }, [currentUser]);
 
-  const wishlistRef = firestore
-    .collection("users")
-    .doc(auth.currentUser?.uid)
-    .collection("wishlist");
-  const [wishlist] = useCollectionData(wishlistRef);
+  function addToWishlistFunc(p) {
+    auth?.currentUser
+      ? addToWishlist(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
 
-  const cartRef = firestore
-    .collection("users")
-    .doc(auth.currentUser?.uid)
-    .collection("cart");
-  const [cart] = useCollectionData(cartRef);
+  function addToCartFunc(p) {
+    auth?.currentUser
+      ? addToCart(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
 
+  function deleteFromCartFunc(p) {
+    auth?.currentUser
+      ? delFromCart(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function deleteFromWishlistFunc(p) {
+    auth?.currentUser
+      ? delFromWishlist(p)
+      : (document.getElementById("overlaySignInId").style.display = "flex");
+  }
+
+  function closeOverlay() {
+    document.getElementById("overlaySignInId").style.display = "none";
+  }
   return (
     <>
       {bestseller &&
         bestseller.map((prod) => (
           <>
-            {console.log(prod)}
+            {/* {console.log(prod)} */}
             <div className="ProductCard" key={prod.itemId}>
+              <div className="overlaySignIn" id="overlaySignInId">
+                <div className="overlaySignInChildren">
+                  <div className="overlaySignInChild">
+                    <p className="overlaySignInChild1">Sign In to Proceed</p>
+                    <Link to="/signin">
+                      <button className="overlaySignInChildBtn2">
+                        Move to SignIn
+                      </button>
+                    </Link>
+                    <button
+                      className="overlaySignInChildBtn1"
+                      onClick={closeOverlay}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
               <div className="imgCont">
                 <div className="overlayProdCard">
                   {cart &&
@@ -45,7 +111,7 @@ const Productcard = () => {
                         onMouseOut={(e) => (e.currentTarget.src = cartF)}
                         className="smallBtn"
                         onClick={() => {
-                          delFromCart(prod);
+                          deleteFromCartFunc(prod);
                         }}
                       />
                     </div>
@@ -58,7 +124,7 @@ const Productcard = () => {
                         onMouseOut={(e) => (e.currentTarget.src = cartH)}
                         className="smallBtn"
                         onClick={() => {
-                          addToCart(prod);
+                          addToCartFunc(prod);
                         }}
                       />
                     </div>
@@ -73,7 +139,7 @@ const Productcard = () => {
                         onMouseOut={(e) => (e.currentTarget.src = liked)}
                         className="smallBtn"
                         onClick={() => {
-                          delFromWishlist(prod);
+                          deleteFromWishlistFunc(prod);
                         }}
                       />
                     </div>
@@ -86,7 +152,7 @@ const Productcard = () => {
                         onMouseOut={(e) => (e.currentTarget.src = like)}
                         className="smallBtn"
                         onClick={() => {
-                          addToWishlist(prod);
+                          addToWishlistFunc(prod);
                         }}
                       />
                     </div>

@@ -54,14 +54,17 @@ function Wishlist() {
                       {product.name}
                     </Link>
                   </td>
-                  <td className="ListData">Holds color and size value</td>
+                  <td className="ListData">
+                    Color: {product.color != "default" ? product.color : "N/A"}{" "}
+                    Size: {product.size != "default" ? product.size : "N/A"}
+                  </td>
                   <td className="ListData">₹ {product.price}</td>
                   <td className="ListData">{product.quantity}</td>
                   <td className="ListData">
                     <span className="alignCenter">
                       <button
                         className="AddToCartBtn"
-                        onClick={() => addToCart(product)}
+                        onClick={() => addToCart(product)}  
                       >
                         Add To Cart
                       </button>
@@ -89,8 +92,7 @@ function Wishlist() {
         <div className="WishlistCards">
           {products && products.length === 0 ? (
             <div className="no-products">
-
-            <p className="ListDataSmall bold ">No Products in Wishlist</p>
+              <p className="ListDataSmall bold ">No Products in Wishlist</p>
             </div>
           ) : (
             products &&
@@ -99,7 +101,10 @@ function Wishlist() {
                 <img src={product.thumbnail} className="WishlistImg" />
                 <div className="WishlistInfo">
                   <p className="ListDataSmall bold">{product.name}</p>
-                  <p className="ListDataSmall">Specs: Holds color and size value</p>
+                  <td className="ListDataSmall">
+                    Color: {product.color != "default" ? product.color : "N/A"}{" "}
+                    Size: {product.size != "default" ? product.size : "N/A"}
+                  </td>
                   <p className="ListDataSmall">Price: ₹ {product.price}</p>
                   <p className="ListDataSmall">Qty: {product.quantity}</p>
                   <div className="ListDataSmall">

@@ -30,20 +30,10 @@ import { use } from "react";
 
 function Nav() {
   const location = useLocation();
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(auth.currentUser?.uid || null);
   const { checkoutAmt, setCheckoutAmt, userData, doingWork, setDoingWork } =
     useUserContext();
-  // const [nitems, setnitems] = useState(0);
-
   const navigate = useNavigate();
-
-  // Set up cart reference only if user is authenticated
-  // const cartRef = auth.currentUser
-  //     ? firestore.collection("users").doc(auth.currentUser.uid).collection("cart")
-  //     : null;
-
-  // Using the cartRef only if it's defined
-  // const [cart] = useCollectionData(cartRef, { idField: 'id' });
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -52,33 +42,19 @@ function Nav() {
     return () => unsubscribe();
   }, []);
 
-  // useEffect(() => {
-  //     if (cart && Array.isArray(cart)) {
-  //         setnitems(cart.length);
-  //     }
-  // }, [cart]);
   const [amount, setAmount] = useState(0);
-  const cartRef = firestore
-    .collection("users")
-    .doc(auth.currentUser?.uid)
-    .collection("cart");
-  const [cart] = useCollectionData(cartRef);
-  console.log(cart);
-  const overlayRef = useRef(null);
 
+  const overlayRef = useRef(null);
   useEffect(() => {
-    // Function to handle click events
     const handleClickOutside = (event) => {
       if (overlayRef.current && !overlayRef.current.contains(event.target)) {
-        closeNav(); // Call the closeNav function if clicked outside
+        closeNav();
       }
     };
 
-    // Add event listener to detect outside clicks
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      // Cleanup the event listener on unmount
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -191,26 +167,63 @@ function Nav() {
   };
 
   const setCheckoutAmount = async (amount) => {
-    await setDoingWork(true);
-    firestore.collection("users").doc(auth.currentUser?.uid).update(
-      {
-        checkoutAmt: amount,
-      },
-      { merge: true }
-    );
-    await setDoingWork(false);
-    // .then(()=>
+    // try {
+    //   setDoingWork(true);
+
+    //   await firestore
+    //     .collection("users")
+    //     .doc(auth.currentUser?.uid)
+    //     .set(
+    //       {
+    //         checkoutAmt: amount,
+    //       },
+    //       { merge: true }
+    //     );
+
+    //   setDoingWork(false);
     openCheckout();
-    // )
+    // } catch (error) {
+    //   console.error("Error setting checkout amount:", error);
+    //   setDoingWork(false);
+    // }
   };
 
+  const [cart, setCart] = useState([]);
   useEffect(() => {
-    if (cart && cart.length > 0) {
-      const total = cart.reduce((sum, c) => sum + c.price * c.quantity, 0);
-      setAmount(total);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user?.uid || null);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      const cartRef = firestore
+        .collection("users")
+        .doc(currentUser)
+        .collection("cart");
+
+      const unsubscribe = cartRef.onSnapshot((snapshot) => {
+        const cartItems = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCart(cartItems);
+      });
+
+      return () => unsubscribe();
     } else {
-      setAmount(0);
+      setCart([]); // Reset cart when no user
     }
+  }, [currentUser]);
+
+  useEffect(() => {
+    const total = cart.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    setAmount(total);
   }, [cart]);
 
   return (
@@ -441,7 +454,12 @@ function Nav() {
                     <div className="cart-prod-new-right">
                       <p className="cart-prod-new-name">{c.name}</p>
                       <p className="cart-prod-new-price">₹ {c.price}</p>
-
+                      {c.color && c.color != "default" ? (
+                        <p className="cart-prod-new-price">Color: {c.color}</p>
+                      ) : null}
+                      {c.size && c.size != "default" ? (
+                        <p className="cart-prod-new-price">Size: {c.size}</p>
+                      ) : null}
                       <div className="cart-new-quantity-box">
                         <button
                           onClick={(e) => {
@@ -475,15 +493,10 @@ function Nav() {
           {
             <div className="cart-checkout-new">
               <button
-                // onClick={
-                //   !doingWork && userData.checkoutAmt && userData.checkoutAmt > 0
-                //     ? openCheckout
-                //     : null
-                // }
                 onClick={() => {
-                  setCheckoutAmount(amount);
+                  setCheckoutAmount(userData?.checkoutAmt || 0);
                 }}
-                disabled={amount > 0 ? false : true}
+                disabled={doingWork || (userData?.checkoutAmt ?? 0) <= 0}
                 className="checkout-final"
               >
                 <p className="checout-text">Proceed to Checkout</p>

@@ -19,7 +19,7 @@ function Recycle() {
       (entries) => {
         entries.forEach((entry) => {
           const target = entry.target;
-          console.log(entry);
+          // console.log(entry);
           if (entry.isIntersecting) {
             if (entry.target === recycle1_1left.current || entry.target === recycle1_3left.current) {
               if (target.classList.contains("rec-new-box")) {

@@ -1,3 +1,6 @@
+// Main Home Page
+
+//Importing Images, Stylesheets and Components
 import "./home.scss";
 import backOne from "./home-back-one.jpg";
 import backTwo from "./home-back-two.jpg";
@@ -23,8 +26,8 @@ import Client1 from "./Client1.jpeg";
 import Client2 from "./Client2.jpeg";
 import Client3 from "./Client3.jpeg";
 import { useRef } from "react";
-
 import Productcard from "../product-card/Productcard";
+
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -74,6 +77,7 @@ function PrevArrowHome(props) {
 }
 
 function Home() {
+  // reference to components
   const counterRef1 = useRef(null);
   const counterRef2 = useRef(null);
   const home1left = useRef(null);
@@ -82,8 +86,10 @@ function Home() {
   const home2right = useRef(null);
   const collectionUp = useRef(null);
   const partnersUp = useRef(null);
+
   const [hasStarted, setHasStarted] = useState(false);
 
+  // counter to show counting animation in review box
   function startCounter(ref, targetValue, speed) {
     let current = 0;
 
@@ -99,25 +105,8 @@ function Home() {
 
     updateCounter(); // Start the counter
   }
-  //   if (home1left.current) {
-  //     home1left.current.classList.add("active-left");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
 
-  //   if (home1right.current) {
-  //     home1right.current.classList.add("active-right");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
-  //   if (home2left.current) {
-  //     home2left.current.classList.add("active-left");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
-  //   if (home2right.current) {
-  //     home2right.current.classList.add("active-right");
-  //     // myDivRef.current.classList.remove("old-class-name");
-  //   }
-  // };
-
+  //animation for home division 2 and 3, also the counter
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -136,8 +125,8 @@ function Home() {
               !hasStarted &&
               (target === counterRef1.current || target === counterRef2.current)
             ) {
-              startCounter(counterRef1, 100, 25);
-              startCounter(counterRef2, 150, 5);
+              startCounter(counterRef1, 409, 0.2);
+              startCounter(counterRef2, 25, 50);
               setHasStarted(true);
             }
           } else {
@@ -164,6 +153,7 @@ function Home() {
     };
   }, [hasStarted]);
 
+  //loader animation
   useEffect(() => {
     setTimeout(() => {
       const loader = document.querySelector(".loader-container");
@@ -177,11 +167,12 @@ function Home() {
       }
 
       if (hero) {
-        hero.style.opacity = "1"; // Fixed the "none" issue
+        hero.style.opacity = "1";
       }
     }, 500);
   }, []);
 
+  //aniamtion to make division-up
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -232,6 +223,7 @@ function Home() {
     };
   }, []);
 
+  //slides array of objects defined
   const slides = [
     { img: "slide-one-before.jpg", img2: "slide-one-after.jpg" },
     { img: "slide-two-before.jpg", img2: "slide-two-after.jpg" },
@@ -240,6 +232,8 @@ function Home() {
     { img: "slide-five-before.jpg", img2: "slide-five-after.jpg" },
     { img: "slide-six-before.jpg", img2: "slide-six-after.jpg" },
   ];
+
+  //settings for slick-slider transformations
   const settingsT = {
     // dots: true,
     infinite: true,
@@ -251,6 +245,7 @@ function Home() {
     autoplaySpeed: 5000,
   };
 
+  //settings for slick-slider home-slider
   const settingsF = {
     dots: true,
     infinite: true,
@@ -262,14 +257,18 @@ function Home() {
     arrows: true,
   };
 
-  var settingsReviews = {
-    dots: true,
+  const settingsReviews = {
+    dots: false,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 800,
+    autoplaySpeed: 2000,
+    arrows: true,
   };
 
+  //array of objects for main Slider - holds information
   const mainSlider = [
     {
       img: require("./home-one.jpg"),
@@ -295,34 +294,63 @@ function Home() {
 
   const reviewSlider = [
     {
-      img: require("./home-one.jpg"),
+      img: require("./user.png"),
       review:
-        "1- Lorem ipsumjb binrbienr rivnrjineir ejfnswe nruinriune einwuieniuwen enijneriugneui enfjeni nur roignu riugnriu rniru",
+        "After buying products from The Retail Project, I'm thrilled with the results. The pet toys and beds I purchased were top-notch, providing my pets with endless entertainment and comfort. Moreover, the eco-friendly fashion items I bought were not only stylish but also made me feel good about supporting sustainable practices. Overall, my experience with The Retail Project was fantastic, and I highly recommend their products to all pet owners looking for quality and sustainability.",
+      name: "Nitesh Sisodiya",
     },
     {
-      img: require("./home-two.JPG"),
+      img: require("./user.png"),
       review:
-        "2-  ipsumjb binrbienr rivnrjineir ejfnswe nruinriune einwuieniuwen enijneriugneui enfjeni nur roignu riugnriu rniru",
+        "Retail Project is one of the best one-stop shops for pet accessories. I recently had a custom bed made for my cats, along with an adorable collar, bow tie, and scrunchie. The idea of transforming clothes you love but no longer wear into unique pet items is fantastic. I had my cats’ bed made from a caricature bedsheet that my mother bought me when I was a child. When I discovered Retail Project, I asked them to convert it into something special for my fur babies. They delivered exactly what I envisioned. Thank you, Retail Project, for making my cats happy and comfortable!",
+      name: "TUKI - PALLAVI PURI FASHION DESIGNER",
     },
     {
-      img: require("./home-three.jpg"),
+      img: require("./user.png"),
       review:
-        "3 - Lorem ipsumjb binrbienr rivnrjineir ejfnswe nruinriune einwuieniuwen enijneriugneui enfjeni nur roignu riugnriu rniru",
+        "TheRetailProject offers fantastic pet clothes and accessories made from upcycled old clothes. Their products are stylish, durable, and eco-friendly. My pet loves the comfort and fit, and I appreciate their commitment to sustainability. Highly recommended! 🐶❤️",
+      name: "Kanupriya Chauhan",
     },
     {
-      img: require("./home-four.jpg"),
+      img: require("./user.png"),
       review:
-        "4- Lorem ipsumjb binrbienr rivnrjineir ejfnswe nruinriune einwuieniuwen enijneriugneui enfjeni nur roignu riugnriu rniru",
+        "The pick up & delivery was seamless & hassle-free, I have sent two Kurtis which I wanted to preserve as they were a gift from a special person, They were re-purposed into a beautiful Bandana, Scrunchie, Bowties & a few durable chew toys which are safe & eco-friendly for my pupper. Really excited to have received the package and loved the idea! I can’t wait to style my Pupper in the Bandana!",
+      name: "Gayatri Pasupuleti",
+    },
+    {
+      img: require("./user.png"),
+      review:
+        "The Retail Project is a gem for pet lovers and eco-conscious shoppers alike. Their pet toys and Cloths are both delightful and eco-friendly, while their recycled fashion items redefine style with sustainability. Five stars for their brilliance in blending pet bliss and eco-chic!",
+      name: "Mul Sa",
+    },
+    {
+      img: require("./user.png"),
+      review:
+        "Loved The Retail Project! Eco-friendly pet supplies & fashion. Great quality, sustainable focus. Highly recommend!",
+      name: "Mahi Khan",
+    },
+    {
+      img: require("./user.png"),
+      review:
+        "I recently purchased a pet bed from The Retail Project, and I'm thoroughly impressed. The selection was diverse, with a range of styles and sizes to suit any pet's needs. The bed I chose was well-made, with high-quality materials that offer both comfort and durability.The ordering process was straightforward, and shipping was prompt, arriving well-packaged and on time. My pet seems to love the new bed, which has quickly become their favorite spot for relaxation. The Retail Project's customer service was also excellent, addressing my queries efficiently and ensuring a smooth transaction.Overall, I highly recommend The Retail Project for pet products. Their commitment to quality and customer satisfaction is evident, and I’ll definitely consider them for future pet-related purchases.",
+      name: "Rakesh Sharma",
+    },
+    {
+      img: require("./user.png"),
+      review:
+        "Had an amazing experience with The Retail Project! Their eco-friendly pet supplies, such as Pawbies bandanas and dog cushions, are fantastic, and their sustainable fashion line is impeccable. The quality is outstanding, and their use of recycled materials is a big plus. Definitely recommend checking them out!",
+      name: "Yuvraj Singh",
     },
   ];
 
   return (
     <div className="Home">
+      {/* loader container */}
       <div className="loader-container">
         <img src={loadImg} className="heart" />
         <p className="HomeHead1">Welcome to The ReTail Project!!</p>
       </div>
-
+      {/* slider container - home division 1 */}
       <Slider {...settingsF} className="SliderCusHome">
         {mainSlider.map((m, index) => (
           <div
@@ -351,9 +379,11 @@ function Home() {
         ))}
       </Slider>
 
+      {/* rest of the homepage */}
       <div className="Hero">
         <div className="hero-lower">
           <div className="home-main">
+            {/* home-division-2 */}
             <div className="home-main-div">
               <div ref={home1left} className="home-main-div-left">
                 <img className="main-div-back hbone" src={backOne} />
@@ -375,7 +405,8 @@ function Home() {
                 </Link>
               </div>
             </div>
-            {/* <marquee>hello</marquee> */}
+
+            {/* home-division-3 */}
             <div className="htwoow">
               <div className="home-main-div htwoowContent">
                 <div ref={home2left} className="home-main-div-right ">
@@ -451,7 +482,7 @@ function Home() {
 
 
                     </div> */}
-
+          {/* collection box - home-division-4 */}
           <div className="collection-box">
             <p className="home-main-head">Our Collections</p>
             <div className="collections" ref={collectionUp}>
@@ -483,6 +514,7 @@ function Home() {
             </div>
           </div>
 
+          {/* transformations - home-division-4 */}
           <div className="transformations">
             <p className="home-main-head">Our Transformations</p>
 
@@ -515,174 +547,15 @@ function Home() {
             </Slider>
           </div>
 
+          {/* featured-products-box - home-division-4 */}
           <div className="featured-products-box">
             <div className="home-main-head">Our Bestsellers</div>
             <div className="featured-products">
-              {/* <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div>
-              <div className="ProductCard">
-                <div className="imgCont">
-                  <div className="overlayProdCard">
-                    <div className="smallImgCartCont">
-                      <img
-                        src={cartH}
-                        alt="Cart Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = cartF)}
-                        onMouseOut={(e) => (e.currentTarget.src = cartH)}
-                        className="smallBtn"
-                      />
-                    </div>
-                    <div className="smallImgHeartCont">
-                      <img
-                        src={like}
-                        alt="Like Icon"
-                        onMouseOver={(e) => (e.currentTarget.src = liked)}
-                        onMouseOut={(e) => (e.currentTarget.src = like)}
-                        className="smallBtn"
-                      />
-                    </div>
-                  </div>
-                  <Link to={`/shop`}>
-                    <img
-                      src={require("./btwo.jpg")}
-                      className="productImg"
-                      alt="Product"
-                    />
-                  </Link>
-                </div>
-                <p className="productCategory">WEAR</p>
-                <div className="productCardRowCus ">
-                  {" "}
-                  <p className="productName">Festive Frock</p>
-                  <p className="productPrice"> ₹ 599 - ₹ 799</p>
-                </div>
-                <Link to="/shop/wear">
-                  <button className=" view-button">View</button>
-                </Link>
-              </div> */}
               <Productcard />
             </div>
           </div>
 
+          {/* our-testimonials-box - home-division-4 */}
           <div className="our-testimonials-box">
             <div className="our-testimonials-component">
               <div className="testimonials-row1">
@@ -703,7 +576,7 @@ function Home() {
                         id="counter1"
                         ref={counterRef1}
                       >
-                        0
+                        250
                       </p>
                       +
                     </>
@@ -727,18 +600,25 @@ function Home() {
                     </>
                   </div>
                 </div>
-                <Slider {...settingsF} className="testimonials-row1-col2">
+
+                <Slider {...settingsReviews} className="testimonials-row1-col2">
                   {reviewSlider &&
                     reviewSlider.map((review, index) => (
                       <div className="reviewSliderDiv" key={index}>
-                        <img
-                          src={Client1}
-                          className="testimonials-smallLogo"
-                          alt="review"
-                        />
                         <div className="reviewBox">
                           {" "}
-                          <p className="clientReviewText">{review.review}</p>
+                          <p className="clientReviewText">
+                            🙶 {review.review} 🙷
+                          </p>
+                          <br />
+                        </div>
+                        <div className="reviewName">
+                          ~{" "}
+                          <img
+                            src={review.img}
+                            className="testimonials-smallLogo-user"
+                          />
+                          <p className="clientName"> {review.name}</p>
                         </div>
                       </div>
                     ))}

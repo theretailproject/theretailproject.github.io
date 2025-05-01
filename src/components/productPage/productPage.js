@@ -12,18 +12,43 @@ import bagFilled from "./bagFilled.png";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore, firebase } from "../../firebase";
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 function ProductPage() {
   const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
     useUserContext();
+  // const { pid } = useParams();
 
+  // const prod = useMemo(() => {
+  //   return products.find((product) => product.itemId == pid);
+  // }, [pid]);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const handleColorClick = (color) => {
+    setSelectedColor(color);
+    console.log("Color clicked:", color); // This logs instantly
+  };
   const { pid } = useParams();
 
-  const [currentImg, setCurrentImg] = useState(() => {
-    const product = products.find((product) => product.itemId == pid);
-    return product ? product.thumbnail : null;
-  });
+  const prod = useMemo(() => {
+    return products.find((product) => product.itemId == pid);
+  }, [products, pid]);
 
-  console.log(products);
+  const [currentImg, setCurrentImg] = useState(null);
+
+  // ✅ Set currentImg ONLY once when prod changes
+  useEffect(() => {
+    if (prod?.thumbnail) {
+      setCurrentImg(prod.thumbnail);
+    }
+  }, [prod]);
+
+  // const [currentImg, setCurrentImg] = useState(() => {
+  //   const product = products.find((product) => product.itemId == pid);
+  //   return product ? product.thumbnail : null;
+  // });
+
+  // const [currentImg, setCurrentImg] = useState(() => prod?.thumbnail || null);
+
+  // console.log(products);
   const wishlistRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
@@ -34,8 +59,8 @@ function ProductPage() {
     .collection("users")
     .doc(auth.currentUser?.uid)
     .collection("cart");
-  const [cart] = useCollectionData(cartRef);
-  console.log(cart);
+  // const [cart] = useCollectionData(cartRef);
+  // console.log(cart);
   const onMouseOverChange = (x) => {
     setCurrentImg(x);
   };
@@ -83,22 +108,33 @@ function ProductPage() {
   function closeOverlay() {
     document.getElementById("overlaySignInId").style.display = "none";
   }
+
+  // console.log(p);
   return (
     <div className="MainDiv">
-      <div className="overlaySignIn" id="overlaySignInId">
-        <div className="overlaySignInChildren">
-          <div className="overlaySignInChild">
-            <p className="overlaySignInChild1">Sign In to Proceed</p>
-            <Link to="/signin">
-              <button className="overlaySignInChildBtn2">Move to SignIn</button>
-            </Link>
-            <button className="overlaySignInChildBtn1" onClick={closeOverlay}>
-              Cancel
-            </button>
+      {!prod ? (
+        <div className="not-found">Product not found.</div>
+      ) : (
+        <>
+          <div className="overlaySignIn" id="overlaySignInId">
+            <div className="overlaySignInChildren">
+              <div className="overlaySignInChild">
+                <p className="overlaySignInChild1">Sign In to Proceed</p>
+                <Link to="/signin">
+                  <button className="overlaySignInChildBtn2">
+                    Move to SignIn
+                  </button>
+                </Link>
+                <button
+                  className="overlaySignInChildBtn1"
+                  onClick={closeOverlay}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {products.map((p) =>
+          {/* {products.map((p) =>
         p.itemId == pid ? (
           !p.multiple ? (
             <div className="product-page-box">
@@ -142,6 +178,26 @@ function ProductPage() {
                     </span>
                   ))}
                 </p>
+                <div className="colorDiv">
+                  {p.multiColor === true ? (
+                    <>
+                      {p.colors &&
+                        p.colors.map((color, index) => (
+                          <button
+                            key={index}
+                            className={
+                              selectedColor == color
+                                ? "colorName selected"
+                                : "colorName"
+                            }
+                            onClick={() => handleColorClick(color)}
+                          >
+                            {color}
+                          </button>
+                        ))}
+                    </>
+                  ) : null}
+                </div>
 
                 <div className="product-page-buttons">
                   <span className="product-page-buttons-row1">
@@ -225,6 +281,152 @@ function ProductPage() {
             </div>
           ) : null
         ) : null
+      )} */}
+
+          <div className="product-page-box">
+            <div className="product-left">
+              {prod.images ? (
+                <div className="prodPageImgDiv">
+                  {prod.images.map((pi, index) => (
+                    <div
+                      key={index}
+                      className={
+                        pi == currentImg
+                          ? "prodPageSmallImgDiv activeImgProdPage"
+                          : "prodPageSmallImgDiv"
+                      }
+                    >
+                      <img
+                        className="prodPageSmallImg"
+                        onMouseEnter={() => {
+                          onMouseOverChange(pi);
+                        }}
+                        onClick={() => {
+                          setCurrentImg(pi);
+                        }}
+                        src={pi}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              <img className="prodPageImg" src={currentImg} />
+            </div>
+            <div className="product-right">
+              <p className="prodPageName">{prod.name}</p>
+              <p className="price">₹ {prod.price}</p>
+              <p className="brand-name fl">by {prod["brand-name"]}</p>
+              <p className="brand-name weight">{prod.weight}</p>
+              <p className="brand-name weight">
+                {prod.dimensions.map((i, index) => (
+                  <span>
+                    {" "}
+                    {i} {index < prod.dimensions.length - 1 ? "X" : ""}
+                  </span>
+                ))}
+              </p>
+              <div className="colorDiv">
+                {prod.multiColor === true ? (
+                  <>
+                    {prod.colors &&
+                      prod.colors.map((color, index) => (
+                        <button
+                          key={index}
+                          className={
+                            selectedColor == color
+                              ? "colorName selected"
+                              : "colorName"
+                          }
+                          onClick={() => handleColorClick(color)}
+                        >
+                          {color}
+                        </button>
+                      ))}
+                  </>
+                ) : null}
+              </div>
+
+              <div className="product-page-buttons">
+                <span className="product-page-buttons-row1">
+                  {wishlist &&
+                  wishlist.some((product) => product.itemId === prod.itemId) ? (
+                    <button
+                      onClick={() => {
+                        deleteFromWishlistFunc(prod);
+                      }}
+                      className="pp-button"
+                      disabled={doingWork ? true : false}
+                    >
+                      <img
+                        src={liked}
+                        className="btnSmallImg heart-icon-filled"
+                      />
+                      Remove from Wishlist
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        addToWishlistFunc(prod);
+                      }}
+                      className="pp-button"
+                      disabled={doingWork ? true : false}
+                    >
+                      <img src={like} className="btnSmallImg heart-icon" />
+                      Add to Wishlist
+                    </button>
+                  )}
+
+                  {cart &&
+                  cart.some((product) => product.itemId === prod.itemId) ? (
+                    <button
+                      onClick={() => {
+                        deleteFromCartFunc(prod);
+                      }}
+                      className="pp-button"
+                      disabled={doingWork ? true : false}
+                    >
+                      <img
+                        src={cartF}
+                        className="btnSmallImg cart-icon-filled"
+                      />
+                      Remove from Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        addToCartFunc(prod);
+                      }}
+                      className="pp-button"
+                      disabled={doingWork ? true : false}
+                    >
+                      <img src={cartH} className="btnSmallImg cart-icon" />
+                      Add to Cart
+                    </button>
+                  )}
+                </span>
+                <div className="">
+                  <button className="pp-button product-page-buttons-row2 blueBG">
+                    <img
+                      src={bagHollow}
+                      alt="Buy Now Icon"
+                      className="btnSmallImg bag-icon "
+                    />
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+
+              <p
+                className="shareb"
+                onClick={() => {
+                  handleShare(prod.shareLink);
+                }}
+              >
+                Share Product
+              </p>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
