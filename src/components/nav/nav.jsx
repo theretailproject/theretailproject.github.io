@@ -552,6 +552,7 @@ function Nav() {
                         src={wishlist}
                       />
                     </Link>
+
                     <img
                       onClick={openCart}
                       className="menuk hideoii"

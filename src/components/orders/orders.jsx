@@ -10,8 +10,10 @@ function Orders() {
 
     const [printing, setPrinting] = useState(false)
 
-    const { orderData, userData } = useUserContext()
+    // const { orderData, userData } = useUserContext()
+    const { userData } = useUserContext()
 
+const orderData =0;
 
     const [orderInvoice, setOrderInvoice] = useState({
         orderId: "",
@@ -27,8 +29,6 @@ function Orders() {
 
 
     const createPDF = async (o) => {
-
-
         await setOrderInvoice({
             orderId: o.orderId,
             deliveryDt: o.deliveredAt,
@@ -38,11 +38,6 @@ function Orders() {
             qty: o.quantity,
             price: o.price
         })
-
-
-
-
-
         await setPrinting(true)
         const invoiceElement = document.querySelector("#invoice");
 
@@ -91,6 +86,9 @@ function Orders() {
             <div className="orders-box-new">
 
                 {
+                    orderData == 0 ? (
+                        <div className="">No orders to display!</div>
+                    ):
                     orderData && orderData.map((o) => (
                         o.type == "Processing"
                             ? <div className="order-new">
