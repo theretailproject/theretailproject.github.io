@@ -27,6 +27,7 @@ $headFont: Quattrocento;
   cursor: pointer;
   padding: 0.2cm;
   border-radius: 25%;
+
   border: 2px solid $primarycolor;
   &:hover {
     // background-color: #e4b04734;
@@ -110,6 +111,27 @@ $headFont: Quattrocento;
 
 .menu-item-img {
   width: 0.6cm;
+}
+
+.cartDotDiv {
+  position: relative;
+  display: inline-block;
+}
+
+.cartDot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e3a533;
+  color: $primarycolor;
+  width: 14px;
+  height: 14px;
+  font-size: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .login {

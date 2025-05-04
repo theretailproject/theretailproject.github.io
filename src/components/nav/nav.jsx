@@ -31,9 +31,16 @@ import { use } from "react";
 function Nav() {
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(auth.currentUser?.uid || null);
-  const { checkoutAmt, setCheckoutAmt, userData, doingWork, setDoingWork } =
-    useUserContext();
+  const {
+    checkoutAmt,
+    cartData,
+    setCheckoutAmt,
+    userData,
+    doingWork,
+    setDoingWork,
+  } = useUserContext();
   const navigate = useNavigate();
+  // console.log(cartData.length);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -552,13 +559,18 @@ function Nav() {
                         src={wishlist}
                       />
                     </Link>
-
-                    <img
-                      onClick={openCart}
-                      className="menuk hideoii"
-                      src={ccart}
-                      title="Your Cart"
-                    />
+                    <span className="cartDotDiv">
+                      {" "}
+                      <img
+                        onClick={openCart}
+                        className="menuk hideoii"
+                        src={ccart}
+                        title="Your Cart"
+                      />
+                      <div className="cartDot">
+                        {cartData.length > 0 ? cartData.length : 0}
+                      </div>
+                    </span>
 
                     <Link className="nav-linkk" to="/profile">
                       <img
