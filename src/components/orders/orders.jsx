@@ -10,10 +10,10 @@ function Orders() {
 
     const [printing, setPrinting] = useState(false)
 
-    // const { orderData, userData } = useUserContext()
-    const { userData } = useUserContext()
+    const { orderData, userData } = useUserContext()
+    // const { userData } = useUserContext()
 
-const orderData =0;
+// const orderData =0;
 
     const [orderInvoice, setOrderInvoice] = useState({
         orderId: "",
