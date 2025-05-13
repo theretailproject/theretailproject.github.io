@@ -1087,7 +1087,7 @@ $secondarycolor: #e4af47;
 .testimonials-smallLogo {
   display: flex;
   flex-direction: row;
-  width: 3cm;
+  width: 5cm;
   padding: 0.2cm; /* Reduce padding */
   border-radius: 50%;
   cursor: pointer;
@@ -1112,7 +1112,7 @@ $secondarycolor: #e4af47;
   text-align: justify;
   padding: 0.5cm;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: $primarycolor;
   background-color: #f6b430dc;
@@ -1165,6 +1165,7 @@ $secondarycolor: #e4af47;
   border-radius: 50%;
   opacity: 0;
   padding: 0.2cm;
+
   &:hover {
     transform: scale(1.2);
     transition: 0.15s ease-in-out;
@@ -1187,7 +1188,7 @@ $secondarycolor: #e4af47;
   border-radius: 50%;
 }
 .satisfiedCustomersNumber {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   color: $secondarycolor;
 }
@@ -1417,7 +1418,21 @@ $secondarycolor: #e4af47;
 }
 
 // Responsive section
+@media screen and (max-width: 1100px) {
+  .testimonials-row2 {
+    // width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8cm;
+    // left: 0;
+  }
 
+  .testimonials-row1-col2 {
+    width: 90%;
+  }
+}
 @media screen and (max-width: 950px) {
   .slider-maincus-flex-col1 {
     width: 100vw;
@@ -1497,17 +1512,19 @@ $secondarycolor: #e4af47;
     width: 0.9cm;
   }
   .testimonials-smallLogo {
-    width: 2.5cm;
+    width: 4.5cm;
   }
   .reviewBox {
-    max-width: 85%;
+    // max-width: 85%;
     font-size: 20px;
     font-weight: 700;
   }
-
+  .clientName {
+    font-size: 18px;
+  }
   @keyframes divLeft {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(-180px);
     }
     to {
@@ -1518,7 +1535,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divRight {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(180px);
     }
     to {
@@ -1616,15 +1633,20 @@ $secondarycolor: #e4af47;
   }
 
   .testimonials-smallLogo {
-    width: 2.2cm;
+    width: 4.2cm;
   }
 
   .reviewBox {
-    max-width: 80%;
+    // max-width: 85%;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
   }
-
+  .clientName {
+    font-size: 16px;
+  }
+  .satisfiedCustomersNumber {
+    font-size: 30px;
+  }
   .transformationLogo {
     width: 0.8cm;
   }
@@ -1636,7 +1658,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divLeft {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(-160px);
     }
     to {
@@ -1647,7 +1669,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divRight {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(160px);
     }
     to {
@@ -1761,7 +1783,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divLeft {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(-80px);
     }
     to {
@@ -1772,13 +1794,25 @@ $secondarycolor: #e4af47;
 
   @keyframes divRight {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(80px);
     }
     to {
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+   .reviewBox {
+    // max-width: 85%;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .clientName {
+    font-size: 14px;
+  }
+  .satisfiedCustomersNumber {
+    font-size: 25px;
   }
 }
 
@@ -1887,7 +1921,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divLeft {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(-20px);
     }
     to {
@@ -1898,13 +1932,25 @@ $secondarycolor: #e4af47;
 
   @keyframes divRight {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(20px);
     }
     to {
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+   .reviewBox {
+    // max-width: 85%;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .clientName {
+    font-size: 14px;
+  }
+  .satisfiedCustomersNumber {
+    font-size: 22px;
   }
 }
 
@@ -2004,12 +2050,16 @@ $secondarycolor: #e4af47;
     font-size: 14px;
   }
 
-  .reviewBox {
-    max-width: 60vw;
+ .reviewBox {
+    // max-width: 85%;
     font-size: 14px;
-    font-weight: 600;
-    justify-content: left;
-    line-height: 0.6cm;
+    font-weight: 700;
+  }
+  .clientName {
+    font-size: 12px;
+  }
+  .satisfiedCustomersNumber {
+    font-size: 20px;
   }
   .transformationLogo {
     width: 0.6cm;
@@ -2021,7 +2071,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divLeft {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(-15px);
     }
     to {
@@ -2032,7 +2082,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divRight {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(15px);
     }
     to {
@@ -2135,7 +2185,7 @@ $secondarycolor: #e4af47;
 
   .reviewSliderDiv {
     display: flex !important;
-    flex-direction: column-reverse !important;
+    // flex-direction: column-reverse !important;
     justify-content: center;
     align-items: center;
     gap: 0.3cm;
@@ -2165,6 +2215,18 @@ $secondarycolor: #e4af47;
     }
   }
 
+   .reviewBox {
+    // max-width: 85%;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .clientName {
+    font-size: 12px;
+  }
+  .satisfiedCustomersNumber {
+    font-size: 18px;
+  }
+
   .testimonials-ClientLogo {
     width: 3cm;
     height: 3cm;
@@ -2179,7 +2241,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divLeft {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(-5px);
     }
     to {
@@ -2190,7 +2252,7 @@ $secondarycolor: #e4af47;
 
   @keyframes divRight {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateX(5px);
     }
     to {
