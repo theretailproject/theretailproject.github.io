@@ -67,7 +67,7 @@ function LogInNew() {
           },
           { merge: true }
         );
-        navigate("/");
+         navigate(-1)
       });
     } catch (error) {
       console.log(error);

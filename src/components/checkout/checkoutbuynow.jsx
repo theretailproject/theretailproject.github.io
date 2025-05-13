@@ -1,13 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, firestore, firebase } from "../../firebase";
 import { useUserContext } from "../../UserContext";
 import "./checkout.scss";
 import { useNavigate } from "react-router-dom";
+// import { useBlocker } from "./useBlocker";
 
-const CheckoutP = () => {
-  const { userData, doingWork, setDoingWork, cartData, setCartData } =
+const CheckoutBuyNow = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = ""; // required for Chrome to trigger alert
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  const [showConfirmOverlay, setShowConfirmOverlay] = useState(false);
+  const [pendingNavigation, setPendingNavigation] = useState(null);
+  // const navigate = useNavigate();
+
+  // useBlocker((tx) => {
+  //   setShowConfirmOverlay(true);
+  //   setPendingNavigation(() => tx);
+  // }, true);
+
+  const handleCancelBack = () => {
+    setShowConfirmOverlay(false);
+    if (pendingNavigation) {
+      pendingNavigation.retry(); // allow the navigation
+    }
+  };
+
+  const handleStay = () => {
+    setShowConfirmOverlay(false); // stay on page
+  };
+  const { userData, doingWork, setDoingWork, cartData, setCartData, buynow } =
     useUserContext();
-const navigate = useNavigate();
+  console.log(cartData);
   const updatedata = (e) => {
     const { name, value } = e.target;
     firestore
@@ -93,10 +126,10 @@ const navigate = useNavigate();
   };
 
   const proceedToPay = async (paymentId) => {
-    if (cartData) {
+    if (buynow) {
       console.log("Starting proceedToPay with Payment ID:", paymentId);
 
-      for (const cd of cartData) {
+      for (const cd of buynow) {
         const orderId = firestore
           .collection("users")
           .doc(auth.currentUser?.uid)
@@ -141,21 +174,64 @@ const navigate = useNavigate();
           await firestore
             .collection("users")
             .doc(auth.currentUser?.uid)
-            .collection("cart")
-            .doc(cd.docId)
+            .collection("buynow")
+            .doc("current")
             .delete();
           console.log("Cart item deleted for item:", cd.itemId);
         } catch (error) {
           console.error("Error processing order:", error);
         }
       }
-navigate("/orders");
+navigate("/orders")
       console.log("All orders processed.");
     }
+  };
+  const isFormValid = () => {
+    const { name, address, pincode } = userData;
+    return name && address && pincode;
+  };
+
+  const handleCancel = async () => {
+    const snapshot = await firestore
+      .collection("users")
+      .doc(auth.currentUser?.uid)
+      .collection("buynow")
+      .get();
+
+    const batch = firestore.batch();
+    snapshot.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+
+    // Optional: reset checkoutAmt if needed
+    await firestore.collection("users").doc(auth.currentUser?.uid).update({
+      checkoutAmt: 0,
+    });
+
+    navigate("/shop"); // or wherever you want to go after cancel
   };
 
   return (
     <div className="CheckoutNew">
+      {showConfirmOverlay && (
+        <div className="overlay">
+          <div className="overlay-box">
+            <p>Are you sure you want to cancel the order?</p>
+            <button
+              onClick={() => {
+                handleCancelBack();
+                handleCancel();
+              }}
+            >
+              Yes, Cancel
+            </button>
+
+            <button onClick={handleStay}>No, Stay</button>
+          </div>
+        </div>
+      )}
       <p className="checkout-h">Checkout</p>
       {userData.checkoutAmt > 0 ? (
         <div className="checkout-container">
@@ -244,12 +320,29 @@ navigate("/orders");
                 onClick={calculateTip}
                 disabled={doingWork}
               >
-                Add tip  {tip > 0 ? `- ${tip}%` : ctip > 0 ? `- ₹${ctip}` : null}
+                Add tip - {tip > 0 ? `${tip}%` : `₹ ${ctip}`}
               </button>
               <p className="tip-text">Thanks, we appreciate!</p>
             </div>
           </div>
           <div className="checkout-box">
+            <div className="personal-dets">
+              <p className="check-head">Order Details</p>
+              <div className="payment-info">
+                {buynow && buynow.length > 0
+                  ? buynow.map((order, index) => (
+                      <div key={index} className="order-row">
+                        <p className="payiname">{order.name}</p>
+                        <img
+                          src={order.thumbnail}
+                          className="orderImg"
+                          alt={order.name}
+                        />
+                      </div>
+                    ))
+                  : null}
+              </div>
+            </div>
             <div className="personal-dets">
               <p className="check-head">Payment Info</p>
               <div className="payment-info">
@@ -274,10 +367,24 @@ navigate("/orders");
                 <button
                   className="pay-button"
                   onClick={(e) => {
-                    handlePayment(e, userData.checkoutAmt + 80 + calculatedTip);
+                    if (!isFormValid()) {
+                      document.getElementById("errorDiv").innerHTML =
+                        "Please add all the details before proceeding!";
+                      return;
+                    } else {
+                      handlePayment(
+                        e,
+                        userData.checkoutAmt + 80 + calculatedTip
+                      );
+                      document.getElementById("errorDiv").innerHTML = "";
+                    }
                   }}
                 >
                   Proceed to Pay
+                </button>
+                <p className="errorLine" id="errorDiv"></p>
+                <button className="cancelBuyNow" onClick={handleCancel}>
+                  Cancel Order
                 </button>
               </div>
             </div>
@@ -290,4 +397,4 @@ navigate("/orders");
   );
 };
 
-export default CheckoutP;
+export default CheckoutBuyNow;
