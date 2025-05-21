@@ -34,7 +34,7 @@ import Refund from "./components/refund/refund.js";
 import Preserve from "./components/shop/preserve.jsx";
 import Wishlist from "./components/wishlist/wishlist.jsx";
 import { AllProducts } from "./components/shop/allproducts.jsx";
-
+import CheckoutBuyNow from './components/checkout/checkoutbuynow.jsx';
 // import Invoice from './components/invoice/invoice.jsx';
 
 function App() {
@@ -110,6 +110,8 @@ function App() {
           <Route path="/faq" element={<FAQQ />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout" element={<CheckoutP />} />
+          <Route path="/checkoutbuynow" element={<CheckoutBuyNow />} />
+
           <Route path="/orders" element={<Orders />} />
           <Route path="/shop/:category/:pid" element={<ProductPage />} />
           <Route path="/privacy-policy" element={<PrivacyT />} />

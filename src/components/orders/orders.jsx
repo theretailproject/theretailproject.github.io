@@ -94,7 +94,7 @@ function Orders() {
                             ? <div className="order-new">
                                 <div className="order-box-card">
                                     <div className="order-left-new">
-                                        <img className="oimg" src={require("./bed.png")} alt="" />
+                                        <img className="oimg" src={o.thumbnail} alt="" />
 
                                     </div>
                                     <div className="order-right">

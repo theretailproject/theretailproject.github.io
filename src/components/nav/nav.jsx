@@ -226,6 +226,9 @@ function Nav() {
   }, [currentUser]);
 
   useEffect(() => {
+    if(cart.length == 0){
+      setAmount(0);
+    }
     const total = cart.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0
@@ -503,7 +506,7 @@ function Nav() {
                 onClick={() => {
                   setCheckoutAmount(userData?.checkoutAmt || 0);
                 }}
-                disabled={doingWork || (userData?.checkoutAmt ?? 0) <= 0}
+                disabled={doingWork || (userData?.checkoutAmt) <= 0}
                 className="checkout-final"
               >
                 <p className="checout-text">Proceed to Checkout</p>
