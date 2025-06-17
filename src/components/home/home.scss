@@ -129,7 +129,7 @@ $secondarycolor: #e4af47;
   right: 0;
   position: relative; /* Add this if not already present */
   background-size: cover;
-  border: 10px solid rgba(14, 0, 0, 0.605);
+  border: 10px solid rgba(14, 0, 0, 0.597);
   overflow: hidden;
   animation: imgSliderZoom 7s ease-in-out;
   animation-fill-mode: forwards; /* Ensures the final state persists */
@@ -146,7 +146,7 @@ $secondarycolor: #e4af47;
   align-items: center;
   overflow: hidden;
   gap: 1cm;
-  background-color: rgba(0, 0, 0, 0.804); /* Adjust darkness */
+  background-color: rgba(0, 0, 0, 0.568); /* Adjust darkness */
   height: 100vh;
 }
 
@@ -154,7 +154,7 @@ $secondarycolor: #e4af47;
   position: relative;
   color: $secondarycolor;
   // border: 1px solid white;
-
+text-shadow: -2px 1px 15px rgba(0, 0, 0, 0.963);
   margin: 0cm 2vw;
   font-size: 3.5rem;
   line-height: 1.5cm;
@@ -165,6 +165,7 @@ $secondarycolor: #e4af47;
   position: relative;
   color: $secondarycolor;
   // border: 1px solid white;
+text-shadow: -2px 1px 15px rgba(0, 0, 0, 0.963);
 
   margin: 0cm 2vw;
   font-size: 5rem;
@@ -176,6 +177,8 @@ $secondarycolor: #e4af47;
   padding: 0.4cm 1.2cm;
   border-radius: 50px;
   border: none;
+  box-shadow: -2px 1px 15px rgba(0, 0, 0, 0.963);
+
   background-color: $secondarycolor;
   color: $primarycolor;
   font-size: 24px;

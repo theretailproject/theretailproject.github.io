@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, firestore, firebase } from "../../firebase";
 import { useUserContext } from "../../UserContext";
 import "./checkout.scss";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutP = () => {
+  useEffect(() => {
+    if (!sessionStorage.getItem("reloaded")) {
+      sessionStorage.setItem("reloaded", "true");
+      window.location.reload();
+    }
+  }, []);
   const { userData, doingWork, setDoingWork, cartData, setCartData } =
     useUserContext();
-const navigate = useNavigate();
+  console.log(cartData);
   const updatedata = (e) => {
     const { name, value } = e.target;
     firestore
@@ -20,10 +26,11 @@ const navigate = useNavigate();
         { merge: true }
       );
   };
-
+  const [zone, setZone] = useState("");
   const [tip, setTip] = useState(0);
   const [ctip, setCtip] = useState(""); // Make sure it's an empty string initially
   const [calculatedTip, setCalculatedTip] = useState(0);
+  const [weightInGrams, setWeightInGrams] = useState();
 
   const calculateTip = async () => {
     setDoingWork(true);
@@ -50,6 +57,148 @@ const navigate = useNavigate();
     setCtip(value);
     setTip(0); // Ensure predefined tip selection is removed when custom tip is entered
   };
+  const [shippingMode, setShippingMode] = useState("Standard"); // default
+
+  const getDeliveryZoneFromAPI = async (pincode) => {
+    const metroCities = [
+      "Delhi",
+      "Mumbai",
+      "Kolkata",
+      "Chennai",
+      "Bangaluru",
+      "Hyderabad",
+      "Ahmedabad",
+      "Pune",
+    ];
+
+    try {
+      const response = await fetch(
+        `https://api.postalpincode.in/pincode/${pincode}`
+      );
+      const data = await response.json();
+
+      if (data[0].Status === "Success") {
+        const postOffice = data[0].PostOffice[0]; // take the first post office
+        const state = postOffice.State;
+        const district = postOffice.District;
+        setZone(district + ", " + state);
+        console.log(district, state);
+        if (state === "Rajasthan") return "Rajasthan";
+        if (metroCities.includes(state) || metroCities.includes(district))
+          return "Metro";
+        return "Rest Of India";
+      } else {
+        console.warn("Invalid Pincode or no data returned");
+        return "Rest Of India"; // fallback
+      }
+    } catch (error) {
+      console.error("Error fetching zone data:", error);
+      return "Rest Of India"; // fallback
+    }
+  };
+
+  const [totalActualWeightKG, setTotalActualWeightKG] = useState(0);
+  const [totalVolumetricWeightKG, setTotalVolumetricWeightKG] = useState(0);
+  const [finalShippingWeightKG, setFinalShippingWeightKG] = useState(0);
+
+  useEffect(() => {
+    if (!cartData || cartData.length === 0) return;
+
+    let totalWeightInGrams = 0;
+    let totalActualWeightKG = 0;
+    let totalVolumetricWeightKG = 0;
+    const divisor = 5000; // Use 4000 or 6000 depending on courier policy
+
+    cartData.forEach((item) => {
+      const quantity = item.quantity || 1;
+      const weight = item.weight || 0; // grams
+      // const length = item.dimensions[0] || 1;
+      // const width = Number(item.dimensions[1]) || 1;
+      // const height = Number(item.dimensions[2]) || 1;
+      console.log("Dimensions: ", item.dimensions);
+      // Calculate actual and volumetric weight per item
+      const actualWeightKG = weight / 1000;
+      // const volumetricWeightKG = (length * width * height) / divisor;
+      const volumetricWeightKG = 10;
+      // Multiply by quantity and sum
+      totalWeightInGrams += weight * quantity;
+      totalActualWeightKG += actualWeightKG * quantity;
+      totalVolumetricWeightKG += volumetricWeightKG * quantity;
+    });
+
+    const finalShippingWeightKG = Math.max(
+      totalActualWeightKG,
+      totalVolumetricWeightKG
+    );
+
+    // Set state values
+    setWeightInGrams(totalWeightInGrams);
+    setTotalActualWeightKG(parseFloat(totalActualWeightKG.toFixed(2)));
+    setTotalVolumetricWeightKG(parseFloat(totalVolumetricWeightKG.toFixed(2)));
+    setFinalShippingWeightKG(parseFloat(finalShippingWeightKG.toFixed(2)));
+  }, [cartData]);
+
+  const calculateCourierFare = (zone, mode, weightInGrams) => {
+    let cost = 0;
+
+    if (mode === "Standard") {
+      const rateSlabs = {
+        Rajasthan: { 250: 30, 500: 40, 1000: 60, extraPerKg: 60 },
+        Metro: { 250: 45, 500: 60, 1000: 80, extraPerKg: 80 },
+        "Rest Of India": { 250: 45, 500: 60, 1000: 80, extraPerKg: 80 },
+        Satellite: { 250: 50, 500: 70, 1000: 100, extraPerKg: 100 },
+      };
+      const selected = rateSlabs[zone] || rateSlabs["Rest Of India"];
+
+      if (weightInGrams <= 250) cost = selected[250];
+      else if (weightInGrams <= 500) cost = selected[500];
+      else if (weightInGrams <= 1000) cost = selected[1000];
+      else {
+        const extraKg = Math.ceil((weightInGrams - 1000) / 1000);
+        cost = selected[1000] + extraKg * selected.extraPerKg;
+      }
+    } else if (mode === "Air") {
+      if (zone === "Rajasthan") return 0; // Air is not available in Rajasthan
+      const chargeableKg = Math.ceil(weightInGrams / 1000);
+      cost = 130 * chargeableKg;
+    } else if (mode === "Fast Track") {
+      const rateSlabs = {
+        Rajasthan: { 250: 250, 500: 250, 1000: 300, extraPer500g: 150 },
+        Metro: { 250: 300, 500: 300, 1000: 400, extraPer500g: 200 },
+        "Rest Of India": { 250: 300, 500: 300, 1000: 400, extraPer500g: 200 },
+        Satellite: { 250: 300, 500: 300, 1000: 400, extraPer500g: 200 },
+      };
+      const selected = rateSlabs[zone] || rateSlabs["Rest Of India"];
+
+      if (weightInGrams <= 250) cost = selected[250];
+      else if (weightInGrams <= 500) cost = selected[500];
+      else if (weightInGrams <= 1000) cost = selected[1000];
+      else {
+        const extraUnits = Math.ceil((weightInGrams - 1000) / 500);
+        cost = selected[1000] + extraUnits * selected.extraPer500g;
+      }
+    }
+
+    const gst = cost * 0.18;
+    const fuel = cost * 0.14;
+
+    return Math.round(cost + gst + fuel);
+  };
+
+  useEffect(() => {
+    const fetchZoneAndFare = async () => {
+      if (userData?.pincode) {
+        const zone = await getDeliveryZoneFromAPI(userData.pincode);
+        setZone(zone);
+
+        const fare = calculateCourierFare(zone, shippingMode, weightInGrams); // <-- pass mode
+        setDeliveryCharge(fare);
+      }
+    };
+    fetchZoneAndFare();
+  }, [userData.pincode, shippingMode]); // <-- add dependency
+
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
 
   const [printing, setPrinting] = useState(false);
 
@@ -149,9 +298,14 @@ const navigate = useNavigate();
           console.error("Error processing order:", error);
         }
       }
-navigate("/orders");
+
       console.log("All orders processed.");
     }
+  };
+
+  const isFormValid = () => {
+    const { name, address, pincode } = userData;
+    return name && address && pincode;
   };
 
   return (
@@ -209,9 +363,30 @@ navigate("/orders");
                 placeholder="Pincode"
                 required
               />
+              <p className="tip-text">Your delivery zone is: {zone}</p>
             </form>
 
             <div className="personal-dets">
+              <p className="check-head">Shipping Mode</p>
+              <div className="shipping-options">
+                {["Standard", "Air", "Fast Track"].map((mode) => (
+                  <label
+                    key={mode}
+                    defaultValue={"Standard"}
+                    className={`shipping-option ${
+                      shippingMode === mode ? "active" : ""
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      value={mode}
+                      checked={shippingMode === mode}
+                      onChange={(e) => setShippingMode(e.target.value)}
+                    />
+                    {mode}{" "}
+                  </label>
+                ))}
+              </div>
               <p className="check-head">Add tip</p>
               <p className="tip-text">
                 Show your support for the team at The ReTail Project
@@ -244,12 +419,31 @@ navigate("/orders");
                 onClick={calculateTip}
                 disabled={doingWork}
               >
-                Add tip  {tip > 0 ? `- ${tip}%` : ctip > 0 ? `- ₹${ctip}` : null}
+                Add tip - {tip > 0 ? `${tip}%` : `₹ ${ctip}`}
               </button>
               <p className="tip-text">Thanks, we appreciate!</p>
             </div>
           </div>
           <div className="checkout-box">
+            <div className="personal-dets">
+              <p className="check-head">Order Details</p>
+              <div className="payment-info">
+                {cartData && cartData.length > 0
+                  ? cartData.map((order, index) => (
+                      <div key={index} className="order-row">
+                        <p className="payiname">
+                          {order.name} X {order.quantity}
+                        </p>
+                        <img
+                          src={order.thumbnail}
+                          className="orderImg"
+                          alt={order.name}
+                        />
+                      </div>
+                    ))
+                  : null}
+              </div>
+            </div>
             <div className="personal-dets">
               <p className="check-head">Payment Info</p>
               <div className="payment-info">
@@ -258,8 +452,8 @@ navigate("/orders");
                   <p className="payival">₹ {userData.checkoutAmt}</p>
                 </div>
                 <div className="payi">
-                  <p className="payiname">Delivery charges</p>
-                  <p className="payival">₹ 80</p>
+                  <p className="payiname">{`Delivery charges : (${zone} + ${shippingMode})`}</p>
+                  <p className="payival">₹ {deliveryCharge}</p>
                 </div>
                 <div className="payi">
                   <p className="payiname">Tip</p>
@@ -268,17 +462,28 @@ navigate("/orders");
                 <div className="payi">
                   <p className="payiname">Total</p>
                   <p className="payival">
-                    ₹ {userData.checkoutAmt + 80 + calculatedTip}
+                    ₹ {userData.checkoutAmt + deliveryCharge + calculatedTip}
                   </p>
                 </div>
                 <button
                   className="pay-button"
                   onClick={(e) => {
-                    handlePayment(e, userData.checkoutAmt + 80 + calculatedTip);
+                    if (!isFormValid()) {
+                      document.getElementById("errorDiv").innerHTML =
+                        "Please add all the details before proceeding!";
+                      return;
+                    } else {
+                      handlePayment(
+                        e,
+                        userData.checkoutAmt + deliveryCharge + calculatedTip
+                      );
+                      document.getElementById("errorDiv").innerHTML = "";
+                    }
                   }}
                 >
                   Proceed to Pay
                 </button>
+                <p className="errorLine" id="errorDiv"></p>
               </div>
             </div>
           </div>
