@@ -35,6 +35,7 @@ import Preserve from "./components/shop/preserve.jsx";
 import Wishlist from "./components/wishlist/wishlist.jsx";
 import { AllProducts } from "./components/shop/allproducts.jsx";
 import CheckoutBuyNow from './components/checkout/checkoutbuynow.jsx';
+import ScrollToTop from "./components/scrollToTop.js";
 // import Invoice from './components/invoice/invoice.jsx';
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
       </>
       <div className="App">
         {isActive("/signup") || isActive("/signin") ? null : <Nav />}
-
+ <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProfileNew />} />
