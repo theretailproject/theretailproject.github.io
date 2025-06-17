@@ -53,7 +53,7 @@ const CheckoutBuyNow = () => {
         { merge: true }
       );
   };
-
+  const [zone, setZone] = useState("");
   const [tip, setTip] = useState(0);
   const [ctip, setCtip] = useState(""); // Make sure it's an empty string initially
   const [calculatedTip, setCalculatedTip] = useState(0);
@@ -83,6 +83,110 @@ const CheckoutBuyNow = () => {
     setCtip(value);
     setTip(0); // Ensure predefined tip selection is removed when custom tip is entered
   };
+  const [shippingMode, setShippingMode] = useState("Standard"); // default
+
+  const getDeliveryZoneFromAPI = async (pincode) => {
+    const metroCities = [
+      "Delhi",
+      "Mumbai",
+      "Kolkata",
+      "Chennai",
+      "Bangaluru",
+      "Hyderabad",
+      "Ahmedabad",
+      "Pune",
+    ];
+
+    try {
+      const response = await fetch(
+        `https://api.postalpincode.in/pincode/${pincode}`
+      );
+      const data = await response.json();
+
+      if (data[0].Status === "Success") {
+        const postOffice = data[0].PostOffice[0]; // take the first post office
+        const state = postOffice.State;
+        const district = postOffice.District;
+        setZone(district + ", " + state);
+        console.log(district, state);
+        if (state === "Rajasthan") return "Rajasthan";
+        if (metroCities.includes(state) || metroCities.includes(district))
+          return "Metro";
+        return "Rest Of India";
+      } else {
+        console.warn("Invalid Pincode or no data returned");
+        return "Rest Of India"; // fallback
+      }
+    } catch (error) {
+      console.error("Error fetching zone data:", error);
+      return "Rest Of India"; // fallback
+    }
+  };
+
+  const calculateCourierFare = (
+    zone,
+    mode = "Standard",
+    weightInGrams = 500
+  ) => {
+    let cost = 0;
+
+    if (mode === "Standard") {
+      const rateSlabs = {
+        Rajasthan: { 250: 30, 500: 40, 1000: 60, extraPerKg: 60 },
+        Metro: { 250: 45, 500: 60, 1000: 80, extraPerKg: 80 },
+        "Rest Of India": { 250: 45, 500: 60, 1000: 80, extraPerKg: 80 },
+        Satellite: { 250: 50, 500: 70, 1000: 100, extraPerKg: 100 },
+      };
+      const selected = rateSlabs[zone] || rateSlabs["Rest Of India"];
+
+      if (weightInGrams <= 250) cost = selected[250];
+      else if (weightInGrams <= 500) cost = selected[500];
+      else if (weightInGrams <= 1000) cost = selected[1000];
+      else {
+        const extraKg = Math.ceil((weightInGrams - 1000) / 1000);
+        cost = selected[1000] + extraKg * selected.extraPerKg;
+      }
+    } else if (mode === "Air") {
+      if (zone === "Rajasthan") return 0; // Air is not available in Rajasthan
+      const chargeableKg = Math.ceil(weightInGrams / 1000);
+      cost = 130 * chargeableKg;
+    } else if (mode === "Fast Track") {
+      const rateSlabs = {
+        Rajasthan: { 250: 250, 500: 250, 1000: 300, extraPer500g: 150 },
+        Metro: { 250: 300, 500: 300, 1000: 400, extraPer500g: 200 },
+        "Rest Of India": { 250: 300, 500: 300, 1000: 400, extraPer500g: 200 },
+        Satellite: { 250: 300, 500: 300, 1000: 400, extraPer500g: 200 },
+      };
+      const selected = rateSlabs[zone] || rateSlabs["Rest Of India"];
+
+      if (weightInGrams <= 250) cost = selected[250];
+      else if (weightInGrams <= 500) cost = selected[500];
+      else if (weightInGrams <= 1000) cost = selected[1000];
+      else {
+        const extraUnits = Math.ceil((weightInGrams - 1000) / 500);
+        cost = selected[1000] + extraUnits * selected.extraPer500g;
+      }
+    }
+
+    const gst = cost * 0.18;
+    const fuel = cost * 0.14;
+
+    return Math.round(cost + gst + fuel);
+  };
+
+  useEffect(() => {
+    const fetchZoneAndFare = async () => {
+      if (userData?.pincode) {
+        const zone = await getDeliveryZoneFromAPI(userData.pincode);
+        setZone(zone);
+        const fare = calculateCourierFare(zone, shippingMode); // <-- pass mode
+        setDeliveryCharge(fare);
+      }
+    };
+    fetchZoneAndFare();
+  }, [userData.pincode, shippingMode]); // <-- add dependency
+
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
 
   const [printing, setPrinting] = useState(false);
 
@@ -182,7 +286,7 @@ const CheckoutBuyNow = () => {
           console.error("Error processing order:", error);
         }
       }
-navigate("/orders")
+      navigate("/orders");
       console.log("All orders processed.");
     }
   };
@@ -285,9 +389,31 @@ navigate("/orders")
                 placeholder="Pincode"
                 required
               />
+              <p className="tip-text">Your delivery zone is: {zone}</p>
             </form>
 
             <div className="personal-dets">
+              <p className="check-head">Shipping Mode</p>
+              <div className="shipping-options">
+                {["Standard", "Air", "Fast Track"].map((mode) => (
+                  <label
+                    key={mode}
+                    defaultValue={"Standard"}
+                    className={`shipping-option ${
+                      shippingMode === mode ? "active" : ""
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      value={mode}
+                      checked={shippingMode === mode}
+                      required
+                      onChange={(e) => setShippingMode(e.target.value)}
+                    />
+                    {mode}{" "}
+                  </label>
+                ))}
+              </div>
               <p className="check-head">Add tip</p>
               <p className="tip-text">
                 Show your support for the team at The ReTail Project
@@ -332,7 +458,9 @@ navigate("/orders")
                 {buynow && buynow.length > 0
                   ? buynow.map((order, index) => (
                       <div key={index} className="order-row">
-                        <p className="payiname">{order.name}</p>
+                        <p className="payiname">
+                          {order.name} X {order.qu}
+                        </p>
                         <img
                           src={order.thumbnail}
                           className="orderImg"
@@ -351,8 +479,8 @@ navigate("/orders")
                   <p className="payival">₹ {userData.checkoutAmt}</p>
                 </div>
                 <div className="payi">
-                  <p className="payiname">Delivery charges</p>
-                  <p className="payival">₹ 80</p>
+                  <p className="payiname">{`Delivery charges : (${zone} + ${shippingMode})`}</p>
+                  <p className="payival">₹ {deliveryCharge}</p>
                 </div>
                 <div className="payi">
                   <p className="payiname">Tip</p>
@@ -361,9 +489,10 @@ navigate("/orders")
                 <div className="payi">
                   <p className="payiname">Total</p>
                   <p className="payival">
-                    ₹ {userData.checkoutAmt + 80 + calculatedTip}
+                    ₹ {userData.checkoutAmt + deliveryCharge + calculatedTip}
                   </p>
                 </div>
+                <p className="errorLine" style={{textAlign:"left", fontSize:"10px"}}>* Inclusive of delivery charges, gst and other charges</p>
                 <button
                   className="pay-button"
                   onClick={(e) => {
@@ -374,7 +503,7 @@ navigate("/orders")
                     } else {
                       handlePayment(
                         e,
-                        userData.checkoutAmt + 80 + calculatedTip
+                        userData.checkoutAmt + deliveryCharge + calculatedTip
                       );
                       document.getElementById("errorDiv").innerHTML = "";
                     }
@@ -383,6 +512,8 @@ navigate("/orders")
                   Proceed to Pay
                 </button>
                 <p className="errorLine" id="errorDiv"></p>
+                
+
                 <button className="cancelBuyNow" onClick={handleCancel}>
                   Cancel Order
                 </button>
