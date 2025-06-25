@@ -178,7 +178,7 @@ $secondarycolor: #e4af47;
   // border-radius: 50px;
   border: none;
   box-shadow: -2px 1px 15px rgba(0, 0, 0, 0.963);
-font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   background-color: $secondarycolor;
   color: $primarycolor;
   font-size: 20px;
@@ -432,8 +432,8 @@ font-family: 'Times New Roman', Times, serif;
 }
 
 .collection-box {
-  margin:  3cm 0;
-  padding: 0cm 5vw;
+  margin: 3cm 0;
+  padding: 0cm;
 }
 
 .OcollectionsM {
@@ -535,9 +535,15 @@ font-family: 'Times New Roman', Times, serif;
   padding: 0.1cm 0.4cm;
   border-radius: 1000px;
 }
-
+.center-align {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1cm;
+  justify-content: center;
+  align-items: center;
+}
 .collections {
-  padding:0;
+  padding: 0;
   margin-top: 1cm;
   display: flex;
   flex-direction: row;
@@ -598,8 +604,19 @@ font-family: 'Times New Roman', Times, serif;
   font-weight: bolder;
   letter-spacing: 0.1cm;
   font-family: Saira Stencil One;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
+.coltext-small {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.1cm;
+  font-family: Saira Stencil One;
+  display: none;
+}
 .wear {
   position: relative;
   z-index: 1;
@@ -1513,19 +1530,20 @@ font-family: 'Times New Roman', Times, serif;
   }
 
   .collection-box {
-    margin-top: 4.5cm;
+    margin-top: 3cm;
+    padding: 0;
   }
 
   .collections {
-    gap: 0.8cm;
+    gap: 0.4cm;
   }
   .collection {
-    padding: 1cm;
-    width: 5cm;
-    height: 5cm;
+    padding: 0.6cm;
+    width: 3cm;
+    height: 3cm;
   }
   .coltext {
-    font-size: 40px;
+    font-size: 24px;
   }
 
   .slick-slider-custom {
@@ -1633,23 +1651,29 @@ font-family: 'Times New Roman', Times, serif;
     margin-top: 0.2cm;
     transition: 0.2s;
   }
-
+  .center-align {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1cm;
+    justify-content: center;
+    align-items: center;
+  }
   .collection-box {
-    margin-top: 4cm;
+    margin-top: 3cm;
+    padding: 0;
   }
 
   .collections {
-    gap: 0.5cm;
+    gap: 0.4cm;
   }
   .collection {
-    padding: 0.8cm;
-    width: 4.5cm;
-    height: 4.5cm;
+    padding: 0.5cm;
+    width: 2.5cm;
+    height: 2.5cm;
   }
   .coltext {
-    font-size: 38px;
+    font-size: 20px;
   }
-
   .slick-slider-custom {
     width: 19cm;
   }
@@ -1710,7 +1734,25 @@ font-family: 'Times New Roman', Times, serif;
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .coltext {
+    display: none;
+  }
+  .coltext-small {
+    display: flex;
+    text-align: center;
+  }
 
+  .wear,
+  .walk,
+  .sleep,
+  .preserve,
+  .coplay {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
 @media screen and (max-width: 750px) and (min-width: 650px) {
   .slider-maincus {
     height: 80vh;
@@ -1760,20 +1802,20 @@ font-family: 'Times New Roman', Times, serif;
     font-size: 15px;
   }
   .collection-box {
-    margin-top: 4cm;
+    margin-top: 3cm;
+    padding: 0;
   }
 
   .collections {
-    gap: 0.5cm;
+    gap: 0.4cm;
   }
   .collection {
-    padding: 0.6cm;
-    min-width: 4.3cm;
-    width: fit-content;
-    height: 4.3cm;
+    padding: 0.2cm;
+    width: 2cm;
+    height: 2cm;
   }
   .coltext {
-    font-size: 35px;
+    font-size: 18px;
   }
 
   .read-more {
@@ -1904,19 +1946,20 @@ font-family: 'Times New Roman', Times, serif;
   }
 
   .collection-box {
-    margin-top: 3.5cm;
+    margin-top: 3cm;
+    padding: 0;
   }
 
   .collections {
-    gap: 0.5cm;
+    gap: 0.4cm;
   }
   .collection {
-    padding: 0.6cm;
-    width: 4cm;
-    height: 4cm;
+    padding: 0.2cm;
+    width: 2cm;
+    height: 2cm;
   }
-  .coltext {
-    font-size: 32px;
+  .coltext-small {
+    font-size: 18px;
   }
 
   .slick-slider-custom {
@@ -2042,20 +2085,22 @@ font-family: 'Times New Roman', Times, serif;
     transition: 0.2s;
   }
 
-  .collection-box {
-    margin-top: 3.2cm;
+    .collection-box {
+    margin-top: 3cm;
+    padding: 0;
+    margin-bottom: 0cm;
   }
 
   .collections {
-    gap: 0.5cm;
+    gap: 0.4cm;
   }
   .collection {
-    padding: 0.5cm;
-    width: 3.8cm;
-    height: 3.8cm;
+    padding: 0.2cm;
+    width: 2cm;
+    height: 2cm;
   }
-  .coltext {
-    font-size: 28px;
+  .coltext-small {
+    font-size: 16px;
   }
 
   .slick-slider-custom {
@@ -2181,22 +2226,23 @@ font-family: 'Times New Roman', Times, serif;
     transition: 0.2s;
   }
 
-  .collection-box {
+    .collection-box {
     margin-top: 3cm;
+    padding: 0;
+    margin-bottom: 0cm;
   }
 
   .collections {
-    gap: 0.5cm;
+    gap: 0.4cm;
   }
   .collection {
-    padding: 0.5cm;
-    width: 3.5cm;
-    height: 3.5cm;
+    padding: 0.2cm;
+    width: 2cm;
+    height: 2cm;
   }
-  .coltext {
-    font-size: 24px;
+  .coltext-small {
+    font-size: 16px;
   }
-
   .slick-slider-custom {
     width: 10cm;
     border: 5px solid $primarycolor;

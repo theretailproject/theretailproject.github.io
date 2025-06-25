@@ -383,42 +383,60 @@ function Home() {
       <div className="Hero">
         <div className="hero-lower">
           {/* featured-products-box - home-division-4 */}
-            <div className="featured-products-box">
-              <div className="home-main-head">Our Bestsellers</div>
-              <div className="featured-products">
-                <Productcard />
-              </div>
+          <div className="featured-products-box">
+            <div className="home-main-head">Our Bestsellers</div>
+            <div className="featured-products">
+              <Productcard />
             </div>
+          </div>
           <div className="home-main">
-          
-
             {/* collection box - home-division-4 */}
             <div className="collection-box">
               <p className="home-main-head">Our Collections</p>
               <div className="collections" ref={collectionUp}>
                 <Link to="/shop/wear">
-                  <div className="collection wear">
-                    <p className="coltext">WEAR</p>
+                  <div className="center-align">
+                    <div className="collection wear">
+                      <p className="coltext">WEAR</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">WEAR</p>
                   </div>
                 </Link>
                 <Link to="/shop/walk">
-                  <div className="collection walk">
-                    <p className="coltext ">WALK</p>
+                  <div className="center-align">
+                    <div className="collection walk">
+                      <p className="coltext">WALK</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">WALK</p>
                   </div>
                 </Link>
                 <Link to="/shop/play">
-                  <div className="collection coplay">
-                    <p className="coltext ">PLAY</p>
+                 <div className="center-align">
+                    <div className="collection coplay">
+                      <p className="coltext">PLAY</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">PLAY</p>
                   </div>
                 </Link>
                 <Link to="/shop/sleep">
-                  <div className="collection sleep">
-                    <p className="coltext ">SLEEP</p>
+                  <div className="center-align">
+                    <div className="collection sleep">
+                      <p className="coltext">SLEEP</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">SLEEP</p>
                   </div>
                 </Link>
                 <Link to="/shop/preserve">
-                  <div className="collection preserve">
-                    <p className="coltext ">PRESERVE</p>
+                 <div className="center-align">
+                    <div className="collection preserve">
+                      <p className="coltext">PRESERVE</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">PRESERVE</p>
                   </div>
                 </Link>
               </div>
@@ -448,10 +466,8 @@ function Home() {
                       Explore more...
                     </button>
                   </Link>
-                   <Link to="/about-us">
-                    <button className="read-more yellowBorder ">
-                      Know Us
-                    </button>
+                  <Link to="/about-us">
+                    <button className="read-more yellowBorder ">Know Us</button>
                   </Link>
                 </div>
                 <div ref={home2right} className="home-main-div-left hmltt">
