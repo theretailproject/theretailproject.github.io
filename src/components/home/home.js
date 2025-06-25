@@ -382,14 +382,15 @@ function Home() {
       {/* rest of the homepage */}
       <div className="Hero">
         <div className="hero-lower">
-          <div className="home-main">
-            {/* featured-products-box - home-division-4 */}
+          {/* featured-products-box - home-division-4 */}
             <div className="featured-products-box">
               <div className="home-main-head">Our Bestsellers</div>
               <div className="featured-products">
                 <Productcard />
               </div>
             </div>
+          <div className="home-main">
+          
 
             {/* collection box - home-division-4 */}
             <div className="collection-box">
@@ -422,30 +423,6 @@ function Home() {
                 </Link>
               </div>
             </div>
-            {/* <div className="home-main-div">
-              <div ref={home1left} className="home-main-div-left">
-                <img className="main-div-back hbone" src={backTwo} />
-              </div>
-              <div ref={home1right} className="home-main-div-right">
-                <p className="home-main-head">What We Do ?</p>
-                <p className="main-text">
-                  The ReTail Project is all about giving pet parents the
-                  opportunity to breathe new life into their pre-owned items by
-                  transforming them into customized, eco-friendly products for
-                  their pets.
-                  <br />
-                  <br />
-                  We take materials that would otherwise go unused and upcycle
-                  them into unique, tailor-made pet products. This way, we not
-                  only help reduce waste but also create a stronger connection
-                  with our community, as each product is personal
-                  and sustainable.
-                </p>
-                <Link to="/how-to-recycle">
-                  <button className="read-more">Read more</button>
-                </Link>
-              </div>
-            </div> */}
 
             {/* home-division-3 */}
 
@@ -480,6 +457,31 @@ function Home() {
                 </div>
               </div>
             </div>
+
+            {/* <div className="home-main-div">
+              <div ref={home1left} className="home-main-div-left">
+                <img className="main-div-back hbone" src={backTwo} />
+              </div>
+              <div ref={home1right} className="home-main-div-right">
+                <p className="home-main-head">What We Do ?</p>
+                <p className="main-text">
+                  The ReTail Project is all about giving pet parents the
+                  opportunity to breathe new life into their pre-owned items by
+                  transforming them into customized, eco-friendly products for
+                  their pets.
+                  <br />
+                  <br />
+                  We take materials that would otherwise go unused and upcycle
+                  them into unique, tailor-made pet products. This way, we not
+                  only help reduce waste but also create a stronger connection
+                  with our community, as each product is personal
+                  and sustainable.
+                </p>
+                <Link to="/how-to-recycle">
+                  <button className="read-more">Read more</button>
+                </Link>
+              </div>
+            </div> */}
           </div>
 
           {/* <div className="home-features">

@@ -196,7 +196,7 @@ $secondarycolor: #e4af47;
 }
 
 .Hero {
-  padding: 0cm 0cm 3cm 0cm;
+  padding: 0cm 0cm 0cm 0cm;
   opacity: 0;
 }
 
@@ -204,8 +204,9 @@ $secondarycolor: #e4af47;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5cm;
-  padding: 3cm 5vw 0cm 5vw;
+  gap: 3cm;
+  // margin-top: -5cm;
+  padding: 0cm 5vw 0cm 5vw;
 }
 
 .home-main-div {
@@ -431,7 +432,7 @@ $secondarycolor: #e4af47;
 }
 
 .collection-box {
-  margin-top: 5cm;
+  margin:  3cm 0;
   padding: 0cm 5vw;
 }
 
