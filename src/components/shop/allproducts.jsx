@@ -8,12 +8,22 @@ import cartH from "./cartHollow.png";
 import cartF from "./cartFilled.png";
 import noProduct from "./noProducts.png";
 import { useState } from "react";
-
+import Popup from "../popup/popup";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore, firebase } from "../../firebase";
+// import Popup from "../popup/popup";
 export const AllProducts = () => {
-  const { addToCart, doingWork, addToWishlist, delFromWishlist, delFromCart } =
-    useUserContext();
+  const {
+    addToCart,
+    doingWork,
+    addToWishlist,
+    delFromWishlist,
+    delFromCart,
+    productAdded,
+    setProductAdded,
+    wishAdded,
+    setWishAdded,
+  } = useUserContext();
   const wishlistRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
@@ -64,7 +74,7 @@ export const AllProducts = () => {
       },
     }));
   };
-
+  let msg;
   const handleAction = (product, callback) => {
     const options = selectedOptions[product.itemId] || {};
     const { color, size } = options;
@@ -133,6 +143,18 @@ export const AllProducts = () => {
               </div>
             </div>
           </div>
+          {productAdded && (
+            <Popup
+              message={`Product added to Cart!`}
+              onClose={() => setProductAdded(false)}
+            />
+          )}
+          {wishAdded && (
+            <Popup
+              message={`Product added to Wishlist!`}
+              onClose={() => setWishAdded(false)}
+            />
+          )}
           {products.map((p) => (
             <div className="ProductCard" key={p.itemId}>
               <div className="imgCont">

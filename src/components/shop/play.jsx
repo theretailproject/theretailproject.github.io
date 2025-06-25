@@ -11,6 +11,8 @@ import cartF from "./cartFilled.png";
 import noProduct from "./noProducts.png";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { auth, firestore, firebase } from "../../firebase";
+import Popup from "../popup/popup";
+
 export const Play = () => {
   const {
     userData,
@@ -18,7 +20,10 @@ export const Play = () => {
     doingWork,
     addToWishlist,
     delFromWishlist,
-    delFromCart,
+    delFromCart,  productAdded,
+    setProductAdded,
+    wishAdded,
+    setWishAdded,
   } = useUserContext();
   const playProducts = products.filter((p) => p.category === "play");
   const [error, setError] = useState("");
@@ -143,6 +148,18 @@ export const Play = () => {
               </div>
             </div>
           </div>
+              {productAdded && (
+            <Popup
+              message={`Product added to Cart!`}
+              onClose={() => setProductAdded(false)}
+            />
+          )}
+          {wishAdded && (
+            <Popup
+              message={`Product added to Wishlist!`}
+              onClose={() => setWishAdded(false)}
+            />
+          )}
           {playProducts.map((p) => (
             <div className="ProductCard" key={p.itemId}>
               <div className="imgCont">
