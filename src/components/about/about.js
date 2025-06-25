@@ -17,6 +17,7 @@ function About() {
         entries.forEach((entry) => {
           const target = entry.target;
 
+
           if (entry.isIntersecting) {
             if (
               target.classList.contains("about-zero-left") ||
@@ -33,9 +34,11 @@ function About() {
           } else {
             target.classList.remove("active-left", "active-right");
           }
+
+          
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.25 }
     );
 
     const elements = [

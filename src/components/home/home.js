@@ -27,7 +27,7 @@ import Client2 from "./Client2.jpeg";
 import Client3 from "./Client3.jpeg";
 import { useRef } from "react";
 import Productcard from "../product-card/Productcard";
-
+ import Popup from "../popup/popup";
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -134,7 +134,7 @@ function Home() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.25 }
     );
 
     const elements = [
@@ -186,7 +186,7 @@ function Home() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
 
     const colBoxes = collectionUp.current?.querySelectorAll(".collection");
