@@ -7,15 +7,24 @@
   transform: translate(-50%, -20%);
   width: 25vw;
   height: 150px;
-  z-index: 9999;
+  z-index: 10;
   pointer-events: none;
   
+  #tsparticles{
+    z-index: 9999;
+  }
 
 //   #tsparticles{
 //     width:100vw;
 //   }
 }
 
+.image-background{
+  width:0.7cm;
+  padding:0.2cm;
+  background-color: #fffffff7;
+  border-radius:25%;
+}
 .popup-box {
   position: absolute;
   top: 0;
@@ -32,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   pointer-events: all;
   animation: popupFadeIn 0.3s ease-out;
 }
@@ -59,5 +69,22 @@
   to {
     opacity: 1;
     // transform: translate(-50%, -20%);
+  }
+}
+
+@media only screen and (max-width:800px) {
+  .popup-container{
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width:400px) {
+  .popup-container{
+    width: 70vw;
+    left: 45vw;
+  }
+
+  .popup-box{
+    font-size: 14px;
   }
 }

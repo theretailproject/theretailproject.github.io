@@ -593,6 +593,14 @@ $secondarycolor: #e4af47;
 
     .coltext {
       color: $secondarycolor;
+      text-shadow: 2px 2px 3px #171717;
+      text-decoration: underline dotted;
+    }
+
+    .coltext-small{
+            color: $secondarycolor;
+
+      text-shadow: 2px 2px 3px #171717;
     }
   }
 }
@@ -608,6 +616,7 @@ $secondarycolor: #e4af47;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  text-shadow: 2px 2px 3px #f4fff3d3;
 }
 
 .coltext-small {
@@ -616,6 +625,7 @@ $secondarycolor: #e4af47;
   letter-spacing: 0.1cm;
   font-family: Saira Stencil One;
   display: none;
+  text-shadow: 2px 2px 3px #f4fff3d3;
 }
 .wear {
   position: relative;

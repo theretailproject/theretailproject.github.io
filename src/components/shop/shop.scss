@@ -71,7 +71,7 @@ $secondarycolor: #e4af47;
   }
 }
 .Shop {
-  padding: 1cm 5vw;
+  // padding: 0 5vw 1cm 5vw;
 }
 
 .nproducts {
@@ -92,43 +92,104 @@ $secondarycolor: #e4af47;
 }
 
 .shop-cats-box {
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 1cm;
-  gap: 0.5cm;
+  padding: 0.2cm 0;
+  gap: 0.1cm;
+  border: thin solid $primarycolor;
+  border-top: thin solid white;
+  background-color: white;
 }
 
 .shop-cat-name {
-  padding: 0.25cm 1.1cm;
-  border: 2px solid $primarycolor;
-  background-color: #e7eeea;
+  padding: 0.2cm 0.8cm;
   color: #31443a;
-  font-weight: bold;
   font-size: 16px;
-  border-radius: 5px;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-
   &:hover {
     background-color: $primarycolor;
     color: #e4af47;
-    transform: scale(1.05);
   }
 }
 
 .activeCat {
   background-color: $primarycolor;
   color: $secondarycolor;
-  transform: scale(1.05);
 }
 
-button:disabled {
-  opacity: 0.2;
-}
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
 
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 99;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    min-width: 400px;
+
+    .dropdown-content-col {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+
+      .dropdown-content-col1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        min-width: 100px;
+        border-right: thin solid $primarycolor;
+        .dropdown-heading {
+          font-weight: bold;
+          font-size: 14px;
+          color: #31443a;
+          margin-bottom: 0.4rem;
+          cursor: pointer;
+          padding-right: 0.2cm;
+          &:hover {
+            color: $secondarycolor;
+          }
+        }
+      }
+
+      .dropdown-content-col2 {
+        display: flex;
+        flex-direction: column;
+        min-width: 100px;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        a {
+          font-size: 13.5px;
+          color: #293c2e;
+          text-decoration: none;
+          padding: 0.1rem 0;
+
+          &:hover {
+            color: $secondarycolor;
+          }
+        }
+      }
+    }
+  }
+
+  // 👇 Show dropdown on hover
+  &:hover .dropdown-content {
+    display: block;
+  }
+}
 .ProductCardRow {
+  padding: 1cm 5vw;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -438,9 +499,12 @@ button:disabled {
     font-size: 14px;
   }
 
+  .shop-cats-box {
+    padding: 0.2cm 0;
+  }
+
   .shop-cat-name {
-    padding: 0.2cm 1cm;
-    font-size: 15px;
+    padding: 0.2cm 0.6cm;
   }
 
   .ProductCardRow {
@@ -470,12 +534,13 @@ button:disabled {
     font-size: 14px;
   }
   .shop-cats-box {
-    margin-bottom: 0.9cm;
-    gap: 0.45cm;
+    padding: 0.2cm 0;
+    // gap:0.2cm
   }
+
   .shop-cat-name {
-    padding: 0.2cm 0.9cm;
-    font-size: 15px;
+    padding: 0.2cm;
+    font-size: 14px;
   }
 
   .ProductCardRow {
@@ -504,13 +569,15 @@ button:disabled {
     font-size: 14px;
   }
   .shop-cats-box {
-    margin-bottom: 0.8cm;
-    gap: 0.4cm;
+    padding: 0.2cm 0;
+    // gap:0.2cm
   }
+
   .shop-cat-name {
-    padding: 0.2cm 0.8cm;
+    padding: 0.2cm 0.4cm;
     font-size: 14px;
   }
+
   .ProductCardRow {
     gap: 0.4cm;
   }
@@ -546,12 +613,12 @@ button:disabled {
     padding: 0.1cm 0.1cm;
   }
   .shop-cats-box {
-    margin-bottom: 0.75cm;
-    gap: 0.38cm;
+    padding: 0.2cm 0;
   }
+
   .shop-cat-name {
-    padding: 0.17cm 0.7cm;
-    font-size: 13px;
+    padding: 0.2cm 0.4cm;
+    font-size: 14px;
   }
 
   .imgCont {
@@ -588,13 +655,14 @@ button:disabled {
     padding: 0.1cm;
   }
   .shop-cats-box {
-    margin-bottom: 0.7cm;
-    gap: 0.35cm;
+    padding: 0.2cm 0;
   }
+
   .shop-cat-name {
-    padding: 0.15cm 0.65cm;
+    padding: 0.2cm;
     font-size: 12px;
   }
+
   .imgCont {
     width: 100%;
   }
@@ -606,7 +674,7 @@ button:disabled {
 
   .productPrice {
     font-size: 11px;
-    text-align: center;
+    text-align: left;
   }
   .overlayProdCard {
     width: 0.8cm;
@@ -616,6 +684,17 @@ button:disabled {
   }
 }
 
+@media screen and (max-width: 420px) {
+  .shop-cats-box {
+    padding: 0.1cm 0;
+  }
+
+  .shop-cat-name {
+    padding: 0.15cm;
+    font-size: 11px;
+    font-weight: bold;
+  }
+}
 // @media screen and (max-width: 400px) {
 //   .ProductCard {
 //     padding: 0.1cm 0.1cm;
