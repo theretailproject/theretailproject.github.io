@@ -174,14 +174,14 @@ $secondarycolor: #e4af47;
 }
 
 .main-slider-buttoncus {
-  padding: 0.4cm 1.2cm;
-  border-radius: 50px;
+  padding: 0.4cm 0.8cm;
+  // border-radius: 50px;
   border: none;
   box-shadow: -2px 1px 15px rgba(0, 0, 0, 0.963);
-
+font-family: 'Times New Roman', Times, serif;
   background-color: $secondarycolor;
   color: $primarycolor;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 650;
   cursor: url("./pawb.cur") 12 12 auto;
   cursor: pointer;

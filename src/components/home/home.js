@@ -276,7 +276,7 @@ function Home() {
       title2: "Tailoring",
     },
     {
-      img: require("./home-two.JPG"),
+      img: require("./home-two.jpg"),
       title1: "Preserve",
       title2: "Memories",
     },
@@ -366,7 +366,7 @@ function Home() {
                 <p className="main-slider-captioncus1">{m.title1}</p>
                 <p className="main-slider-captioncus2">{m.title2}</p>
                 <Link to="/shop">
-                  <button className="main-slider-buttoncus">Explore Now</button>
+                  <button className="main-slider-buttoncus">Shop Now</button>
                 </Link>
               </div>
               <img
@@ -445,7 +445,12 @@ function Home() {
                   </p>
                   <Link to="/how-to-recycle">
                     <button className="read-more yellowBorder ">
-                      Read more
+                      Explore more...
+                    </button>
+                  </Link>
+                   <Link to="/about-us">
+                    <button className="read-more yellowBorder ">
+                      Know Us
                     </button>
                   </Link>
                 </div>
