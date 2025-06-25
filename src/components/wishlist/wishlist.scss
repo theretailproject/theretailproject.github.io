@@ -48,7 +48,6 @@ $headFont: Quattrocento;
   max-width: 18vw;
 }
 
-
 .ListData {
   // border-top: thin solid $primarycolor;
   justify-content: center;
@@ -157,8 +156,8 @@ $headFont: Quattrocento;
 .WishlistImg {
   width: 4cm;
   height: 100%;
-  border-radius: 5px;
-  // border: thin solid $primarycolor;
+  border-radius: 10px;
+  border:thin solid $primarycolor;
 }
 .WishlistInfo {
   width: 100%;
@@ -288,17 +287,8 @@ $headFont: Quattrocento;
 
   .WishlistCards {
     display: flex;
-    width:90%;
   }
-  .no-products {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: whitesmoke;
-    padding: 0.2cm;
-  }
+
   .AddToCartBtn {
     display: flex;
   }
@@ -352,13 +342,13 @@ $headFont: Quattrocento;
 
 @media screen and (max-width: 450px) {
   .WishlistCard {
-    width: 80%;
+    width:80%;
     display: flex;
     flex-direction: column;
     gap: 0.2cm;
   }
 
-  .alignCenter {
+  .alignCenter{
     align-self: center;
   }
 }
