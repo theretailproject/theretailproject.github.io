@@ -27,7 +27,7 @@ import Client2 from "./Client2.jpeg";
 import Client3 from "./Client3.jpeg";
 import { useRef } from "react";
 import Productcard from "../product-card/Productcard";
-
+ import Popup from "../popup/popup";
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -134,7 +134,7 @@ function Home() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.25 }
     );
 
     const elements = [
@@ -186,7 +186,7 @@ function Home() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
 
     const colBoxes = collectionUp.current?.querySelectorAll(".collection");
@@ -276,7 +276,7 @@ function Home() {
       title2: "Tailoring",
     },
     {
-      img: require("./home-two.JPG"),
+      img: require("./home-two.jpg"),
       title1: "Preserve",
       title2: "Memories",
     },
@@ -366,7 +366,7 @@ function Home() {
                 <p className="main-slider-captioncus1">{m.title1}</p>
                 <p className="main-slider-captioncus2">{m.title2}</p>
                 <Link to="/shop">
-                  <button className="main-slider-buttoncus">Explore Now</button>
+                  <button className="main-slider-buttoncus">Shop Now</button>
                 </Link>
               </div>
               <img
@@ -382,31 +382,68 @@ function Home() {
       {/* rest of the homepage */}
       <div className="Hero">
         <div className="hero-lower">
+          {/* featured-products-box - home-division-4 */}
+          <div className="featured-products-box">
+            <div className="home-main-head">Our Bestsellers</div>
+            <div className="featured-products">
+              <Productcard />
+            </div>
+          </div>
           <div className="home-main">
-            {/* home-division-2 */}
-            <div className="home-main-div">
-              <div ref={home1left} className="home-main-div-left">
-                <img className="main-div-back hbone" src={backOne} />
-              </div>
-              <div ref={home1right} className="home-main-div-right">
-                <p className="home-main-head">Who We Are ?</p>
-                <p className="main-text">
-                  The ReTail Project is a conscious pet brand that customizes
-                  pet clothing, accessories, bedding and toys offering
-                  eco-friendly, personalized designs.
-                  <br />
-                  <br />
-                  With our own product range and a focus on upcycling, we bring
-                  sustainability and style together for pet parents who care
-                  about the planet.
-                </p>
-                <Link to="/about-us">
-                  <button className="read-more">Read more</button>
+            {/* collection box - home-division-4 */}
+            <div className="collection-box">
+              <p className="home-main-head">Our Collections</p>
+              <div className="collections" ref={collectionUp}>
+                <Link to="/shop/wear">
+                  <div className="center-align">
+                    <div className="collection wear">
+                      <p className="coltext">WEAR</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">WEAR</p>
+                  </div>
+                </Link>
+                <Link to="/shop/walk">
+                  <div className="center-align">
+                    <div className="collection walk">
+                      <p className="coltext">WALK</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">WALK</p>
+                  </div>
+                </Link>
+                <Link to="/shop/play">
+                 <div className="center-align">
+                    <div className="collection coplay">
+                      <p className="coltext">PLAY</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">PLAY</p>
+                  </div>
+                </Link>
+                <Link to="/shop/sleep">
+                  <div className="center-align">
+                    <div className="collection sleep">
+                      <p className="coltext">SLEEP</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">SLEEP</p>
+                  </div>
+                </Link>
+                <Link to="/shop/preserve">
+                 <div className="center-align">
+                    <div className="collection preserve">
+                      <p className="coltext">PRESERVE</p>
+                      {/* <p className="coltext-small">WEAR</p> */}
+                    </div>
+                    <p className="coltext-small">PRESERVE</p>
+                  </div>
                 </Link>
               </div>
             </div>
 
             {/* home-division-3 */}
+
             <div className="htwoow">
               <div className="home-main-div htwoowContent">
                 <div ref={home2left} className="home-main-div-right ">
@@ -426,8 +463,11 @@ function Home() {
                   </p>
                   <Link to="/how-to-recycle">
                     <button className="read-more yellowBorder ">
-                      Read more
+                      Explore more...
                     </button>
+                  </Link>
+                  <Link to="/about-us">
+                    <button className="read-more yellowBorder ">Know Us</button>
                   </Link>
                 </div>
                 <div ref={home2right} className="home-main-div-left hmltt">
@@ -438,6 +478,31 @@ function Home() {
                 </div>
               </div>
             </div>
+
+            {/* <div className="home-main-div">
+              <div ref={home1left} className="home-main-div-left">
+                <img className="main-div-back hbone" src={backTwo} />
+              </div>
+              <div ref={home1right} className="home-main-div-right">
+                <p className="home-main-head">What We Do ?</p>
+                <p className="main-text">
+                  The ReTail Project is all about giving pet parents the
+                  opportunity to breathe new life into their pre-owned items by
+                  transforming them into customized, eco-friendly products for
+                  their pets.
+                  <br />
+                  <br />
+                  We take materials that would otherwise go unused and upcycle
+                  them into unique, tailor-made pet products. This way, we not
+                  only help reduce waste but also create a stronger connection
+                  with our community, as each product is personal
+                  and sustainable.
+                </p>
+                <Link to="/how-to-recycle">
+                  <button className="read-more">Read more</button>
+                </Link>
+              </div>
+            </div> */}
           </div>
 
           {/* <div className="home-features">
@@ -482,37 +547,6 @@ function Home() {
 
 
                     </div> */}
-          {/* collection box - home-division-4 */}
-          <div className="collection-box">
-            <p className="home-main-head">Our Collections</p>
-            <div className="collections" ref={collectionUp}>
-              <Link to="/shop/wear">
-                <div className="collection wear">
-                  <p className="coltext">WEAR</p>
-                </div>
-              </Link>
-              <Link to="/shop/walk">
-                <div className="collection walk">
-                  <p className="coltext ">WALK</p>
-                </div>
-              </Link>
-              <Link to="/shop/play">
-                <div className="collection coplay">
-                  <p className="coltext ">PLAY</p>
-                </div>
-              </Link>
-              <Link to="/shop/sleep">
-                <div className="collection sleep">
-                  <p className="coltext ">SLEEP</p>
-                </div>
-              </Link>
-              <Link to="/shop/preserve">
-                <div className="collection sleep">
-                  <p className="coltext ">PRESERVE</p>
-                </div>
-              </Link>
-            </div>
-          </div>
 
           {/* transformations - home-division-4 */}
           <div className="transformations">
@@ -545,14 +579,6 @@ function Home() {
                 </div>
               ))}
             </Slider>
-          </div>
-
-          {/* featured-products-box - home-division-4 */}
-          <div className="featured-products-box">
-            <div className="home-main-head">Our Bestsellers</div>
-            <div className="featured-products">
-              <Productcard />
-            </div>
           </div>
 
           {/* our-testimonials-box - home-division-4 */}

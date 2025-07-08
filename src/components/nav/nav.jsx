@@ -34,6 +34,7 @@ function Nav() {
   const {
     checkoutAmt,
     cartData,
+    wishData,
     setCheckoutAmt,
     userData,
     doingWork,
@@ -226,7 +227,7 @@ function Nav() {
   }, [currentUser]);
 
   useEffect(() => {
-    if(cart.length == 0){
+    if (cart.length == 0) {
       setAmount(0);
     }
     const total = cart.reduce(
@@ -502,18 +503,24 @@ function Nav() {
 
           {
             <div className="cart-checkout-new">
-              <button
-                onClick={() => {
-                  setCheckoutAmount(userData?.checkoutAmt || 0);
+              <div
+                onClick={(e) => {
+                  if (
+                    // !doingWork &&
+                    // userData.checkoutAmt &&
+                    // userData.checkoutAmt > 0
+                    amount
+                  ) {
+                    setCheckoutAmount(amount);
+                    openCheckout();
+                  }
                 }}
-                disabled={doingWork || (userData?.checkoutAmt) <= 0}
                 className="checkout-final"
               >
                 <p className="checout-text">Proceed to Checkout</p>
                 <p>|</p>
-
                 <p className="checout-price">₹ {amount}</p>
-              </button>
+              </div>
             </div>
           }
         </div>
@@ -556,11 +563,16 @@ function Nav() {
                 {auth.currentUser ? (
                   <div className="nav-menu-bar">
                     <Link className="nav-linkk" to="/wishlist">
-                      <img
-                        title="Your Wishlist"
-                        className="menuk hideoii"
-                        src={wishlist}
-                      />
+                      <span className="cartDotDiv">
+                        <img
+                          title="Your Wishlist"
+                          className="menuk hideoii"
+                          src={wishlist}
+                        />
+                        <div className="cartDot">
+                          {wishData.length > 0 ? wishData.length : 0}
+                        </div>
+                      </span>
                     </Link>
                     <span className="cartDotDiv">
                       {" "}

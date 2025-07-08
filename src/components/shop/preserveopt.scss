@@ -1,0 +1,58 @@
+$primarycolor: #486455;
+$secondarycolor: #e4af47;
+$headFont: Quattrocento;
+.Preserve-Container {
+  width: 100%;
+}
+
+.Preserve-Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6cm;
+  padding: 0.5cm;
+}
+
+.Preserve-Heading{
+    font-size: 28px;
+    font-family: $headFont;
+    font-weight: bold;
+}
+
+.Preserve-Choice-Boxes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6cm;
+}
+
+.Preserve-Choice-Box {
+  width: 8cm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2cm;
+  padding: 0.2cm;
+  background-color: $primarycolor;
+  box-shadow: rgba(67, 67, 67, 0.16) 0px 3px 6px,
+    rgba(87, 87, 87, 0.23) 0px 3px 6px;
+  .Preserve-Choice-Box-Img {
+    width: 100%;
+    height:8cm;
+  }
+
+  .Preserve-Choice-Box-Text {
+    color: $secondarycolor;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.008);
+    transition: 0.2s ease;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+}

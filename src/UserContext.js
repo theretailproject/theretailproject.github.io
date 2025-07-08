@@ -8,9 +8,11 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
-
+  const [productAdded, setProductAdded] = useState(false);
+  const [wishAdded, setWishAdded] = useState(false);
   const [petData, setPetData] = useState([]);
   const [orderData, setOrderData] = useState([]);
+    const [wishData, setWishData] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [checkoutAmt, setCheckoutAmt] = useState(0);
 
@@ -37,7 +39,15 @@ export const UserProvider = ({ children }) => {
             setPetData(fetchedPets);
 
             // Fetch order data from subcollection
-            const ordersSnapshot = await firestore
+            const wishlistSnapshot = await firestore
+              .collection("users")
+              .doc(uid)
+              .collection("wishlist")
+              .get();
+            const fetchWishlist = wishlistSnapshot.docs.map((doc) => doc.data());
+            setWishData(fetchWishlist);
+
+             const ordersSnapshot = await firestore
               .collection("users")
               .doc(uid)
               .collection("orders")
@@ -146,10 +156,10 @@ export const UserProvider = ({ children }) => {
           thumbnail: p.thumbnail,
           link: `/shop/${p.category}/${p.itemId}`,
           price: p.price,
-          quantity: p.selectedQty || 1,
-
-          size: p.selectedSize || "default",
-          color: p.selectedColor || "default",
+          quantity: p.quantity || 1,
+dimensions:p.dimensions,
+          size: p.size || "default",
+          color: p.color || "default",
           itemId: p.itemId,
           category: p.category,
         })
@@ -162,8 +172,10 @@ export const UserProvider = ({ children }) => {
             },
             { merge: true }
           );
-          alert("product added to cart");
           await setDoingWork(false);
+          setProductAdded(true);
+          // Automatically reset after 3s (optional — could be controlled by <Popup /> too)
+          setTimeout(() => setProductAdded(false), 5000);
         });
     }
   };
@@ -192,6 +204,8 @@ export const UserProvider = ({ children }) => {
         link: `/shop/${p.category}/${p.itemId}`,
         price: p.price,
         quantity: p.selectedQty || 1,
+        dimensions:p.dimensions,
+
         orderPrice: p.price * (p.selectedQty || 1),
         size: p.selectedSize || "default",
         color: p.selectedColor || "default",
@@ -255,7 +269,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const addToWishlist = async (p) => {
-    console.log(p);
+    console.log("wish:",p);
     const wishlistProdId = firestore
       .collection("users")
       .doc(auth.currentUser?.uid)
@@ -281,15 +295,18 @@ export const UserProvider = ({ children }) => {
           thumbnail: p.thumbnail,
           link: `/shop/${p.category}/${p.itemId}`,
           price: p.price,
-          quantity: p.selectedQty || 1,
-          size: p.selectedSize || "default",
-          color: p.selectedColor || "default",
+          quantity: p.quantity || 1,
+          dimensions:p.dimensions ,
+
+          size: p.size || "default",
+          color: p.color || "default",
           itemId: p.itemId,
           category: p.category,
         })
         .then(async () => {
-          alert("Product added to Wishlist");
+          setWishAdded(true);
           await setDoingWork(false);
+          setTimeout(() => setWishAdded(false), 5000);
         });
     }
   };
@@ -387,6 +404,7 @@ export const UserProvider = ({ children }) => {
         petData,
         orderData,
         cartData,
+        wishData,
         addToCart,
         checkoutAmt,
         setCheckoutAmt,
@@ -399,6 +417,10 @@ export const UserProvider = ({ children }) => {
         updateBuyList,
         buynow,
         delFromBuyList,
+        productAdded,
+        setProductAdded,
+        wishAdded,
+        setWishAdded,
       }}
     >
       {children}

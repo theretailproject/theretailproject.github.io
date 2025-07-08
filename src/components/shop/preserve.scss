@@ -1,24 +1,53 @@
 $primarycolor: #486455;
-$secondarycolor : #e4af47;
-
+$secondarycolor: #e4af47;
 
 .Preserve {
-    padding: 0cm 0vw;
+  padding: 1cm 2vw;
 }
 
-.prehead{
-    font-weight: 600;
-    font-size: 16px;
-    text-align: left;
-    color: $primarycolor;
-
+.prehead {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: left;
+  color: $primarycolor;
 }
 
-.pretext{
-    color: $primarycolor;
-    text-align: left;
+.pretext {
+  color: $primarycolor;
+  text-align: left;
 }
 
-ul{
-    list-style: none;
+ul {
+  list-style: none;
+}
+
+.preserve-container {
+  width: 100%;
+  padding: 0.5cm;
+}
+
+.preserve-boxes {
+  display: flex;
+  flex-direction: row;
+  gap: 1cm;
+  justify-content: center;
+  align-items: center;
+}
+
+.preserve-option-box {
+  padding: 1cm auto;
+  border: 2px solid $primarycolor;
+  background-color: $primarycolor;
+  color: $secondarycolor;
+  font-weight: 600;
+  width: 4cm;
+  height: 4cm;
+  align-content: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  &:hover {
+    cursor: pointer;
+    border-color: $secondarycolor;
+    font-weight: 800;
+  }
 }

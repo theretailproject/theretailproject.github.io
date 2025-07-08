@@ -5,13 +5,18 @@
 
 .backTopDiv {
   width: 100%;
+  // position: fixed;
+  // bottom: 0;
+  // right: 0;
+  // z-index: 1000;
+}
+
+.backTopBtn {
+  
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 1000;
-}
-
-.backTopBtn {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -21,7 +26,7 @@
 
 .arrowBtn {
   padding: 0.3cm;
-  width: 1cm;
+  width: 1.5cm;
   background-color: #486455;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,

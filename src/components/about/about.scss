@@ -54,7 +54,7 @@ $secondarycolor: #e4af47;
 @keyframes divLeft {
   from {
     opacity: 0.5;
-    transform: translateX(-200px);
+    transform: translateX(-100px);
   }
   to {
     opacity: 1;
@@ -65,7 +65,7 @@ $secondarycolor: #e4af47;
 @keyframes divRight {
   from {
     opacity: 0.5;
-    transform: translateX(300px);
+    transform: translateX(180px);
   }
   to {
     opacity: 1;
@@ -520,6 +520,28 @@ $secondarycolor: #e4af47;
   .news-inp {
     width: 8cm;
   }
+
+  @keyframes divLeft {
+  from {
+    opacity: 0.2;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes divRight {
+  from {
+    opacity: 0.2;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 }
 
 @media only screen and (max-width: 1100px) {
@@ -630,7 +652,7 @@ $secondarycolor: #e4af47;
   @keyframes divLeft {
     from {
       opacity: 0.5;
-      transform: translateX(-180px);
+      transform: translateX(-120px);
     }
     to {
       opacity: 1;
@@ -641,7 +663,7 @@ $secondarycolor: #e4af47;
   @keyframes divRight {
     from {
       opacity: 0.5;
-      transform: translateX(180px);
+      transform: translateX(120px);
     }
     to {
       opacity: 1;

@@ -1,0 +1,120 @@
+$primarycolor: #486455;
+$secondarycolor: #e4af47;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.PFormContainer {
+  max-width: 60vw;
+  margin: 1vh auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  font-family: "Raleway", sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background-color: #f9f8f6;
+  color: #333;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cm;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.PFormSection {
+  width: 100%;
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cm;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.PFormRow1{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap:1cm;
+}
+.PFormImage {
+  width: 6cm;
+  height: auto;
+  // border-radius: 8px;
+  border:5px solid $primarycolor;
+}
+
+.PFormProductName{
+  font-size: 24px;
+  font-weight: bold;
+}
+.PFormHeading {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.center {
+  align-self: center;
+}
+.PFormSelect,
+.PFormTextArea {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid $primarycolor;
+  font-family: inherit;
+}
+
+.PFormSelect option {
+  background: #fff;
+  color: #333;
+  padding: 10px;
+  font-size: 1rem;
+  border: thin solid $primarycolor;
+}
+
+.PFormGuidelines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2cm;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0cm 0.5cm;
+
+  li {
+    list-style: circle;
+  }
+}
+
+.PFormPrice {
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+.PFormButton {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  align-self: center;
+  background-color: $primarycolor;
+  cursor: pointer;
+}
+.enabled {
+  &:hover {
+    color: $secondarycolor;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+}
+
+.disabled {
+  background-color: #aaa;
+  cursor: none;
+}

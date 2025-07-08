@@ -48,7 +48,6 @@ $headFont: Quattrocento;
   max-width: 18vw;
 }
 
-
 .ListData {
   // border-top: thin solid $primarycolor;
   justify-content: center;
@@ -99,7 +98,7 @@ $headFont: Quattrocento;
 }
 
 .AddToCartBtnImg {
-  width: 0.8cm;
+  width: 1.2cm;
   padding: 0.3cm;
   background-color: $primarycolor;
   border: none;
@@ -114,7 +113,7 @@ $headFont: Quattrocento;
   }
 }
 .deleteBtn {
-  width: 0.8cm;
+  width: 1.2cm;
   padding: 0.3cm;
   background-color: rgb(210, 0, 0);
   border: none;
@@ -157,8 +156,8 @@ $headFont: Quattrocento;
 .WishlistImg {
   width: 4cm;
   height: 100%;
-  border-radius: 5px;
-  // border: thin solid $primarycolor;
+  border-radius: 10px;
+  border:thin solid $primarycolor;
 }
 .WishlistInfo {
   width: 100%;
@@ -276,7 +275,7 @@ $headFont: Quattrocento;
 
   .AddToCartBtnImg,
   .deleteBtn {
-    width: 0.6cm;
+    width: 0.8cm;
     padding: 0.2cm;
   }
 }
@@ -288,17 +287,8 @@ $headFont: Quattrocento;
 
   .WishlistCards {
     display: flex;
-    width:90%;
   }
-  .no-products {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: whitesmoke;
-    padding: 0.2cm;
-  }
+
   .AddToCartBtn {
     display: flex;
   }
@@ -327,7 +317,7 @@ $headFont: Quattrocento;
     font-size: 14px;
   }
   .deleteBtn {
-    width: 0.6cm;
+    width: 0.8cm;
     padding: 0.2cm;
   }
 }
@@ -345,20 +335,35 @@ $headFont: Quattrocento;
     display: flex;
   }
   .deleteBtn {
-    width: 0.6cm;
+    width: 0.8cm;
     padding: 0.2cm;
   }
 }
 
 @media screen and (max-width: 450px) {
+  .WishlistCards{
+    padding: 0;
+  }
   .WishlistCard {
-    width: 80%;
+    width:80%;
     display: flex;
     flex-direction: column;
+    border-radius: 0;
     gap: 0.2cm;
+    border: none;
+
+    img{
+      border-radius: 0;
+      border: none;
+    }
   }
 
-  .alignCenter {
+  .ListDataSmall{
+    align-self: flex-start;
+  text-align: left;
+  }
+
+  .alignCenter{
     align-self: center;
   }
 }

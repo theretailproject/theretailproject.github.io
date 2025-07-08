@@ -34,10 +34,12 @@ import Refund from "./components/refund/refund.js";
 import Preserve from "./components/shop/preserve.jsx";
 import Wishlist from "./components/wishlist/wishlist.jsx";
 import { AllProducts } from "./components/shop/allproducts.jsx";
-import CheckoutBuyNow from './components/checkout/checkoutbuynow.jsx';
+import CheckoutBuyNow from "./components/checkout/checkoutbuynow.jsx";
 import ScrollToTop from "./components/scrollToTop.js";
+import PreserveForHuman from "./components/shop/pHuman.jsx";
+import PreserveForPet from "./components/shop/pPet.jsx";
 // import Invoice from './components/invoice/invoice.jsx';
-
+import PreserveForm from "./components/shop/preserveform.jsx";
 function App() {
   const location = useLocation();
   const [showdp, setshowdp] = useState(true);
@@ -91,7 +93,7 @@ function App() {
       </>
       <div className="App">
         {isActive("/signup") || isActive("/signin") ? null : <Nav />}
- <ScrollToTop />
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProfileNew />} />
@@ -105,7 +107,24 @@ function App() {
             <Route index path="/shop/play" element={<Play />} />
             <Route index path="/shop/sleep" element={<Sleep />} />
             <Route index path="/shop/preserve" element={<Preserve />} />
+            <Route
+            index
+            path="/shop/preserve/foryou"
+            element={<PreserveForHuman />}
+          />
+          <Route
+            index
+            path="/shop/preserve/foryourpet"
+            element={<PreserveForPet />}
+          />
+          <Route
+            index
+            path="/shop/preserve/form/:pid"
+            element={<PreserveForm />}
+          />
           </Route>
+
+          
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<LogInNew />} />
           <Route path="/faq" element={<FAQQ />} />
