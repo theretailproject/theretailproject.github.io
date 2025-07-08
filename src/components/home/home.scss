@@ -565,8 +565,8 @@ $secondarycolor: #e4af47;
 
 .collection {
   padding: 0.6cm;
-  width: 4cm;
-  height: 4cm;
+  width: 4.5cm;
+  height: 4.7cm;
   border-radius: 50%;
   background-color: #e7c278;
   width: fit-content;
@@ -589,7 +589,7 @@ $secondarycolor: #e4af47;
 
   &:hover {
     background-color: #496d52bc;
-    transform: translateY(5px);
+    translate: 0 -5px ;
 
     .coltext {
       color: $secondarycolor;
@@ -707,7 +707,7 @@ $secondarycolor: #e4af47;
 
 .preserve {
   .coltext {
-    letter-spacing: 0.08cm;
+    letter-spacing: 0.02cm;
   }
 
   background-color: #e7c278;
@@ -1500,6 +1500,10 @@ $secondarycolor: #e4af47;
   .slick-slide img {
     display: none;
   }
+
+  .featured-products-box {
+    margin-top: 4cm;
+  }
 }
 
 @media screen and (max-width: 1100px) and (min-width: 920px) {
@@ -1553,7 +1557,7 @@ $secondarycolor: #e4af47;
     height: 3cm;
   }
   .coltext {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .slick-slider-custom {
@@ -1682,7 +1686,7 @@ $secondarycolor: #e4af47;
     height: 2.5cm;
   }
   .coltext {
-    font-size: 20px;
+    font-size: 18px;
   }
   .slick-slider-custom {
     width: 19cm;
@@ -1720,6 +1724,10 @@ $secondarycolor: #e4af47;
   .testimonials-ClientLogo {
     width: 3.8cm;
     height: 3.8cm;
+  }
+
+  .featured-products-box {
+    margin-top: 3.5cm;
   }
 
   @keyframes divLeft {
@@ -1825,7 +1833,7 @@ $secondarycolor: #e4af47;
     height: 2cm;
   }
   .coltext {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .read-more {
@@ -1864,6 +1872,11 @@ $secondarycolor: #e4af47;
     width: 3.6cm;
     height: 3.6cm;
   }
+
+  .featured-products-box {
+    margin-top: 3cm;
+  }
+  
 
   @keyframes divLeft {
     from {
@@ -2002,6 +2015,10 @@ $secondarycolor: #e4af47;
   }
   .transformationLogo {
     width: 0.6cm;
+  }
+
+  .featured-products-box {
+    margin-top: 2.8cm;
   }
 
   @keyframes divLeft {
@@ -2155,7 +2172,9 @@ $secondarycolor: #e4af47;
     width: 3.2cm;
     height: 3.2cm;
   }
-
+.featured-products-box {
+    margin-top: 2.5cm;
+  }
   @keyframes divLeft {
     from {
       opacity: 0.5;
@@ -2283,7 +2302,9 @@ $secondarycolor: #e4af47;
   .slider-maincus img {
     display: none;
   }
-
+.featured-products-box {
+    margin-top: 2.5cm;
+  }
   .reviewBox {
     padding: 0.2cm;
     &::before {

@@ -14,25 +14,27 @@ function Recycle() {
   const collectionUp = useRef(null);
   const partnersUp = useRef(null);
 
-  useEffect(() => {
+  useEffect(() => {console.log("Effect running");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const target = entry.target;
           // console.log(entry);
           if (entry.isIntersecting) {
-            if (entry.target === recycle1_1left.current || entry.target === recycle1_3left.current) {
+            if (
+              entry.target === recycle1_1left.current ||
+              entry.target === recycle1_3left.current
+            ) {
               if (target.classList.contains("rec-new-box")) {
                 target.classList.add("active-left");
               }
             }
-            
+
             if (entry.target === recycle1_2right.current) {
               if (target.classList.contains("rec-new-box")) {
                 target.classList.add("active-right");
               }
             }
-            
           } else {
             target.classList.remove("active-left", "active-right");
           }
@@ -55,6 +57,7 @@ function Recycle() {
   }, []);
 
   useEffect(() => {
+    console.log("Effect running");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -82,8 +85,7 @@ function Recycle() {
     return () => {
       if (recycleBoxes) {
         Array.from(recycleBoxes).forEach((el) => {
-          if (el.classList.contains("tRowData"))
-            observer.unobserve(el);
+          if (el.classList.contains("tRowData")) observer.unobserve(el);
         });
       }
     };

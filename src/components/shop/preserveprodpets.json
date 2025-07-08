@@ -1,0 +1,243 @@
+[
+  {
+    "itemId": "TRP-Pets-1",
+    "name": "Baby Memory Quilts",
+    "options": [
+      {
+        "opname": "MEDIUM",
+        "price": "500",
+        "dimensions": "4' X 6' ft",
+        "clothesrequired": "20-35"
+      },
+      {
+        "opname": "LARGE",
+        "price": "500",
+        "dimensions": "5' X 7' ft",
+        "clothesrequired": "25-45"
+      },
+      {
+        "opname": "EXTRA LARGE",
+        "price": "500",
+        "dimensions": "7' X 8' ft",
+        "clothesrequired": "45-65"
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/pTnFkc0Q/babyquilt.jpg",
+    "product-card-img": "https://i.postimg.cc/pTnFkc0Q/babyquilt.jpg",
+    "shareLink": "https://theretailproject.in/shop/preserve/foryou/TRP-Pets-1"
+  },
+  {
+    "itemId": "TRP-Pets-2",
+    "name": "Memory Pillows",
+    "options": [
+      {
+        "opname": "SMALL",
+        "price": "250",
+        "dimensions": "12\" X 12\" inches",
+        "clothesrequired": "3-5"
+      },
+      {
+        "opname": "MEDIUM",
+        "price": "350",
+        "dimensions": "16\" X 16\" inches",
+        "clothesrequired": "5-7"
+      },
+      {
+        "opname": "LARGE",
+        "price": "450",
+        "dimensions": "18\" X 18\" inches",
+        "clothesrequired": "7-10"
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/MH2jL04C/memorypillow.jpg",
+    "product-card-img": "https://i.postimg.cc/MH2jL04C/memorypillow.jpg",
+    "shareLink": "https://theretailproject.in/shop/preserve/foryou/TRP-Pets-2"
+  },
+  {
+    "itemId": "TRP-Pet-1",
+    "name": "Patch Bed",
+    "options": [
+      {
+        "opname": "MEDIUM",
+        "price": "600",
+        "dimensions": "24\" X 30\" inches",
+        "clothesrequired": "10-15"
+      },
+      {
+        "opname": "LARGE",
+        "price": "750",
+        "dimensions": "30\" X 36\" inches",
+        "clothesrequired": "15-25"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/w7zkaf9zp/Retail%20Project/Sleep%20Images/patch%20work%20bed/IMG_6451.jpg?updatedAt=1749283909523",
+    "product-card-img": "https://ik.imagekit.io/w7zkaf9zp/Retail%20Project/Sleep%20Images/patch%20work%20bed/IMG_6451.jpg?updatedAt=1749283909523",
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-1"
+  },
+  {
+    "itemId": "TRP-Pet-2",
+    "name": "Doughnut Bed",
+    "options": [
+      {
+        "opname": "SMALL",
+        "price": "650",
+        "dimensions": "20\" diameter",
+        "clothesrequired": "12-18"
+      },
+      {
+        "opname": "LARGE",
+        "price": "850",
+        "dimensions": "30\" diameter",
+        "clothesrequired": "20-30"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Sleep%20Images/dough%20nut%20bed/IMG_3320.jpg?updatedAt=1751022691558",
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Sleep%20Images/dough%20nut%20bed/IMG_3320.jpg?updatedAt=1751022691558",
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-2"
+  },
+  {
+    "itemId": "TRP-Pet-3",
+    "name": "Fish Teether Toy",
+    "options": [
+      {
+        "opname": "Fish",
+        "price": "150",
+        "dimensions": "8\" X 3\" inches",
+        "clothesrequired": "1-2"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Toys%20Images/Multiple/IMG_2821.jpg?updatedAt=1751022628007",
+
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Toys%20Images/Multiple/IMG_2821.jpg?updatedAt=1751022628007",
+
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-3"
+  },
+  {
+    "itemId": "TRP-Pet-3",
+    "name": "Bone Teether Toy",
+    "options": [
+      {
+        "opname": "Bone",
+        "price": "150",
+        "dimensions": "8\" X 3\" inches",
+        "clothesrequired": "1-2"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Toys%20Images/Multiple/IMG_2851.jpg?updatedAt=1751022628382",
+
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Toys%20Images/Multiple/IMG_2851.jpg?updatedAt=1751022628382",
+
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-3"
+  },
+  {
+    "itemId": "TRP-Pet-4",
+    "name": "Pet Collars",
+    "options": [
+      {
+        "opname": "Simple",
+        "price": "180",
+        "dimensions": "Adjustable up to 18\"",
+        "clothesrequired": "1-2"
+      },
+      {
+        "opname": "Bow",
+        "price": "200",
+        "dimensions": "Adjustable up to 18\" with bow",
+        "clothesrequired": "2-3"
+      },
+      {
+        "opname": "Canon Style",
+        "price": "220",
+        "dimensions": "Wide band style, adjustable",
+        "clothesrequired": "2-3"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Wear/bow%20collar/CollarsCombo.png?updatedAt=1751895971085",
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Wear/bow%20collar/CollarsCombo.png?updatedAt=1751895971085",
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-4"
+  },
+  {
+    "itemId": "TRP-Pet-5",
+    "name": "Harness and Leash Combo",
+    "options": [
+      {
+        "opname": "Standard Set",
+        "price": "450",
+        "dimensions": "Leash: 48\" | Harness Chest: 14-24\"",
+        "clothesrequired": "4-6"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/walk/harness%20and%20leash%20combo/IMG_4519.jpg?updatedAt=1751022715253",
+
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/walk/harness%20and%20leash%20combo/IMG_4519.jpg?updatedAt=1751022715253",
+
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-5"
+  },
+  {
+    "itemId": "TRP-Pet-6",
+    "name": "Pet Frocks",
+    "options": [
+      {
+        "opname": "SMALL",
+        "price": "300",
+        "dimensions": "Chest: 10-14\"",
+        "clothesrequired": "2-3"
+      },
+      {
+        "opname": "MEDIUM",
+        "price": "400",
+        "dimensions": "Chest: 15-20\"",
+        "clothesrequired": "3-4"
+      },
+      {
+        "opname": "LARGE",
+        "price": "500",
+        "dimensions": "Chest: 21-26\"",
+        "clothesrequired": "4-6"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Wear/frocks/IMG_8472.jpg?updatedAt=1751022738608",
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Wear/frocks/IMG_8472.jpg?updatedAt=1751022738608",
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-6"
+  },
+  {
+    "itemId": "TRP-Pet-7",
+    "name": "Pet Shirts",
+    "options": [
+      {
+        "opname": "SMALL",
+        "price": "280",
+        "dimensions": "Chest: 10-14\"",
+        "clothesrequired": "2-3"
+      },
+      {
+        "opname": "MEDIUM",
+        "price": "350",
+        "dimensions": "Chest: 15-20\"",
+        "clothesrequired": "3-4"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Wear/shirts/IMG_6112.jpg?updatedAt=1751022738289",
+
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Wear/shirts/IMG_6112.jpg?updatedAt=1751022738289",
+
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-7"
+  },
+  {
+    "itemId": "TRP-Pet-8",
+    "name": "Pet Tents",
+    "options": [
+      {
+        "opname": "STANDARD",
+        "price": "950",
+        "dimensions": "20\" X 20\" X 24\"",
+        "clothesrequired": "15-20"
+      }
+    ],
+    "thumbnail": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Sleep%20Images/tents/InShot_20250603_132929872.jpg?updatedAt=1751022684720",
+
+    "product-card-img": "https://ik.imagekit.io/llt66uteia/the%20retail%20project/Sleep%20Images/tents/InShot_20250603_132929872.jpg?updatedAt=1751022684720",
+
+    "shareLink": "https://theretailproject.in/shop/preserve/pets/TRP-Pet-8"
+  }
+]

@@ -9,102 +9,78 @@ import { Play } from "./play";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Preserve from "./preserve";
 import { AllProducts } from "./allproducts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import PreserveForHuman from "./pHuman";
+import PreserveForPet from "./pPet";
+import PreserveForm from "./preserveform";
+import products from "./products.json";
 function Shop() {
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
+  const isShopActive = location.pathname.match("shop");
+  const isWearActive = location.pathname.includes("shop/wear");
+  const isWalkActive = location.pathname.includes("shop/walk");
+  const isPlayActive = location.pathname.includes("shop/play");
+  const isSleepActive = location.pathname.includes("shop/sleep");
+  const isPreserveActive = location.pathname.includes("shop/preserve");
+  const [Products, setProducts] = useState(products);
+  const [wearCategories, setWearCat] = useState([]);
+  const [sleepCategories, setSleepCat] = useState([]);
+  const [walkCategories, setWalkCat] = useState([]);
+  const [playCategories, setPlayCat] = useState([]);
 
-  const wearCategories = [
-    {
-      name: "Bandana",
-      subcategories: [
-        "Silk Bandana"
-      ],
-    },
-    {
-      name: "Shirt",
-      subcategories: [
-        "Collared Shirt"
-      ],
-    },
-    {
-      name: "Collar",
-      subcategories: [
-        "Bib Collar",
-        "Scrunchie Collar",
-        "Frill Collar with Net"
-      ],
-    },
-    {
-      name: "Frock",
-      subcategories: [
-        "Festive Frock",
-      ],
-    },
-    {
-      name: "Festive",
-      subcategories: ["Sherwani", "Lehenga", "Kurta", "Ghagra", "Frock","Jacket/ Coat"],
-    },
-     {
-      name: "Scrunchie",
-      subcategories: ["Classic", "Long Tail", "Small Tail"],
-    },
-     {
-      name: "Bow",
-      subcategories: ["Stuffed", "Sailor"],
-    },
-  ];
+ useEffect(() => {
+  if (!Array.isArray(Products)) return;
 
-  const sleepCategories = [
-    {
-      name: "Beds",
-      subcategories: ["Dough Nut Bed", "Patch Work Bed"],
-    },
-    {
-      name: "Pet Tent",
-      subcategories: [],
-    },
-    {
-      name: "Snuffle Mat",
-      subcategories: ["Soft Mat", "Hard Mat"],
-    },
-  ];
+  const wearMap = new Map();
+  const sleepMap = new Map();
+  const walkMap = new Map();
+  const playMap = new Map();
 
-  const walkCategories = [
-    {
-      name: "Harness + Leash Combo",
-      subcategories: ["Matching Set"],
-    },
-     {
-      name: "Poop Bag",
-      subcategories: [],
-    },
-  ];
+  try {
+    Products.forEach(({ category, name, itemId }) => {
+      switch (category) {
+        case "wear":
+          if (!wearMap.has(name)) wearMap.set(name, itemId);
+          break;
+        case "sleep":
+          if (!sleepMap.has(name)) sleepMap.set(name, itemId);
+          break;
+        case "walk":
+          if (!walkMap.has(name)) walkMap.set(name, itemId);
+          break;
+        case "play":
+          if (!playMap.has(name)) playMap.set(name, itemId);
+          break;
+        default:
+          break;
+      }
+    });
+  } catch (err) {
+    console.error("Error in categorizing products:", err);
+    alert("Please Reload");
+  }
 
-  const playCategories = [
-    {
-      name: "Rope Toys",
-      subcategories: [ "Tug Toy"],
-    },
-    {
-      name: "Teether Toys",
-      subcategories: ["Fish Teether", "Bone Teether"],
-    },
-    {
-      name: "Snuffle Toys",
-      subcategories: ["Ball"],
-    },
-    {
-      name: "Chrochet Toys",
-      subcategories: ["Orange", "Bird", "Carrot", "Ball","Banana", "Mango", "Moon", "Heart", "Strawberry", "Ice Cream", "Soft Bone", "Honey Bee"],
-    },
-  ];
+  const toArray = (map) =>
+    Array.from(map.entries()).map(([name, itemId]) => ({ name, itemId }));
+
+  setWearCat(toArray(wearMap));
+  setSleepCat(toArray(sleepMap));
+  setWalkCat(toArray(walkMap));
+  setPlayCat(toArray(playMap));
+}, [Products]);
+
+
 
   const [hoveredCategory, setHoveredCategory] = useState(null);
   return (
     <div className="Shop">
       <div className="shop-box">
+        <div className="shopHead">
+          <p className="shopHeadText">SHOP</p>
+        </div>
+
         <div className="shop-cats-box">
           <Link to="/shop">
             <p
@@ -117,141 +93,137 @@ function Shop() {
               All Products
             </p>
           </Link>
-          <div className="dropdown-wrapper">
-            <Link to="/shop/wear">
-              <p className="shop-cat-name">Wear ▼</p>
-            </Link>
+          <div className="wearDrop dropdown-wrapper">
+            <p
+              className={
+                isWearActive ? "shop-cat-name activeCat" : "shop-cat-name"
+              }
+            >
+              Wear ▼
+            </p>
 
             <div className="dropdown-content">
               <div className="dropdown-content-col">
                 <div className="dropdown-content-col1">
                   {wearCategories.map((category, index) => (
-                    <p
-                      key={index}
-                      className="dropdown-heading"
-                      onMouseEnter={() => setHoveredCategory(category)}
-                    >
-                      {category.name}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="dropdown-content-col2">
-                  {hoveredCategory?.subcategories.map((sub, subIndex) => (
                     <Link
-                      key={subIndex}
-                      to={`/shop/wear/${hoveredCategory.name.toLowerCase()}/${sub
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
+                      key={index}
+                      to={`/shop/wear/${category.itemId}`}
                     >
-                      {sub}
+                      <p
+                        key={index}
+                        className="dropdown-heading"
+                        onMouseEnter={() => setHoveredCategory(category)}
+                      >
+                        {category.name}
+                      </p>
                     </Link>
                   ))}
+                  <Link to="/shop/wear">
+                    <p className="dropdown-heading">View All..</p>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="dropdown-wrapper">
-            <Link to="/shop/sleep">
-              <p className="shop-cat-name">Sleep ▼</p>
-            </Link>
+          <div className="sleepDrop dropdown-wrapper">
+            <p
+              className={
+                isSleepActive ? "shop-cat-name activeCat" : "shop-cat-name"
+              }
+            >
+              Sleep ▼
+            </p>
 
             <div className="dropdown-content">
               <div className="dropdown-content-col">
                 <div className="dropdown-content-col1">
                   {sleepCategories.map((category, index) => (
-                    <p
-                      key={index}
-                      className="dropdown-heading"
-                      onMouseEnter={() => setHoveredCategory(category)}
-                    >
-                      {category.name}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="dropdown-content-col2">
-                  {hoveredCategory?.subcategories.map((sub, subIndex) => (
                     <Link
-                      key={subIndex}
-                      to={`/shop/wear/${hoveredCategory.name.toLowerCase()}/${sub
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
+                      key={index}
+                      to={`/shop/sleep/${category.itemId}`}
                     >
-                      {sub}
+                      <p
+                        key={index}
+                        className="dropdown-heading"
+                        onMouseEnter={() => setHoveredCategory(category)}
+                      >
+                        {category.name}
+                      </p>
                     </Link>
                   ))}
+                  <Link to="/shop/sleep">
+                    <p className="dropdown-heading">View All..</p>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="dropdown-wrapper">
-            <Link to="/shop/walk">
-              <p className="shop-cat-name">Walk ▼</p>
-            </Link>
+          <div className=" walkDrop dropdown-wrapper">
+            <p
+              className={
+                isWalkActive ? "shop-cat-name activeCat" : "shop-cat-name"
+              }
+            >
+              Walk ▼
+            </p>
 
             <div className="dropdown-content">
               <div className="dropdown-content-col">
                 <div className="dropdown-content-col1">
                   {walkCategories.map((category, index) => (
-                    <p
-                      key={index}
-                      className="dropdown-heading"
-                      onMouseEnter={() => setHoveredCategory(category)}
-                    >
-                      {category.name}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="dropdown-content-col2">
-                  {hoveredCategory?.subcategories.map((sub, subIndex) => (
                     <Link
-                      key={subIndex}
-                      to={`/shop/wear/${hoveredCategory.name.toLowerCase()}/${sub
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
+                      key={index}
+                      to={`/shop/walk/${category.itemId}`}
                     >
-                      {sub}
+                      <p
+                        key={index}
+                        className="dropdown-heading"
+                        onMouseEnter={() => setHoveredCategory(category)}
+                      >
+                        {category.name}
+                      </p>
                     </Link>
                   ))}
+                  <Link to="/shop/walk">
+                    <p className="dropdown-heading">View All..</p>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="dropdown-wrapper">
-            <Link to="/shop/play">
-              <p className="shop-cat-name">Play ▼</p>
-            </Link>
+          <div className="playDrop dropdown-wrapper">
+            <p
+              className={
+                isPlayActive ? "shop-cat-name activeCat" : "shop-cat-name"
+              }
+            >
+              Play ▼
+            </p>
 
-            <div className="dropdown-content">
+            <div className="  dropdown-content">
               <div className="dropdown-content-col">
                 <div className="dropdown-content-col1">
                   {playCategories.map((category, index) => (
-                    <p
-                      key={index}
-                      className="dropdown-heading"
-                      onMouseEnter={() => setHoveredCategory(category)}
-                    >
-                      {category.name}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="dropdown-content-col2">
-                  {hoveredCategory?.subcategories.map((sub, subIndex) => (
                     <Link
-                      key={subIndex}
-                      to={`/shop/wear/${hoveredCategory.name.toLowerCase()}/${sub
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
+                      key={index}
+                      to={`/shop/play/${category.itemId}`}
                     >
-                      {sub}
+                      <p
+                        key={index}
+                        className="dropdown-heading"
+                        onMouseEnter={() => setHoveredCategory(category)}
+                      >
+                        {category.name}
+                      </p>
                     </Link>
                   ))}
+                  <Link to="/shop/play">
+                    <p className="dropdown-heading">View All..</p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -260,9 +232,7 @@ function Shop() {
           <Link to="/shop/preserve">
             <p
               className={
-                isActive("/shop/preserve")
-                  ? "shop-cat-name activeCat"
-                  : "shop-cat-name"
+                isPreserveActive ? "shop-cat-name activeCat" : "shop-cat-name"
               }
             >
               Preserve
@@ -277,6 +247,9 @@ function Shop() {
           <Route path="/play" element={<Play />} />
           <Route path="/sleep" element={<Sleep />} />
           <Route path="/preserve" element={<Preserve />} />
+          <Route path="/preserve/foryou" element={<PreserveForHuman />} />
+          <Route path="/preserve/foryourpet" element={<PreserveForPet />} />
+          <Route path="/preserve/form/:pid" element={<PreserveForm />} />
         </Routes>
       </div>
     </div>

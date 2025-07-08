@@ -97,7 +97,7 @@ function Footer() {
                                 </div>
                                 <div className="lower-footer">
                                         <p className="copyright" >
-                                                The ReTail Project &copy; 2023
+                                                The ReTail Project &copy; 2025
                                         </p>
 
                                 </div>

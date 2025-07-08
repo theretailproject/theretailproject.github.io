@@ -22,8 +22,8 @@ $headFont: Quattrocento;
 }
 
 .menuk {
-  width: 0.6cm;
-  height: 0.6cm;
+  width: 1cm;
+  height: 1cm;
   cursor: pointer;
   padding: 0.2cm;
   border-radius: 25%;
@@ -258,8 +258,8 @@ $headFont: Quattrocento;
 }
 
 .acc-dets-img {
-  width: 0.6cm;
-  height: 0.6cm;
+  width: 0.8cm;
+  height: 0.8cm;
 }
 
 .login-buttons-overlay {
@@ -1798,8 +1798,8 @@ h3 {
   }
 
   .menuk {
-    width: 0.6cm;
-    height: 0.6cm;
+    width: 1cm;
+    height: 1cm;
     padding: 0.2cm;
     // border: none;
     &:hover {
@@ -1917,6 +1917,21 @@ h3 {
       padding: 0;
     }
   }
+  .cartDot {
+  position: absolute;
+  top: -7px;
+  right: -4px;
+  background-color: #e3a533;
+  color: $primarycolor;
+  width: 10px;
+  height: 10px;
+  font-size: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
 }
 
 @media only screen and (max-width: 400px) {
@@ -1926,9 +1941,11 @@ h3 {
   }
 
   .nav-menu-bar {
-    gap: 0.17cm;
+    gap: 0.3cm;
 
     img {
+      width: 0.55cm;
+      height: auto;
       padding: 0;
     }
   }
@@ -1938,9 +1955,9 @@ h3 {
   }
 
   .login-button {
-    min-width: 1.2cm;
+    min-width: 1.5cm;
     padding: 0.1cm 0.2cm;
-    border: 2px solid $secondarycolor;
+    border: 1px solid $secondarycolor;
     font-size: 12px;
     word-wrap: none;
   }

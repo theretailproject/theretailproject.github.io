@@ -21,7 +21,7 @@ const Signup = () => {
 
 
 
-    useEffect(() => {
+    useEffect(() => {console.log("Effect running");
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
             "recaptcha-container", {
             size: "invisible",

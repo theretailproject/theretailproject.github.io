@@ -12,6 +12,7 @@ export const UserProvider = ({ children }) => {
   const [wishAdded, setWishAdded] = useState(false);
   const [petData, setPetData] = useState([]);
   const [orderData, setOrderData] = useState([]);
+    const [wishData, setWishData] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [checkoutAmt, setCheckoutAmt] = useState(0);
 
@@ -38,7 +39,15 @@ export const UserProvider = ({ children }) => {
             setPetData(fetchedPets);
 
             // Fetch order data from subcollection
-            const ordersSnapshot = await firestore
+            const wishlistSnapshot = await firestore
+              .collection("users")
+              .doc(uid)
+              .collection("wishlist")
+              .get();
+            const fetchWishlist = wishlistSnapshot.docs.map((doc) => doc.data());
+            setWishData(fetchWishlist);
+
+             const ordersSnapshot = await firestore
               .collection("users")
               .doc(uid)
               .collection("orders")
@@ -395,6 +404,7 @@ dimensions:p.dimensions,
         petData,
         orderData,
         cartData,
+        wishData,
         addToCart,
         checkoutAmt,
         setCheckoutAmt,

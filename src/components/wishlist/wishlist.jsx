@@ -9,10 +9,15 @@ import cartImg from "./cartImg.png";
 import Popup from "../popup/popup";
 
 function Wishlist() {
-  const { addToCart, doingWork, delFromWishlist,  productAdded,
+  const {
+    addToCart,
+    doingWork,
+    delFromWishlist,
+    productAdded,
     setProductAdded,
     wishAdded,
-    setWishAdded, } = useUserContext();
+    setWishAdded,
+  } = useUserContext();
   const wishlistRef = firestore
     .collection("users")
     .doc(auth.currentUser?.uid)
@@ -23,12 +28,12 @@ function Wishlist() {
     <div className="WishlistComponent">
       <div className="WishlistDiv">
         <div className="WishlistRow1">My Wishlist </div>
-            {productAdded && (
-            <Popup
-              message={`Product added to Cart!`}
-              onClose={() => setProductAdded(false)}
-            />
-          )}
+        {productAdded && (
+          <Popup
+            message={`Product added to Cart!`}
+            onClose={() => setProductAdded(false)}
+          />
+        )}
         <table className="WishlistTable">
           <thead className="tableHead">
             <tr>
@@ -115,10 +120,15 @@ function Wishlist() {
                 <div className="WishlistInfo">
                   <p className="ListDataSmall bold">{product.name}</p>
                   <p className="ListDataSmall">
-                    Specs: Holds color and size value
+                    Color: {product.color}, Size: {product.size}
                   </p>
                   <p className="ListDataSmall">Price: ₹ {product.price}</p>
-                  <p className="ListDataSmall">Qty: {product.quantity}</p>
+                  <p className="ListDataSmall">
+                    Qty:{" "}
+                    {product.quantity > 1
+                      ? `${product.quantity} pcs`
+                      : `${product.quantity} pc`}
+                  </p>{" "}
                   <div className="ListDataSmall">
                     <span className="alignCenter">
                       <button

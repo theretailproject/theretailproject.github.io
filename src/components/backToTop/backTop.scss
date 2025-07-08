@@ -5,13 +5,18 @@
 
 .backTopDiv {
   width: 100%;
+  // position: fixed;
+  // bottom: 0;
+  // right: 0;
+  // z-index: 1000;
+}
+
+.backTopBtn {
+  
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 1000;
-}
-
-.backTopBtn {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;

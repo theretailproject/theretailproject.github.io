@@ -1,0 +1,56 @@
+[
+  {
+    "itemId": "TRP-Memory-1",
+    "name": "Baby Memory Quilts",
+    "options": [
+      {
+        "opname": "MEDIUM",
+        "price": "500",
+        "dimensions": "4' X 6' ft",
+        "clothesrequired": "20-35"
+      },
+      {
+        "opname": "LARGE",
+        "price": "500",
+        "dimensions": "5' X 7' ft",
+        "clothesrequired": "25-45"
+      },
+      {
+        "opname": "EXTRA LARGE",
+        "price": "500",
+        "dimensions": "7' X 8' ft",
+        "clothesrequired": "45-65"
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/pTnFkc0Q/babyquilt.jpg",
+    "product-card-img": "https://i.postimg.cc/pTnFkc0Q/babyquilt.jpg",
+    "shareLink": "https://theretailproject.in/shop/preserve/foryou/TRP-Memory-1"
+  },
+  {
+    "itemId": "TRP-Memory-2",
+    "name": "Memory Pillows",
+    "options": [
+      {
+        "opname": "SMALL",
+        "price": "250",
+        "dimensions": "12\" X 12\" inches",
+        "clothesrequired": "3-5"
+      },
+      {
+        "opname": "MEDIUM",
+        "price": "350",
+        "dimensions": "16\" X 16\" inches",
+        "clothesrequired": "5-7"
+      },
+      {
+        "opname": "LARGE",
+        "price": "450",
+        "dimensions": "18\" X 18\" inches",
+        "clothesrequired": "7-10"
+      }
+    ],
+    "thumbnail": "https://i.postimg.cc/MH2jL04C/memorypillow.jpg",
+    "product-card-img": "https://i.postimg.cc/MH2jL04C/memorypillow.jpg",
+    "shareLink": "https://theretailproject.in/shop/preserve/foryou/TRP-Memory-2"
+  }
+]

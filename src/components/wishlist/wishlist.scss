@@ -98,7 +98,7 @@ $headFont: Quattrocento;
 }
 
 .AddToCartBtnImg {
-  width: 0.8cm;
+  width: 1.2cm;
   padding: 0.3cm;
   background-color: $primarycolor;
   border: none;
@@ -113,7 +113,7 @@ $headFont: Quattrocento;
   }
 }
 .deleteBtn {
-  width: 0.8cm;
+  width: 1.2cm;
   padding: 0.3cm;
   background-color: rgb(210, 0, 0);
   border: none;
@@ -275,7 +275,7 @@ $headFont: Quattrocento;
 
   .AddToCartBtnImg,
   .deleteBtn {
-    width: 0.6cm;
+    width: 0.8cm;
     padding: 0.2cm;
   }
 }
@@ -317,7 +317,7 @@ $headFont: Quattrocento;
     font-size: 14px;
   }
   .deleteBtn {
-    width: 0.6cm;
+    width: 0.8cm;
     padding: 0.2cm;
   }
 }
@@ -335,17 +335,32 @@ $headFont: Quattrocento;
     display: flex;
   }
   .deleteBtn {
-    width: 0.6cm;
+    width: 0.8cm;
     padding: 0.2cm;
   }
 }
 
 @media screen and (max-width: 450px) {
+  .WishlistCards{
+    padding: 0;
+  }
   .WishlistCard {
     width:80%;
     display: flex;
     flex-direction: column;
+    border-radius: 0;
     gap: 0.2cm;
+    border: none;
+
+    img{
+      border-radius: 0;
+      border: none;
+    }
+  }
+
+  .ListDataSmall{
+    align-self: flex-start;
+  text-align: left;
   }
 
   .alignCenter{
