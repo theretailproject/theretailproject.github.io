@@ -3,17 +3,31 @@ import { auth, firestore, firebase } from "../../firebase";
 import { useUserContext } from "../../UserContext";
 import "./checkout.scss";
 import { useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 const CheckoutP = () => {
+  const { userData, doingWork, setDoingWork } = useUserContext();
+  // let productPrice=0;
+  const cartRef = firestore
+    .collection("users")
+    .doc(auth?.currentUser?.uid)
+    .collection("cart");
+  const [cartData] = useCollectionData(cartRef);
+  // console.log(cartData);
+  const [productPrice, setProductPrice] = useState(0);
+
   useEffect(() => {
-    if (!sessionStorage.getItem("reloaded")) {
-      sessionStorage.setItem("reloaded", "true");
-      window.location.reload();
+    if (cartData && cartData.length > 0) {
+      const total = cartData.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+      }, 0);
+
+      setProductPrice(total);
+      console.log(productPrice);
+    } else {
+      setProductPrice(0); // reset if cart is empty
     }
-  }, []);
-  const { userData, doingWork, setDoingWork, cartData, setCartData } =
-    useUserContext();
-  console.log(cartData);
+  }, [cartData]);
   const updatedata = (e) => {
     const { name, value } = e.target;
     firestore
@@ -107,20 +121,14 @@ const CheckoutP = () => {
     let totalWeightInGrams = 0;
     let totalActualWeightKG = 0;
     let totalVolumetricWeightKG = 0;
-    const divisor = 5000; // Use 4000 or 6000 depending on courier policy
+    const divisor = 5000;
 
     cartData.forEach((item) => {
       const quantity = item.quantity || 1;
-      const weight = item.weight || 0; // grams
-      // const length = item.dimensions[0] || 1;
-      // const width = Number(item.dimensions[1]) || 1;
-      // const height = Number(item.dimensions[2]) || 1;
+      const weight = item.weight || 0;
       console.log("Dimensions: ", item.dimensions);
-      // Calculate actual and volumetric weight per item
       const actualWeightKG = weight / 1000;
-      // const volumetricWeightKG = (length * width * height) / divisor;
       const volumetricWeightKG = 10;
-      // Multiply by quantity and sum
       totalWeightInGrams += weight * quantity;
       totalActualWeightKG += actualWeightKG * quantity;
       totalVolumetricWeightKG += volumetricWeightKG * quantity;
@@ -138,7 +146,11 @@ const CheckoutP = () => {
     setFinalShippingWeightKG(parseFloat(finalShippingWeightKG.toFixed(2)));
   }, [cartData]);
 
-  const calculateCourierFare = (zone, mode, weightInGrams) => {
+  const calculateCourierFare = (
+    zone,
+    mode = "Standard",
+    weightInGrams = 500
+  ) => {
     let cost = 0;
 
     if (mode === "Standard") {
@@ -190,8 +202,7 @@ const CheckoutP = () => {
       if (userData?.pincode) {
         const zone = await getDeliveryZoneFromAPI(userData.pincode);
         setZone(zone);
-
-        const fare = calculateCourierFare(zone, shippingMode, weightInGrams); // <-- pass mode
+        const fare = calculateCourierFare(zone, shippingMode); // <-- pass mode
         setDeliveryCharge(fare);
       }
     };
@@ -265,12 +276,21 @@ const CheckoutP = () => {
               itemId: cd.itemId,
               name: cd.name,
               price: cd.price,
+              category: cd.category,
               quantity: cd.quantity,
               thumbnail: cd.thumbnail,
               link: cd.link,
+              statusHistory: [
+                {
+                  status: "Processing",
+                  timestamp: firebase.firestore.Timestamp.now(),
+                },
+              ],
               status: "Processing",
               orderedAt: firebase.firestore.Timestamp.now(),
               type: "Processing",
+              finalPayment:
+                userData.checkoutAmt + deliveryCharge + calculatedTip,
             });
 
           console.log("Order added for item:", cd.itemId);
@@ -465,6 +485,12 @@ const CheckoutP = () => {
                     ₹ {userData.checkoutAmt + deliveryCharge + calculatedTip}
                   </p>
                 </div>
+                <p
+                  className="errorLine"
+                  style={{ textAlign: "left", fontSize: "10px" }}
+                >
+                  * Inclusive of delivery charges, gst and other charges
+                </p>
                 <button
                   className="pay-button"
                   onClick={(e) => {

@@ -35,21 +35,21 @@ $secondarycolor: #e4af47;
   align-items: flex-start;
 }
 
-.PFormRow1{
+.PFormRow1 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  gap:1cm;
+  gap: 1cm;
 }
 .PFormImage {
   width: 6cm;
   height: auto;
   // border-radius: 8px;
-  border:5px solid $primarycolor;
+  border: 5px solid $primarycolor;
 }
 
-.PFormProductName{
+.PFormProductName {
   font-size: 24px;
   font-weight: bold;
 }
@@ -117,4 +117,84 @@ $secondarycolor: #e4af47;
 .disabled {
   background-color: #aaa;
   cursor: none;
+}
+
+@media screen and (max-width: "1000px") {
+  .PFormContainer {
+    max-width: 80vw;
+    padding: 1rem;
+  }
+  .PFormHeading {
+    font-size: 16px;
+  }
+
+  .PFormPageHeading {
+    font-size: 16px;
+  }
+
+  .PFormImage {
+    width: 5cm;
+    border: 3px solid $primarycolor;
+  }
+
+  .PFormProductName {
+    font-size: 20px;
+  }
+
+  .PFormButton {
+    padding: 0.6rem 1.2rem;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: "450px") {
+  .PFormContainer {
+    max-width: 95vw;
+    padding: 0.2cm;
+  }
+  .PFormHeading {
+    font-size: 14px;
+  }
+
+  .PFormRow1 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5cm;
+  }
+  .PFormImage {
+    width: 4cm;
+    border: 2px solid $primarycolor;
+  }
+
+  .PFormSection {
+    gap: 0.2cm;
+    font-size: 12px;
+    margin-top: 0;
+  }
+  .PFormLabel {
+    text-align: left;
+  }
+  .PFormSelect,
+  .PFormTextArea {
+    padding: 0.2rem;
+    font-size: 12px;
+  }
+
+  .PFormSelect option {
+    background: #fff;
+    color: #333;
+    padding: 5px;
+    font-size: 12px;
+    border: thin solid $primarycolor;
+  }
+
+  .PFormButton {
+    padding: 0.4rem 1rem;
+    font-size: 14px;
+  }
+
+  .PFormGuidelines {
+    text-align: left;
+  }
 }

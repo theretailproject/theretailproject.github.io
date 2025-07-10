@@ -2,12 +2,20 @@ import "./preserveform.scss";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CryptoJS from "crypto-js";
+import { useUserContext } from "../../UserContext";
+import { useNavigate, Link } from "react-router-dom";
 import productsh from "./preserveprodhumans.json";
 import productsp from "./preserveprodpets.json";
 function PreserveForm() {
+  const navigate = useNavigate();
+  const { updateBuyListPreserve, delFromBuyListPreserve } = useUserContext();
   const [selectedSize, setSelectedSize] = useState("Small");
   const [basePrice, setBasePrice] = useState(0);
-  const [prodDimension, setProdDimension] = useState("");
+  const [prodDimensions, setProdDimensions] = useState("");
+  const [clothesLen, setClothesLen] = useState("");
+  // const [prodDimension, setClothesReq] = useState("");
+  const [clothDimensions, setClothesDimensions] = useState("");
+
   const [clothesReq, setClothesReq] = useState("");
   const [customNote, setCustomNote] = useState("");
   const [customPrice, setCustomPrice] = useState(0);
@@ -47,12 +55,21 @@ function PreserveForm() {
         console.warn("No matching product found for ID:", decryptedId);
       }
     }
+    console.log(currentProd);
   }, [decryptedId]);
 
   useEffect(() => {
     const selectedOption = currentProd?.options?.find(
       (opt) => opt.opname === selectedOptionName
     );
+    setClothesLen(selectedOption ? parseInt(selectedOption.length || 0) : 0);
+    setProdDimensions(
+      selectedOption ? parseInt(selectedOption.dimensions || 0) : 0
+    );
+    setClothesDimensions(
+      selectedOption ? selectedOption.clothDimensions || " 1m X 1m " : 0
+    );
+
     setBasePrice(selectedOption ? parseInt(selectedOption.price) : 0);
     setClothesReq(selectedOption ? selectedOption.clothesrequired : "");
   }, [selectedOptionName, currentProd]);
@@ -66,13 +83,32 @@ function PreserveForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!agreeGuidelines || !selfDelivery) return;
-    alert(`Proceeding to payment\nTotal: ₹${finalPrice}`);
+    const preserveProduct = {
+      itemId: currentProd.itemId,
+      thumbnail:currentProd.thumbnail,
+      category:"preserve",
+      name: currentProd.name,
+      option: selectedOptionName,
+      price: finalPrice,
+      dimensions: prodDimensions,
+      clothDimension: clothDimensions,
+      clothesReq: clothesReq,
+      selectedQty: 1,
+      customNote: customNote,
+      agreeGuidelines:true,
+      selfDelivery:true
+    };
+
+    updateBuyListPreserve(preserveProduct);
     // Replace with Razorpay or Firebase logic later
+    navigate("/checkoutbuynow")
   };
 
   return (
     <div className="PFormContainer">
-      <h2 className="center">Customize Your Memory Keepsake</h2>
+      <h2 className="center PFormPageHeading">
+        Customize Your Memory Keepsake
+      </h2>
       {currentProd ? (
         <>
           {/* Product Display */}
@@ -122,12 +158,18 @@ function PreserveForm() {
             <p className="PFormHeading">Minimum Requirements</p>
             <ul className="PFormGuidelines">
               <li>Clothes must be clean and ironed</li>
-              <li>Minimum fabric length: </li>
-              <li>Clothes Required: {clothesReq}</li>
+              <li>
+                Minimum fabric length: <strong>{clothesLen}</strong>
+              </li>
+              <li>
+                Clothes Required: <strong>{clothesReq}</strong>{" "}
+              </li>
               <li>No torn or damaged material</li>
-              <li>Delivery must be made within 7 days</li>
+              <li>
+                Delivery must be made within <strong>7 days</strong>
+              </li>
             </ul>
-            <label>
+            <label className="PFormLabel">
               <input
                 type="checkbox"
                 checked={agreeGuidelines}
@@ -139,7 +181,7 @@ function PreserveForm() {
 
           {/* Delivery */}
           <div className="PFormSection">
-            <label>
+            <label className="PFormLabel">
               <input
                 type="checkbox"
                 checked={selfDelivery}
@@ -153,17 +195,20 @@ function PreserveForm() {
           {/* Final Summary */}
           <div className="PFormSection">
             <p className="PFormHeading center">Total: ₹{finalPrice}</p>
-            <button
-              className={`PFormButton ${
-                agreeGuidelines && selfDelivery && basePrice != 0
-                  ? "enabled"
-                  : "disabled"
-              }`}
-              disabled={!(agreeGuidelines && selfDelivery)}
-              onClick={handleSubmit}
-            >
-              Proceed to Pay
-            </button>
+           
+              {" "}
+              <button
+                className={`PFormButton ${
+                  agreeGuidelines && selfDelivery && basePrice != 0
+                    ? "enabled"
+                    : "disabled"
+                }`}
+                disabled={!(agreeGuidelines && selfDelivery)}
+                onClick={handleSubmit}
+              >
+                Proceed to Pay
+              </button>
+            
           </div>
         </>
       ) : null}
