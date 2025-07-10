@@ -100,6 +100,10 @@ export const Walk = () => {
       document.getElementById("overlaySignInId").style.display = "flex";
     }
   };
+    function closeOverlay() {
+    document.getElementById("overlaySignInId").style.display = "none";
+    document.getElementById("overlayErrorId").style.display = "none";
+  }
   return (
     <div className="nproducts">
       {walkProducts.length === 0 ? (
@@ -109,7 +113,7 @@ export const Walk = () => {
         </div>
       ) : (
         <div className="ProductCardRow">
-          <div className="overlaySignIn" id="overlaySignInId">
+         <div className="overlaySignIn" id="overlaySignInId">
             <div className="overlaySignInChildren">
               <div className="overlaySignInChild">
                 <p className="overlaySignInChild1">Sign In to Proceed</p>
@@ -118,10 +122,16 @@ export const Walk = () => {
                     Move to SignIn
                   </button>
                 </Link>
-                <button className="overlaySignInChildBtn1">Cancel</button>
+                <button
+                  className="overlaySignInChildBtn1"
+                  onClick={closeOverlay}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
-          </div>    {productAdded && (
+          </div>
+           {productAdded && (
             <Popup
               message={`Product added to Cart!`}
               onClose={() => setProductAdded(false)}

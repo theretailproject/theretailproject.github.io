@@ -114,7 +114,7 @@ function ProfileNew() {
                     : "Phone Number Required!"
                 }
                 style={{
-                  minWidth: "80vh",
+                  // minWidth: "80vh",
                   border: "none",
                   backgroundColor: "transparent",
                   cursor: editMode.address ? "text" : "default",
@@ -148,7 +148,7 @@ function ProfileNew() {
                   editMode.address ? "Enter Address" : "Address Required!"
                 }
                 style={{
-                  minWidth: "80vh",
+                  // minWidth: "80vh",
                   border: "none",
                   backgroundColor: "transparent",
                   cursor: editMode.address ? "text" : "default",

@@ -1,6 +1,7 @@
 import "./preserveform.scss";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { auth } from "../../firebase";
 import CryptoJS from "crypto-js";
 import { useUserContext } from "../../UserContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -82,30 +83,53 @@ function PreserveForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!agreeGuidelines || !selfDelivery) return;
-    const preserveProduct = {
-      itemId: currentProd.itemId,
-      thumbnail:currentProd.thumbnail,
-      category:"preserve",
-      name: currentProd.name,
-      option: selectedOptionName,
-      price: finalPrice,
-      dimensions: prodDimensions,
-      clothDimension: clothDimensions,
-      clothesReq: clothesReq,
-      selectedQty: 1,
-      customNote: customNote,
-      agreeGuidelines:true,
-      selfDelivery:true
-    };
 
-    updateBuyListPreserve(preserveProduct);
-    // Replace with Razorpay or Firebase logic later
-    navigate("/checkoutbuynow")
+    if (auth?.currentUser) {
+      if (!agreeGuidelines || !selfDelivery) return;
+
+      const preserveProduct = {
+        itemId: currentProd.itemId,
+        thumbnail: currentProd.thumbnail,
+        category: "preserve",
+        name: currentProd.name,
+        option: selectedOptionName,
+        price: finalPrice,
+        dimensions: prodDimensions,
+        clothDimension: clothDimensions,
+        clothesReq: clothesReq,
+        selectedQty: 1,
+        customNote: customNote,
+        agreeGuidelines: true,
+        selfDelivery: true,
+      };
+
+      updateBuyListPreserve(preserveProduct);
+      navigate("/checkoutbuynow"); // Navigate to checkout page
+    } else {
+      // Show sign-in overlay if user not logged in
+      document.getElementById("overlaySignInId").style.display = "flex";
+    }
   };
 
+  function closeOverlay() {
+    document.getElementById("overlaySignInId").style.display = "none";
+    document.getElementById("overlayErrorId").style.display = "none";
+  }
   return (
     <div className="PFormContainer">
+      <div className="overlaySignIn" id="overlaySignInId">
+        <div className="overlaySignInChildren">
+          <div className="overlaySignInChild">
+            <p className="overlaySignInChild1">Sign In to Proceed</p>
+            <Link to="/signin">
+              <button className="overlaySignInChildBtn2">Move to SignIn</button>
+            </Link>
+            <button className="overlaySignInChildBtn1" onClick={closeOverlay}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
       <h2 className="center PFormPageHeading">
         Customize Your Memory Keepsake
       </h2>
@@ -194,21 +218,18 @@ function PreserveForm() {
 
           {/* Final Summary */}
           <div className="PFormSection">
-            <p className="PFormHeading center">Total: ₹{finalPrice}</p>
-           
-              {" "}
-              <button
-                className={`PFormButton ${
-                  agreeGuidelines && selfDelivery && basePrice != 0
-                    ? "enabled"
-                    : "disabled"
-                }`}
-                disabled={!(agreeGuidelines && selfDelivery)}
-                onClick={handleSubmit}
-              >
-                Proceed to Pay
-              </button>
-            
+            <p className="PFormHeading center">Total: ₹{finalPrice}</p>{" "}
+            <button
+              className={`PFormButton ${
+                agreeGuidelines && selfDelivery && basePrice != 0
+                  ? "enabled"
+                  : "disabled"
+              }`}
+              disabled={!(agreeGuidelines && selfDelivery)}
+              onClick={handleSubmit}
+            >
+              Proceed to Pay
+            </button>
           </div>
         </>
       ) : null}

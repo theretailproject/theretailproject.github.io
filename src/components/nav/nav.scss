@@ -1816,7 +1816,7 @@ h3 {
   }
 }
 
-.acc-dets-text{
+.acc-dets-text {
   font-size: 0.8rem;
 }
 
@@ -1854,6 +1854,14 @@ h3 {
       padding: 0;
     }
   }
+
+   .cartDot {
+    top: -7px;
+    right: -4px;
+    width: 12px;
+    height: 12px;
+    font-size: 8px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -1886,7 +1894,13 @@ h3 {
     border: 2px solid $secondarycolor;
     font-size: 14px;
   }
-  
+   .cartDot {
+    top: -6px;
+    right: -3px;
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -1895,13 +1909,13 @@ h3 {
     text-align: left;
   }
 
-  .acc-dets-text{
+  .acc-dets-text {
     font-size: 0.7rem;
   }
 
   .menuk {
-    width: 0.45cm;
-    height: 0.45cm;
+    width: 0.55cm;
+    height: auto;
     padding: 0.15cm;
     border: none;
     &:hover {
@@ -1914,24 +1928,17 @@ h3 {
     gap: 0.19cm;
 
     img {
+      width: 0.55cm;
       padding: 0;
     }
   }
   .cartDot {
-  position: absolute;
-  top: -7px;
-  right: -4px;
-  background-color: #e3a533;
-  color: $primarycolor;
-  width: 10px;
-  height: 10px;
-  font-size: 8px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
+    top: -7px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -1944,13 +1951,13 @@ h3 {
     gap: 0.3cm;
 
     img {
-      width: 0.55cm;
+      width: 0.6cm;
       height: auto;
-      padding: 0;
+      // padding: 0.15cm;
     }
   }
 
-  .acc-dets-text{
+  .acc-dets-text {
     font-size: 0.7rem;
   }
 

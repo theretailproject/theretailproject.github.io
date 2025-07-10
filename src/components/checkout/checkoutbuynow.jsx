@@ -314,11 +314,11 @@ const CheckoutBuyNow = () => {
                 itemId: cd.itemId,
                 name: cd.name,
                 price: cd.price,
-                category:cd.category,
+                category: cd.category,
                 quantity: cd.quantity,
                 thumbnail: cd.thumbnail,
                 link: cd.link,
-                 statusHistory: [
+                statusHistory: [
                   {
                     status: "Processing",
                     timestamp: firebase.firestore.Timestamp.now(),
@@ -357,7 +357,8 @@ const CheckoutBuyNow = () => {
           }
         }
       }
-      document.getElementById("defaultTextCheckout").innerHTML="Redirecting. Please Don't Refresh!"
+      document.getElementById("defaultTextCheckout").innerHTML =
+        "Redirecting. Please Don't Refresh!";
       navigate("/orders");
       console.log("All orders processed.");
     }
@@ -551,7 +552,11 @@ const CheckoutBuyNow = () => {
                   <p className="payival">₹ {userData.checkoutAmt}</p>
                 </div>
                 <div className="payi">
-                  <p className="payiname">{`Delivery charges : (${zone} + ${shippingMode})`}</p>
+                  <span>
+                    <p className="payiname">Delivery charges</p>
+                    <p className="smallPayiname">{`(${zone} + ${shippingMode})`}</p>
+                  </span>
+
                   <p className="payival">₹ {deliveryCharge}</p>
                 </div>
                 <div className="payi">
