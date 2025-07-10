@@ -221,3 +221,14 @@ $secondarycolor : #e4af47;
         width: 100%;
     }
 }
+
+
+@media only screen and (max-width : 500px){
+    .footer-box{
+        font-size: 12px;
+    }
+
+    p{
+        font-size: 12px;
+    }
+}

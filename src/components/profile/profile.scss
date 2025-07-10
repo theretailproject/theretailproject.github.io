@@ -82,13 +82,18 @@ $secondarycolor: #e4af47;
   font-size: 1rem;
   word-break: break-all;
   color: black;
+  // width:70vw;
+  text-align: left;
+
+  ::placeholder{
+    font-size: 1rem;
+  }
 }
 
-.profile-det-input{
-  width:max-content;
-  border:none;
+.profile-det-input {
+  width: max-content;
+  border: none;
   background-color: transparent;
-  
 }
 
 @media only screen and (max-width: 800px) {
@@ -104,7 +109,10 @@ $secondarycolor: #e4af47;
     color: var(--theme-ui-colors-text-basic-color-2);
     // border: 1px solid red;
   }
-
+  .profile-det-text {
+  width: 70vw;
+    text-align: left;
+  }
   .signOutBtn {
     padding: 0.1cm 0.2cm;
     // width: 100%;
@@ -124,6 +132,12 @@ $secondarycolor: #e4af47;
   }
 }
 
+@media screen and (max-width: 600px) {
+  .profile-det-text {
+    min-width: 50vw;
+    text-align: left;
+  }
+}
 @media only screen and (max-width: 400px) {
   .profile-det-head {
     flex-direction: column;
@@ -137,7 +151,10 @@ $secondarycolor: #e4af47;
     color: var(--theme-ui-colors-text-basic-color-2);
     // border: 1px solid red;
   }
-
+ .profile-det-text {
+    min-width: 50vw;
+    text-align: left;
+  }
   .profile-det-text {
     font-size: 0.7rem;
     text-align: left;

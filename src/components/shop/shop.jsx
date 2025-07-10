@@ -99,7 +99,7 @@ function Shop() {
                 isWearActive ? "shop-cat-name activeCat" : "shop-cat-name"
               }
             >
-              Wear ▼
+              Wear▾
             </p>
 
             <div className="dropdown-content">
@@ -133,7 +133,7 @@ function Shop() {
                 isSleepActive ? "shop-cat-name activeCat" : "shop-cat-name"
               }
             >
-              Sleep ▼
+              Sleep▾
             </p>
 
             <div className="dropdown-content">
@@ -167,7 +167,7 @@ function Shop() {
                 isWalkActive ? "shop-cat-name activeCat" : "shop-cat-name"
               }
             >
-              Walk ▼
+              Walk▾
             </p>
 
             <div className="dropdown-content">
@@ -201,7 +201,7 @@ function Shop() {
                 isPlayActive ? "shop-cat-name activeCat" : "shop-cat-name"
               }
             >
-              Play ▼
+              Play▾
             </p>
 
             <div className="  dropdown-content">

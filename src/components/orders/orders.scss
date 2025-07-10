@@ -9,23 +9,24 @@ $headFont: Quattrocento;
 
 .oimg {
   width: 4cm;
+  height: auto;
   border-radius: 5px;
 }
 
 .OrdersNew {
   padding: 1cm 5vw;
   //   background-color: whitesmoke;
-  .overlaySignInChild1{
+  .overlaySignInChild1 {
     margin-bottom: 0;
-    width:100%;
+    width: 100%;
     border-bottom: 1px solid $primarycolor;
   }
 
-  .overlaySignInChild{
+  .overlaySignInChild {
     align-items: flex-start;
   }
 
-  .overlayBtns{
+  .overlayBtns {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -35,7 +36,7 @@ $headFont: Quattrocento;
   }
 }
 
-#overlayConfirmation{
+#overlayConfirmation {
   display: none;
 }
 //tracking bar
@@ -77,6 +78,10 @@ $headFont: Quattrocento;
   transition: width 0.5s ease-in-out;
 }
 
+.orderTextConfirmation {
+  font-size: 0.7rem;
+  color: rgba(255, 46, 46, 0.832);
+}
 .trackingStep {
   display: flex;
   flex-direction: column;
@@ -116,9 +121,7 @@ $headFont: Quattrocento;
   font-weight: 600;
 }
 
-
 //tracking bar end
-
 
 .orders-box-new {
   display: flex;
@@ -305,13 +308,13 @@ $headFont: Quattrocento;
   animation: vibrateImg 0.4s 2 ease-in-out;
   transform-origin: center;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     animation-iteration-count: infinite;
   }
 }
 
-.noOrderText{
+.noOrderText {
   font-weight: bold;
 }
 
@@ -327,6 +330,15 @@ $headFont: Quattrocento;
   }
 }
 
+@media only screen and (max-width: 850px) {
+  .OrdersNew {
+    .overlaySignInChild {
+      width: 80vw;
+    }
+
+    font-size: 14px;
+  }
+}
 @media only screen and (max-width: 600px) {
   .oname {
     font-size: 16px;
@@ -398,6 +410,26 @@ $headFont: Quattrocento;
   .order-right-lower {
     align-self: center;
   }
+
+  .trackingContainer {
+    padding: 0.7rem;
+  }
+  .circle {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+  }
+
+  .trackingStep p {
+    margin-top: 6px;
+    font-size: 0.6rem;
+    color: #999;
+  }
+
+  .trackingStep.completed p {
+    color: $secondarycolor;
+    font-weight: 400;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -418,5 +450,37 @@ $headFont: Quattrocento;
   }
   .order-right-lower {
     align-self: center;
+  }
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    font-size: 8px;
+  }
+  .trackingContainer {
+    padding: 0;
+  }
+  .trackingBar {
+    padding: 0 5px;
+  }
+  .trackingStep p {
+    margin-top: 15px;
+    font-size: 0.4rem;
+    color: #999;
+  }
+
+  .trackingStep.completed p {
+    color: $secondarycolor;
+    font-weight: 200;
+  }
+
+  .overlaySignInChild {
+    padding: 0.5cm;
+    font-size: 12px;
+  }
+  .overlaySignInChildBtn1 {
+
+    padding:0.2cm;
+    font-size: 12px;
   }
 }

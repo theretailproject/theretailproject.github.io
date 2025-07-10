@@ -9,7 +9,11 @@ import { Link } from "react-router-dom";
 function Orders() {
   const [printing, setPrinting] = useState(false);
 
-  const { orderData, userData } = useUserContext();
+  let { orderData, userData } = useUserContext();
+  const sortedOrders = [...orderData].sort(
+    (a, b) => b.orderedAt.seconds - a.orderedAt.seconds
+  );
+   orderData = sortedOrders;
   //   const { userData } = useUserContext();
   // const orderData=[];
   const [orderInvoice, setOrderInvoice] = useState({
@@ -137,6 +141,29 @@ function Orders() {
                 {currOrder?.price * currOrder?.quantity || "Loading..."}
               </p>
               <p>
+                <strong>Final Price (Inc of Taxes):</strong> ₹
+                {currOrder?.finalPayment || "Loading..."}
+              </p>
+              {currOrder?.category == "preserve" ? (
+                <>
+                  <p>
+                    <strong>Clothes Required & Dimensions Required:</strong>{" "}
+                    {currOrder?.clothesReq || "Loading..."} clothes &
+                    {currOrder?.clothDimension || "Loading..."} dimension
+                  </p>
+                  <p>
+                    <strong>Custom Note : </strong>{" "}
+                    {currOrder?.customNote || "No Customization "}
+                  </p>
+                  {currOrder.agreeGuidelines && currOrder.selfDelivery ? (
+                    <p className="orderTextConfirmation">
+                      **{userData.name} agreed to perform self delivery within 7
+                      days of order placement.
+                    </p>
+                  ) : null}
+                </>
+              ) : null}
+              <p>
                 <strong>Status:</strong> {currOrder?.status || "Loading..."}
               </p>
             </>
@@ -218,7 +245,7 @@ function Orders() {
                       </div>
                       <div className="order-right">
                         <div className="order-right-upper">
-                          <p className="oname">{o.name}</p>
+                          <p className="oname" title={o.category=="preserve"?"☘️ means you preserved a memory!":null}>{o.category=="preserve"?"☘️Preserved - ":null}{o.name}</p>
                           <p className="oqty">Qty. : {o.quantity}</p>
                           <p className="oqty">
                             Price : ₹ {o.price * o.quantity}
@@ -252,13 +279,13 @@ function Orders() {
                       </div>
                     </div>
                   </div>
-                ) : o.type == "Processed" ? (
+                ) : o.type == "Delivered" ? (
                   <div className="order-new">
                     <div className="order-box-card">
                       <div className="order-left-new">
                         <img
                           className="oimg"
-                          src={require("./bed.png")}
+                          src={o.thumbnail}
                           alt=""
                         />
                       </div>

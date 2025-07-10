@@ -213,7 +213,7 @@ const CheckoutBuyNow = () => {
 
           // Pass the payment ID to proceedToPay
           await proceedToPay(response.razorpay_payment_id);
-          alert("Payment done!!");
+          // alert("Payment done!!");
         },
         modal: {
           ondismiss: function () {
@@ -241,51 +241,124 @@ const CheckoutBuyNow = () => {
           .doc().id;
         console.log("Generated orderId:", orderId);
 
-        try {
-          await firestore
-            .collection("users")
-            .doc(auth.currentUser?.uid)
-            .collection("orders")
-            .doc(orderId)
-            .set({
-              orderId: orderId,
-              paymentId: paymentId, // Store actual payment ID from Razorpay
-              itemId: cd.itemId,
-              name: cd.name,
-              price: cd.price,
-              quantity: cd.quantity,
-              thumbnail: cd.thumbnail,
-              link: cd.link,
-              status: "Processing",
-              orderedAt: firebase.firestore.Timestamp.now(),
-              type: "Processing",
-            });
-
-          console.log("Order added for item:", cd.itemId);
-
-          if (userData.checkoutAmt > 0) {
+        if (cd.category == "preserve") {
+          try {
             await firestore
               .collection("users")
               .doc(auth.currentUser?.uid)
-              .update(
-                {
-                  checkoutAmt: 0,
-                },
-                { merge: true }
-              );
-          }
+              .collection("orders")
+              .doc(orderId)
+              .set({
+                orderId: orderId,
+                paymentId: paymentId,
+                itemId: cd.itemId,
+                name: cd.name,
+                price: cd.price,
+                quantity: cd.quantity,
+                thumbnail: cd.thumbnail,
+                dimensions: cd.dimensions,
+                clothDimension: cd.clothDimension,
+                clothesReq: cd.clothesReq,
+                customNote: cd.customNote,
+                agreeGuidelines: true,
+                selfDelivery: true,
+                category: cd.category,
+                link: cd.link,
+                statusHistory: [
+                  {
+                    status: "Processing",
+                    timestamp: firebase.firestore.Timestamp.now(),
+                  },
+                ],
+                status: "Processing",
+                orderedAt: firebase.firestore.Timestamp.now(),
+                type: "Processing",
+                finalPayment:
+                  userData.checkoutAmt + deliveryCharge + calculatedTip,
+              });
 
-          await firestore
-            .collection("users")
-            .doc(auth.currentUser?.uid)
-            .collection("buynow")
-            .doc("current")
-            .delete();
-          console.log("Cart item deleted for item:", cd.itemId);
-        } catch (error) {
-          console.error("Error processing order:", error);
+            console.log("Order added for item:", cd.itemId);
+
+            if (userData.checkoutAmt > 0) {
+              await firestore
+                .collection("users")
+                .doc(auth.currentUser?.uid)
+                .update(
+                  {
+                    checkoutAmt: 0,
+                  },
+                  { merge: true }
+                );
+            }
+
+            await firestore
+              .collection("users")
+              .doc(auth.currentUser?.uid)
+              .collection("buynow")
+              .doc("current")
+              .delete();
+            console.log("Cart item deleted for item:", cd.itemId);
+          } catch (error) {
+            console.error("Error processing order:", error);
+          }
+        } else {
+          try {
+            await firestore
+              .collection("users")
+              .doc(auth.currentUser?.uid)
+              .collection("orders")
+              .doc(orderId)
+              .set({
+                orderId: orderId,
+                paymentId: paymentId, // Store actual payment ID from Razorpay
+                itemId: cd.itemId,
+                name: cd.name,
+                price: cd.price,
+                category: cd.category,
+                quantity: cd.quantity,
+                thumbnail: cd.thumbnail,
+                link: cd.link,
+                statusHistory: [
+                  {
+                    status: "Processing",
+                    timestamp: firebase.firestore.Timestamp.now(),
+                  },
+                ],
+                status: "Processing",
+                orderedAt: firebase.firestore.Timestamp.now(),
+                type: "Processing",
+                finalPayment:
+                  userData.checkoutAmt + deliveryCharge + calculatedTip,
+              });
+
+            console.log("Order added for item:", cd.itemId);
+
+            if (userData.checkoutAmt > 0) {
+              await firestore
+                .collection("users")
+                .doc(auth.currentUser?.uid)
+                .update(
+                  {
+                    checkoutAmt: 0,
+                  },
+                  { merge: true }
+                );
+            }
+
+            await firestore
+              .collection("users")
+              .doc(auth.currentUser?.uid)
+              .collection("buynow")
+              .doc("current")
+              .delete();
+            console.log("Cart item deleted for item:", cd.itemId);
+          } catch (error) {
+            console.error("Error processing order:", error);
+          }
         }
       }
+      document.getElementById("defaultTextCheckout").innerHTML =
+        "Redirecting. Please Don't Refresh!";
       navigate("/orders");
       console.log("All orders processed.");
     }
@@ -459,7 +532,7 @@ const CheckoutBuyNow = () => {
                   ? buynow.map((order, index) => (
                       <div key={index} className="order-row">
                         <p className="payiname">
-                          {order.name} X {order.qu}
+                          {order.name} X {order.quantity}
                         </p>
                         <img
                           src={order.thumbnail}
@@ -479,7 +552,11 @@ const CheckoutBuyNow = () => {
                   <p className="payival">₹ {userData.checkoutAmt}</p>
                 </div>
                 <div className="payi">
-                  <p className="payiname">{`Delivery charges : (${zone} + ${shippingMode})`}</p>
+                  <span>
+                    <p className="payiname">Delivery charges</p>
+                    <p className="smallPayiname">{`(${zone} + ${shippingMode})`}</p>
+                  </span>
+
                   <p className="payival">₹ {deliveryCharge}</p>
                 </div>
                 <div className="payi">
@@ -492,7 +569,12 @@ const CheckoutBuyNow = () => {
                     ₹ {userData.checkoutAmt + deliveryCharge + calculatedTip}
                   </p>
                 </div>
-                <p className="errorLine" style={{textAlign:"left", fontSize:"10px"}}>* Inclusive of delivery charges, gst and other charges</p>
+                <p
+                  className="errorLine"
+                  style={{ textAlign: "left", fontSize: "10px" }}
+                >
+                  * Inclusive of delivery charges, gst and other charges
+                </p>
                 <button
                   className="pay-button"
                   onClick={(e) => {
@@ -512,7 +594,6 @@ const CheckoutBuyNow = () => {
                   Proceed to Pay
                 </button>
                 <p className="errorLine" id="errorDiv"></p>
-                
 
                 <button className="cancelBuyNow" onClick={handleCancel}>
                   Cancel Order
@@ -522,7 +603,7 @@ const CheckoutBuyNow = () => {
           </div>
         </div>
       ) : (
-        <p>Add items in cart to checkout</p>
+        <p id="defaultTextCheckout">Add items in cart to checkout</p>
       )}
     </div>
   );

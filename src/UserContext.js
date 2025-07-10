@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
   const [wishAdded, setWishAdded] = useState(false);
   const [petData, setPetData] = useState([]);
   const [orderData, setOrderData] = useState([]);
-    const [wishData, setWishData] = useState([]);
+  const [wishData, setWishData] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [checkoutAmt, setCheckoutAmt] = useState(0);
 
@@ -44,10 +44,12 @@ export const UserProvider = ({ children }) => {
               .doc(uid)
               .collection("wishlist")
               .get();
-            const fetchWishlist = wishlistSnapshot.docs.map((doc) => doc.data());
+            const fetchWishlist = wishlistSnapshot.docs.map((doc) =>
+              doc.data()
+            );
             setWishData(fetchWishlist);
 
-             const ordersSnapshot = await firestore
+            const ordersSnapshot = await firestore
               .collection("users")
               .doc(uid)
               .collection("orders")
@@ -157,7 +159,7 @@ export const UserProvider = ({ children }) => {
           link: `/shop/${p.category}/${p.itemId}`,
           price: p.price,
           quantity: p.quantity || 1,
-dimensions:p.dimensions,
+          dimensions: p.dimensions,
           size: p.size || "default",
           color: p.color || "default",
           itemId: p.itemId,
@@ -204,7 +206,7 @@ dimensions:p.dimensions,
         link: `/shop/${p.category}/${p.itemId}`,
         price: p.price,
         quantity: p.selectedQty || 1,
-        dimensions:p.dimensions,
+        dimensions: p.dimensions,
 
         orderPrice: p.price * (p.selectedQty || 1),
         size: p.selectedSize || "default",
@@ -268,8 +270,92 @@ dimensions:p.dimensions,
     console.log("Product removed from wishlist");
   };
 
+  const updateBuyListPreserve = async (p) => {
+    const buyNowId = "current"; // Fixed ID to always overwrite the single doc
+    console.log("Product object (p):", p);
+
+    await setDoingWork(true);
+
+    await firestore
+      .collection("users")
+      .doc(auth.currentUser?.uid)
+      .collection("buynow")
+      .doc(buyNowId)
+      .set({
+        docId: buyNowId,
+        name: p.name || "random",
+        thumbnail: p.thumbnail || "product",
+        link: `/shop/${p.category}/${p.itemId}`,
+        price: p.price,
+        quantity: p.selectedQty || 1,
+        dimensions: p.dimensions,
+        clothDimension: p.clothDimension,
+        clothesReq: p.clothesReq,
+        customNote: p.customNote,
+        orderPrice: p.price * (p.selectedQty || 1),
+        itemId: p.itemId,
+        category: p.category,
+        agreeGuidelines: true,
+        selfDelivery: true,
+      })
+      .then(async () => {
+        const newAmt = p.price * (p.selectedQty || 1);
+        setCheckoutAmt(newAmt);
+
+        await firestore.collection("users").doc(auth.currentUser?.uid).update(
+          {
+            checkoutAmt: newAmt,
+          },
+          { merge: true }
+        );
+
+        // alert("Product added to buy list.");
+        await setDoingWork(false);
+      })
+      .catch((error) => {
+        console.error("Error updating buynow:", error);
+        alert("Failed to update buy list.");
+        setDoingWork(false);
+      });
+  };
+
+  const delFromBuyListPreserve = async (p) => {
+    setDoingWork(true);
+    // console.log("Delete btn clicked.");
+
+    const userId = auth.currentUser?.uid;
+    const productId = p?.itemId;
+
+    const currentDocId = buynow?.map((pr) =>
+      pr.itemId === p.itemId ? pr.docId : null
+    );
+    console.log(currentDocId);
+    try {
+      const productRef = doc(
+        firestore,
+        "users",
+        userId,
+        "buynow",
+        currentDocId[0]
+      );
+      console.log("Firestore document path:", productRef.path);
+
+      await deleteDoc(productRef).then(() =>
+        // alert("Product removed from Wishlist")
+        setDoingWork(false)
+      );
+    } catch (error) {
+      console.error("Error removing product from wishlist:", error);
+      alert("Failed to remove product from wishlist");
+    } finally {
+      await setDoingWork(false);
+    }
+
+    console.log("Product removed from wishlist");
+  };
+
   const addToWishlist = async (p) => {
-    console.log("wish:",p);
+    console.log("wish:", p);
     const wishlistProdId = firestore
       .collection("users")
       .doc(auth.currentUser?.uid)
@@ -296,7 +382,7 @@ dimensions:p.dimensions,
           link: `/shop/${p.category}/${p.itemId}`,
           price: p.price,
           quantity: p.quantity || 1,
-          dimensions:p.dimensions ,
+          dimensions: p.dimensions,
 
           size: p.size || "default",
           color: p.color || "default",
@@ -415,6 +501,7 @@ dimensions:p.dimensions,
         delFromWishlist,
         delFromCart,
         updateBuyList,
+        updateBuyListPreserve,
         buynow,
         delFromBuyList,
         productAdded,
